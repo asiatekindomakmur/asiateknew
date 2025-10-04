@@ -86,8 +86,7 @@ body { background: #f8f9fb; font-family: 'Poppins', sans-serif; }
                 <tr class="text-center">
                     <th width="5%">No</th>
                     <th>Nama</th>
-                    <th>Email</th>
-                    <th>Subjek</th>
+                    <th>Nomor Pengirim</th>
                     <th>Pesan</th>
                     <th>Tanggal</th>
                     <th width="20%">Aksi</th>
@@ -101,8 +100,7 @@ body { background: #f8f9fb; font-family: 'Poppins', sans-serif; }
                 <tr>
                     <td class="text-center"><?= $no++; ?></td>
                     <td><?= htmlspecialchars($row['name']) ?></td>
-                    <td><?= htmlspecialchars($row['email']) ?></td>
-                    <td><?= htmlspecialchars($row['subject']) ?></td>
+                    <td><?= htmlspecialchars($row['phone']) ?></td>
                     <td><?= htmlspecialchars(substr($row['message'],0,70)) ?>...</td>
                     <td><?= date("d M Y H:i", strtotime($row['created_at'])) ?></td>
                     <td class="text-center">

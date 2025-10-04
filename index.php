@@ -61,12 +61,12 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
 
         <!-- Nav Links -->
         <nav class="nav links">
-          <a href="index.html">Home</a>
-          <a href="sparepart.html">Spare parts</a>
-          <a href="service.html">Service</a>
-          <a href="about.html">About Us</a>
-          <a href="contact.html">Contact</a>
-          <a href="contact.html">Blog & Artikel</a>
+          <a href="index.php">Home</a>
+          <a href="sparepart.php">Spare parts</a>
+          <a href="service.php">Service</a>
+          <a href="about.php">About Us</a>
+          <a href="contact.php">Contact</a>
+          <a href="artikel.php">Blog & Artikel</a>
         </nav>
       </div>
     </header>

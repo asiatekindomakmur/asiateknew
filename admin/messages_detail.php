@@ -85,12 +85,8 @@ body { background: #f8f9fb; font-family: 'Poppins', sans-serif; }
             <p><?= htmlspecialchars($message['name']) ?></p>
         </div>
         <div class="mb-3">
-            <label class="fw-semibold">Email:</label>
-            <p><?= htmlspecialchars($message['email']) ?></p>
-        </div>
-        <div class="mb-3">
-            <label class="fw-semibold">Subjek:</label>
-            <p><?= htmlspecialchars($message['subject']) ?></p>
+            <label class="fw-semibold">Nomor Pengirim:</label>
+            <p><?= htmlspecialchars($message['phone']) ?></p>
         </div>
         <div class="mb-3">
             <label class="fw-semibold">Pesan:</label>
