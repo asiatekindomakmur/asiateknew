@@ -9,15 +9,15 @@ include 'config.php';
 
 // === AMBIL DATA DARI DATABASE ===
 $total_products = 0;
-$total_articles = 0;
+$total_artikel = 0;
 $total_messages = 0;
 
 try {
   $query = $conn->query("SELECT COUNT(*) AS total FROM products");
   if ($query && $row = $query->fetch_assoc()) $total_products = $row['total'];
 
-  $query = $conn->query("SELECT COUNT(*) AS total FROM articles");
-  if ($query && $row = $query->fetch_assoc()) $total_articles = $row['total'];
+  $query = $conn->query("SELECT COUNT(*) AS total FROM artikel");
+  if ($query && $row = $query->fetch_assoc()) $total_artikel = $row['total'];
 
   $query = $conn->query("SELECT COUNT(*) AS total FROM messages");
   if ($query && $row = $query->fetch_assoc()) $total_messages = $row['total'];
@@ -156,7 +156,7 @@ try {
     }
 
     .icon-products { background: linear-gradient(135deg, #0d6efd, #5a9bfd); }
-    .icon-articles { background: linear-gradient(135deg, #28a745, #5dd075); }
+    .icon-artikel { background: linear-gradient(135deg, #28a745, #5dd075); }
     .icon-messages { background: linear-gradient(135deg, #ffc107, #ffd75a); }
 
     .stat-info h6 {
@@ -227,10 +227,10 @@ try {
 
       <div class="col-md-4">
         <div class="stat-card">
-          <div class="stat-icon icon-articles"><i class="fa-solid fa-file-lines"></i></div>
+          <div class="stat-icon icon-artikel"><i class="fa-solid fa-file-lines"></i></div>
           <div class="stat-info">
             <h6>Total Artikel</h6>
-            <h3><?php echo $total_articles; ?></h3>
+            <h3><?php echo $total_artikel; ?></h3>
           </div>
         </div>
       </div>
