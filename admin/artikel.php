@@ -65,6 +65,8 @@ $result = $conn->query("SELECT * FROM artikel ORDER BY created_at DESC");
 
     .table th { background-color: #0d6efd; color: white; }
 
+    .table img { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; }
+
     .card { border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
   </style>
 </head>
@@ -105,6 +107,7 @@ $result = $conn->query("SELECT * FROM artikel ORDER BY created_at DESC");
         <thead>
           <tr class="text-center">
             <th width="5%">No</th>
+            <th>Gambar</th>
             <th>Judul</th>
             <th>Deskripsi</th>
             <th>Tanggal Dibuat</th>
@@ -118,6 +121,13 @@ $result = $conn->query("SELECT * FROM artikel ORDER BY created_at DESC");
           ?>
           <tr>
             <td class="text-center"><?= $no++; ?></td>
+            <td class="text-center">
+              <?php if (!empty($row['image'])): ?>
+                <img src="uploads/<?= $row['image'] ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+              <?php else: ?>
+                <img src="https://via.placeholder.com/60?text=No+Image" alt="no image">
+              <?php endif; ?>
+            </td>
             <td><?= htmlspecialchars($row['title']) ?></td>
             <td><?= htmlspecialchars(substr($row['description'], 0, 70)) ?>...</td>
             <td><?= date("d M Y", strtotime($row['created_at'])) ?></td>

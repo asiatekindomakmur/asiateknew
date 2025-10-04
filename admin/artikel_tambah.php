@@ -1,25 +1,36 @@
 <?php
 session_start();
-if (!isset($_SESSION['admin'])) {
-    header("Location: login.php");
-    exit;
-}
+if (!isset($_SESSION['admin'])) { header("Location: login.php"); exit; }
 include 'config.php';
 
-if (isset($_POST['submit'])) {
+if(isset($_POST['submit'])){
     $title = $_POST['title'];
     $description = $_POST['description'];
+    $image = '';
 
-    $stmt = $conn->prepare("INSERT INTO articles (title, description, created_at) VALUES (?, ?, NOW())");
-    $stmt->bind_param("ss", $title, $description);
+    // Upload gambar jika ada
+    if(isset($_FILES['image']) && $_FILES['image']['name'] != ''){
+        $targetDir = "uploads/";
+        if(!is_dir($targetDir)) mkdir($targetDir,0755,true);
 
-    if ($stmt->execute()) {
-        $_SESSION['message'] = ['type' => 'success', 'text' => 'Artikel berhasil ditambahkan!'];
-    } else {
-        $_SESSION['message'] = ['type' => 'danger', 'text' => 'Gagal menambahkan artikel.'];
+        $fileName = time().'_'.basename($_FILES['image']['name']);
+        $targetFilePath = $targetDir.$fileName;
+
+        if(move_uploaded_file($_FILES['image']['tmp_name'],$targetFilePath)){
+            $image = $fileName;
+        }
     }
 
-    header("Location: articles.php");
+    $stmt = $conn->prepare("INSERT INTO artikel(title, description, image, created_at) VALUES(?,?,?,NOW())");
+    $stmt->bind_param("sss",$title,$description,$image);
+
+    if($stmt->execute()){
+        $_SESSION['message']=['type'=>'success','text'=>'Artikel berhasil ditambahkan!'];
+    } else{
+        $_SESSION['message']=['type'=>'danger','text'=>'Gagal menambahkan artikel.'];
+    }
+
+    header("Location: artikel.php");
     exit;
 }
 ?>
@@ -33,7 +44,6 @@ if (isset($_POST['submit'])) {
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 <style>
-/* Desain sama seperti produk.php */
 :root { --primary: #0d6efd; --accent: #f4f6fb; --text-dark: #2e2e2e; --card-bg: #fff; }
 body { font-family:'Poppins',sans-serif; background: var(--accent); color: var(--text-dark); margin:0; overflow-x:hidden; }
 .sidebar { position: fixed; left:0; top:0; width:250px; height:100vh; background:#fff; box-shadow:3px 0 15px rgba(0,0,0,0.05); padding:30px 20px; display:flex; flex-direction:column; }
@@ -58,7 +68,7 @@ body { font-family:'Poppins',sans-serif; background: var(--accent); color: var(-
   <div class="logo"><img src="../img/logo.png" alt="Logo"></div>
   <a href="index.php"><i class="fa-solid fa-house"></i> Dashboard</a>
   <a href="produk.php"><i class="fa-solid fa-box"></i> Produk</a>
-  <a href="articles.php" class="active"><i class="fa-solid fa-file-alt"></i> Artikel</a>
+  <a href="artikel.php" class="active"><i class="fa-solid fa-file-alt"></i> Artikel</a>
   <a href="messages.php"><i class="fa-solid fa-envelope"></i> Pesan</a>
   <a href="logout.php" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
 </div>
@@ -70,7 +80,7 @@ body { font-family:'Poppins',sans-serif; background: var(--accent); color: var(-
   </div>
 
   <div class="card-form">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
       <div class="mb-3">
         <label class="form-label">Judul</label>
         <input type="text" name="title" class="form-control" required>
@@ -79,8 +89,12 @@ body { font-family:'Poppins',sans-serif; background: var(--accent); color: var(-
         <label class="form-label">Deskripsi</label>
         <textarea name="description" class="form-control" rows="5" required></textarea>
       </div>
+      <div class="mb-3">
+        <label class="form-label">Gambar (opsional)</label>
+        <input type="file" name="image" class="form-control">
+      </div>
       <div class="text-end">
-        <a href="articles.php" class="btn btn-secondary">Batal</a>
+        <a href="artikel.php" class="btn btn-secondary">Batal</a>
         <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
       </div>
     </form>
