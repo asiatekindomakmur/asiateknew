@@ -18,6 +18,7 @@ $total_articles = 0;
 $total_messages = 0;
 $recent_products = [];
 $recent_articles = [];
+$recent_messages = [];
 
 try {
   // Total produk
@@ -38,9 +39,8 @@ try {
     $total_messages = $row['total'];
   }
 
-  // Produk terbaru
-  $recent_products = [];
-  $query = $conn->query("SELECT name, stock, status FROM products ORDER BY created_at DESC LIMIT 5");
+  // Produk terbaru (tanpa stock)
+  $query = $conn->query("SELECT name, description, image, created_at FROM products ORDER BY created_at DESC LIMIT 5");
   if ($query) {
     while ($row = $query->fetch_assoc()) {
       $recent_products[] = $row;
@@ -48,11 +48,18 @@ try {
   }
 
   // Artikel terbaru
-  $recent_articles = [];
   $query = $conn->query("SELECT title, created_at FROM articles ORDER BY created_at DESC LIMIT 5");
   if ($query) {
     while ($row = $query->fetch_assoc()) {
       $recent_articles[] = $row;
+    }
+  }
+
+  // Pesan terbaru
+  $query = $conn->query("SELECT name, email, message, created_at FROM messages ORDER BY created_at DESC LIMIT 5");
+  if ($query) {
+    while ($row = $query->fetch_assoc()) {
+      $recent_messages[] = $row;
     }
   }
 
@@ -181,17 +188,15 @@ try {
         <div class="chart-container">
           <h6>Produk Terbaru</h6>
           <table class="table table-sm">
-            <thead><tr><th>Nama</th><th>Stok</th><th>Status</th></tr></thead>
+            <thead><tr><th>Nama</th><th>Deskripsi</th><th>Tanggal</th></tr></thead>
             <tbody>
-              <?php while($p = $recent_products->fetch_assoc()): ?>
+              <?php foreach($recent_products as $p): ?>
               <tr>
                 <td><?= htmlspecialchars($p['name']) ?></td>
-                <td><?= $p['stock'] ?></td>
-                <td class="<?= $p['status']=='ready'?'text-success':'text-danger' ?>">
-                  <?= ucfirst($p['status']) ?>
-                </td>
+                <td><?= htmlspecialchars(substr($p['description'], 0, 40)) ?>...</td>
+                <td><?= date("d M Y", strtotime($p['created_at'])) ?></td>
               </tr>
-              <?php endwhile; ?>
+              <?php endforeach; ?>
             </tbody>
           </table>
         </div>
@@ -203,12 +208,12 @@ try {
           <table class="table table-sm">
             <thead><tr><th>Judul</th><th>Tanggal</th></tr></thead>
             <tbody>
-              <?php while($a = $recent_articles->fetch_assoc()): ?>
+              <?php foreach($recent_articles as $a): ?>
               <tr>
                 <td><?= htmlspecialchars($a['title']) ?></td>
                 <td><?= date("d M Y", strtotime($a['created_at'])) ?></td>
               </tr>
-              <?php endwhile; ?>
+              <?php endforeach; ?>
             </tbody>
           </table>
         </div>
@@ -216,18 +221,18 @@ try {
 
       <div class="col-md-12">
         <div class="chart-container">
-          <h6>Pesan Customer</h6>
+          <h6>Pesan Customer Terbaru</h6>
           <table class="table table-striped">
             <thead><tr><th>Nama</th><th>Email</th><th>Pesan</th><th>Tanggal</th></tr></thead>
             <tbody>
-              <?php while($m = $recent_messages->fetch_assoc()): ?>
+              <?php foreach($recent_messages as $m): ?>
               <tr>
                 <td><?= htmlspecialchars($m['name']) ?></td>
                 <td><?= htmlspecialchars($m['email']) ?></td>
                 <td><?= htmlspecialchars(substr($m['message'], 0, 60)) ?>...</td>
                 <td><?= date("d M Y", strtotime($m['created_at'])) ?></td>
               </tr>
-              <?php endwhile; ?>
+              <?php endforeach; ?>
             </tbody>
           </table>
         </div>
