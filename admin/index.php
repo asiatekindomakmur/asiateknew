@@ -35,7 +35,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     /* === NAVBAR === */
     .navbar-custom {
       background: linear-gradient(135deg, #b8860b, #ffd700);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
       padding: 12px 40px;
       display: flex;
       align-items: center;
@@ -49,18 +49,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     .navbar-left {
       display: flex;
       align-items: center;
-      gap: 40px;
-    }
-
-    .navbar-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #fff;
-      font-weight: 700;
-      font-size: 22px;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
+      gap: 25px;
     }
 
     .navbar-brand img {
@@ -70,7 +59,8 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     .navbar-menu {
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 40px;
+      margin-left: 40px;
     }
 
     .navbar-menu a {
@@ -82,6 +72,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       align-items: center;
       gap: 8px;
       position: relative;
+      text-transform: capitalize;
     }
 
     .navbar-menu a::after {
@@ -132,14 +123,21 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       min-height: calc(100vh - 120px);
     }
 
+    .dashboard-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
     .dashboard-header h2 {
       font-weight: 700;
       color: #b8860b;
+      font-size: 28px;
     }
 
     .dashboard-header p {
       color: #666;
       margin-top: 6px;
+      font-size: 15px;
     }
 
     /* === INFO CARDS === */
@@ -158,6 +156,18 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     .info-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
+    .info-card h5 {
+      color: #555;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .info-card h2 {
+      font-weight: 800;
+      color: #b8860b;
+      margin: 0;
     }
 
     .icon-box {
@@ -191,20 +201,17 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       color: #ffd700;
     }
 
+    /* === RESPONSIVE === */
     @media (max-width: 992px) {
       .navbar-custom {
         flex-direction: column;
         align-items: flex-start;
         padding: 15px 20px;
       }
-      .navbar-left {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 15px;
-      }
       .navbar-menu {
         flex-wrap: wrap;
         gap: 15px;
+        margin-left: 0;
       }
       .dashboard-wrapper {
         padding: 30px 20px;
@@ -212,6 +219,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     }
   </style>
 </head>
+
 <body>
 
   <!-- Navbar -->
@@ -219,12 +227,12 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     <div class="navbar-left">
       <a class="navbar-brand" href="index.php">
         <img src="../img/logo.png" alt="Asiatek Logo">
-        <span>Asiatek Admin</span>
       </a>
       <div class="navbar-menu">
+        <a href="index.php"><i class="fa fa-gauge"></i> Dashboard</a>
         <a href="products.php"><i class="fa fa-box"></i> Produk</a>
         <a href="articles.php"><i class="fa fa-newspaper"></i> Artikel</a>
-        <a href="messages.php"><i class="fa fa-envelope"></i> Pesan</a>
+        <a href="messages.php"><i class="fa fa-envelope"></i> Pesan Customer</a>
       </div>
     </div>
     <a href="logout.php" class="btn btn-logout">
@@ -234,12 +242,12 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 
   <!-- Dashboard Content -->
   <div class="dashboard-wrapper">
-    <div class="dashboard-header mb-4">
+    <div class="dashboard-header">
       <h2>Selamat Datang, <?php echo $_SESSION['admin']; ?> 👋</h2>
       <p>Berikut ringkasan aktivitas website Anda hari ini.</p>
     </div>
 
-    <div class="row g-4">
+    <div class="row g-4 text-center">
       <div class="col-md-4">
         <div class="info-card">
           <div class="icon-box bg-product"><i class="fa fa-box"></i></div>
@@ -276,6 +284,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     </div>
   </div>
 
+  <!-- Footer -->
   <footer>
     © <?php echo date("Y"); ?> <strong>Asiatek</strong>. Semua Hak Dilindungi.
   </footer>
