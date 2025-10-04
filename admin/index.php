@@ -28,6 +28,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       color: #333;
       display: flex;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     a {
@@ -43,16 +44,51 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 40px 0 30px;
+      padding: 25px 0;
       box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
       position: fixed;
       left: 0;
       top: 0;
+      transition: width 0.3s ease;
+      overflow: hidden;
+    }
+
+    .sidebar.collapsed {
+      width: 90px;
     }
 
     .sidebar img {
-      height: 70px;
-      margin-bottom: 35px;
+      height: 60px;
+      margin-bottom: 25px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .sidebar.collapsed img {
+      transform: scale(0.8);
+      margin-bottom: 15px;
+    }
+
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: -15px;
+      background: #fff;
+      color: #b8860b;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .toggle-btn:hover {
+      background: #b8860b;
+      color: #fff;
     }
 
     .sidebar nav {
@@ -61,6 +97,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       width: 100%;
       gap: 5px;
       flex-grow: 1;
+      margin-top: 20px;
     }
 
     .sidebar a {
@@ -69,18 +106,22 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       gap: 12px;
       color: #fff;
       font-weight: 600;
-      padding: 14px 30px;
+      padding: 12px 25px;
       transition: all 0.3s ease;
       font-size: 15px;
+      white-space: nowrap;
     }
 
     .sidebar a:hover,
     .sidebar a.active {
       background: rgba(255, 255, 255, 0.25);
-      color: #fff;
       text-shadow: 0 0 8px rgba(255,255,255,0.8);
       border-left: 4px solid #fff;
-      padding-left: 26px;
+      padding-left: 22px;
+    }
+
+    .sidebar.collapsed a span {
+      display: none;
     }
 
     .sidebar .logout-btn {
@@ -88,11 +129,13 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       color: #b8860b;
       border: none;
       border-radius: 10px;
-      padding: 10px 24px;
+      padding: 10px 22px;
       font-weight: 600;
-      margin-top: 15px;
+      margin: 20px auto 0;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       transition: all 0.3s ease;
+      width: 80%;
+      text-align: center;
     }
 
     .sidebar .logout-btn:hover {
@@ -111,6 +154,11 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       flex-direction: column;
       justify-content: space-between;
       min-height: 100vh;
+      transition: margin-left 0.3s ease;
+    }
+
+    .collapsed + .main-content {
+      margin-left: 90px;
     }
 
     .dashboard-header {
@@ -197,26 +245,12 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     /* === RESPONSIVE === */
     @media (max-width: 992px) {
       .sidebar {
-        width: 100%;
-        height: auto;
-        flex-direction: row;
-        justify-content: space-around;
-        padding: 10px;
+        position: fixed;
+        z-index: 2000;
       }
-
-      .sidebar nav {
-        flex-direction: row;
-        justify-content: center;
-        gap: 10px;
-      }
-
       .main-content {
-        margin-left: 0;
+        margin-left: 90px;
         padding: 30px 20px;
-      }
-
-      .sidebar .logout-btn {
-        margin-top: 0;
       }
     }
   </style>
@@ -225,19 +259,20 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 <body>
 
   <!-- Sidebar -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
+    <div class="toggle-btn" id="toggle-btn"><i class="fa fa-bars"></i></div>
     <img src="../img/logo.png" alt="Asiatek Logo">
     <nav>
-      <a href="index.php" class="active"><i class="fa fa-gauge"></i> Dashboard</a>
-      <a href="products.php"><i class="fa fa-box"></i> Produk</a>
-      <a href="articles.php"><i class="fa fa-newspaper"></i> Artikel</a>
-      <a href="messages.php"><i class="fa fa-envelope"></i> Pesan Customer</a>
+      <a href="index.php" class="active"><i class="fa fa-gauge"></i> <span>Dashboard</span></a>
+      <a href="products.php"><i class="fa fa-box"></i> <span>Produk</span></a>
+      <a href="articles.php"><i class="fa fa-newspaper"></i> <span>Artikel</span></a>
+      <a href="messages.php"><i class="fa fa-envelope"></i> <span>Pesan Customer</span></a>
     </nav>
-    <a href="logout.php" class="logout-btn"><i class="fa fa-sign-out-alt"></i> Logout</a>
+    <a href="logout.php" class="logout-btn"><i class="fa fa-sign-out-alt"></i> <span>Logout</span></a>
   </aside>
 
   <!-- Main Content -->
-  <div class="main-content">
+  <div class="main-content" id="main-content">
     <div>
       <div class="dashboard-header">
         <h2>Selamat Datang, <?php echo $_SESSION['admin']; ?> 👋</h2>
@@ -285,6 +320,17 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       © <?php echo date("Y"); ?> <strong>Asiatek</strong>. Semua Hak Dilindungi.
     </footer>
   </div>
+
+  <script>
+    const toggleBtn = document.getElementById('toggle-btn');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('main-content');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+      mainContent.classList.toggle('collapsed');
+    });
+  </script>
 
 </body>
 </html>
