@@ -444,51 +444,28 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
     </div>
   </section>
     
-    <!-- Blog Section -->
-    <section class="blog-section">
-      <div class="container">
+<!-- Blog Section Dinamis -->
+<section class="blog-section">
+    <div class="container">
         <h2>Blog & Artikel</h2>
         <p>
-          Dapatkan informasi terbaru seputar alat berat, perawatan, dan tips
-          terbaik.
+            Dapatkan informasi terbaru seputar alat berat, perawatan, dan tips terbaik.
         </p>
 
         <div class="blog-grid">
-          <!-- Artikel 1 -->
-          <div class="blog-card">
-            <img src="img/exb.jpg" alt="Tips Merawat Excavator" />
-            <h3>Tips Merawat Excavator Agar Tetap Prima</h3>
-            <p>
-              Excavator yang dirawat dengan baik akan lebih awet dan efisien.
-              Berikut adalah 7 tips perawatan yang wajib dilakukan.
-            </p>
-            <a href="#">Read More</a>
-          </div>
-
-          <!-- Artikel 2 -->
-          <div class="blog-card">
-            <img src="img/spb.jpg" alt="Memilih Sparepart" />
-            <h3>Cara Memilih Spare Part Berkualitas untuk Alat Berat</h3>
-            <p>
-              Memilih suku cadang yang tepat sangat penting untuk menjaga
-              performa alat berat Anda.
-            </p>
-            <a href="#">Read More</a>
-          </div>
-
-          <!-- Artikel 3 -->
-          <div class="blog-card">
-            <img src="img/pwb.jpg" alt="Perawatan Berkala" />
-            <h3>Pentingnya Perawatan Berkala pada Alat Berat</h3>
-            <p>
-              Servis rutin dapat mencegah kerusakan besar dan menghemat biaya
-              operasional jangka panjang.
-            </p>
-            <a href="#">Read More</a>
-          </div>
+            <?php foreach ($articles as $a): ?>
+            <div class="blog-card">
+                <img src="uploads/artikel/<?= htmlspecialchars($a['image']) ?>" alt="<?= htmlspecialchars($a['title']) ?>" />
+                <h3><?= htmlspecialchars($a['title']) ?></h3>
+                <p>
+                    <?= nl2br(htmlspecialchars(substr($a['description'], 0, 150))) ?>...
+                </p>
+                <a href="artikel-detail.php?id=<?= $a['id'] ?>">Read More</a>
+            </div>
+            <?php endforeach; ?>
         </div>
-      </div>
-    </section>
+    </div>
+</section>
 
     <?php include 'footer.php'; ?>
   </body>
