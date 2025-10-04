@@ -105,7 +105,7 @@ $product = $result->fetch_assoc();
     <div class="card-detail">
       <h4 class="text-primary mb-3"><i class="fa-solid fa-box me-2"></i> <?= htmlspecialchars($product['name']) ?></h4>
       <?php if ($product['image']): ?>
-        <img src="uploads/<?= $product['image'] ?>" alt="Gambar Produk">
+        <img src="uploads/produk/<?= $product['image'] ?>" alt="Gambar Produk">
       <?php endif; ?>
       <p><?= nl2br(htmlspecialchars($product['description'])) ?></p>
       <small class="text-muted">Dibuat pada: <?= date("d M Y", strtotime($product['created_at'])) ?></small>

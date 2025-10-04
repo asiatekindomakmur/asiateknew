@@ -116,7 +116,7 @@ img.current-image { width: 120px; border-radius: 8px; margin-bottom: 10px; }
       <div class="mb-3">
         <label class="form-label">Gambar Saat Ini</label><br>
         <?php if(!empty($article['image'])): ?>
-          <img src="uploads/<?= $article['image'] ?>" class="current-image">
+          <img src="uploads/artikel/<?= $article['image'] ?>" class="current-image">
         <?php else: ?>
           <img src="https://via.placeholder.com/120?text=No+Image" class="current-image">
         <?php endif; ?>

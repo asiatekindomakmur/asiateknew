@@ -66,7 +66,7 @@ img.article-image { width: 100%; max-width: 400px; border-radius: 10px; margin-b
     <p class="text-muted">Tanggal Dibuat: <?= date("d M Y", strtotime($article['created_at'])) ?></p>
     
     <?php if(!empty($article['image'])): ?>
-        <img src="uploads/<?= $article['image'] ?>" class="article-image" alt="<?= htmlspecialchars($article['title']) ?>">
+        <img src="uploads/artikel/<?= $article['image'] ?>" class="article-image" alt="<?= htmlspecialchars($article['title']) ?>">
     <?php else: ?>
         <img src="https://via.placeholder.com/400x250?text=No+Image" class="article-image" alt="No Image">
     <?php endif; ?>

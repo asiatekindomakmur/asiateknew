@@ -160,7 +160,7 @@ $result = $conn->query("SELECT * FROM artikel ORDER BY created_at ASC");
             <td class="text-center"><?= $no++; ?></td>
             <td class="text-center">
               <?php if (!empty($row['image'])): ?>
-                <img src="uploads/<?= $row['image'] ?>" alt="<?= htmlspecialchars($row['title']) ?>">
+                <img src="uploads/artikel/<?= $row['image'] ?>" alt="<?= htmlspecialchars($row['title']) ?>">
               <?php else: ?>
                 <img src="https://via.placeholder.com/60?text=No+Image" alt="no image">
               <?php endif; ?>

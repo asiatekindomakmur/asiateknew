@@ -10,7 +10,7 @@ if(isset($_POST['submit'])){
 
     // Upload gambar jika ada
     if(isset($_FILES['image']) && $_FILES['image']['name'] != ''){
-        $targetDir = "uploads/";
+        $targetDir = "uploads/artikel/";
         if(!is_dir($targetDir)) mkdir($targetDir,0755,true);
 
         $fileName = time().'_'.basename($_FILES['image']['name']);

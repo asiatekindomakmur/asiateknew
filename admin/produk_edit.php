@@ -23,7 +23,7 @@ if (isset($_POST['update'])) {
 
     // Upload gambar baru jika ada
     if (isset($_FILES['image']) && $_FILES['image']['name'] != '') {
-        $targetDir = "uploads/";
+        $targetDir = "uploads/produk/";
         if (!is_dir($targetDir)) mkdir($targetDir, 0755, true);
 
         $fileName = time() . '_' . basename($_FILES['image']['name']);
@@ -137,7 +137,7 @@ if (isset($_POST['update'])) {
         </div>
         <div class="mb-3">
           <label class="form-label">Gambar Saat Ini</label><br>
-          <img src="uploads/<?= $product['image'] ?>" class="current-image">
+          <img src="uploads/produk/<?= $product['image'] ?>" class="current-image">
           <input type="file" name="image" class="form-control">
         </div>
         <div class="text-end">

@@ -170,7 +170,7 @@ body { background: #f8f9fb; font-family: 'Poppins', sans-serif; }
                     <td class="text-center"><?= $no++; ?></td>
                     <td class="text-center">
                         <?php if (!empty($row['image'])): ?>
-                            <img src="uploads/<?= $row['image'] ?>" alt="<?= htmlspecialchars($row['name']) ?>">
+                            <img src="uploads/produk/<?= $row['image'] ?>" alt="<?= htmlspecialchars($row['name']) ?>">
                         <?php else: ?>
                             <img src="https://via.placeholder.com/60?text=No+Image" alt="no image">
                         <?php endif; ?>

@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
 
     // Upload gambar
     if (isset($_FILES['image']) && $_FILES['image']['name'] != '') {
-        $targetDir = "uploads/";
+        $targetDir = "uploads/produk/";
         if (!is_dir($targetDir)) {
             mkdir($targetDir, 0755, true);
         }
