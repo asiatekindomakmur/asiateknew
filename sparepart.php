@@ -87,7 +87,7 @@ $result = $conn->query($sql);
             <?php while($row = $result->fetch_assoc()): ?>
                 <div class="gallery-item">
                   <a href="<?php echo $row['link']; ?>">
-                    <img src="img/product/<?php echo $row['image']; ?>" alt="<?php echo htmlspecialchars($row['name']); ?>" />
+                    <img src="admin/uploads/produk/<?php echo $row['image']; ?>" alt="<?php echo htmlspecialchars($row['name']); ?>" />
                     <p><?php echo htmlspecialchars($row['name']); ?></p>
                   </a>
                 </div>
