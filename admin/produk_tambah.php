@@ -25,8 +25,13 @@ if (isset($_POST['submit'])) {
   $stmt->bind_param("sss", $name, $description, $image);
   $stmt->execute();
 
-  header("Location: produk.php");
-  exit;
+    if ($stmt->execute()) {
+        $_SESSION['message'] = ['type' => 'success', 'text' => 'Produk berhasil ditambahkan!'];
+    } else {
+        $_SESSION['message'] = ['type' => 'danger', 'text' => 'Gagal menambahkan produk.'];
+    }
+    header("Location: produk.php");
+    exit;
 }
 ?>
 

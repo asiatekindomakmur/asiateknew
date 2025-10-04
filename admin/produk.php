@@ -108,6 +108,15 @@ $result = $conn->query("SELECT * FROM products ORDER BY created_at DESC");
     </div>
   </div>
 
+  <?php if (isset($_SESSION['message'])): ?>
+  <div class="alert alert-<?= $_SESSION['message']['type'] ?> alert-dismissible fade show" role="alert">
+    <?= $_SESSION['message']['text'] ?>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <?php unset($_SESSION['message']); ?>
+<?php endif; ?>
+
+
   <!-- MAIN -->
   <div class="main-content">
     <div class="d-flex justify-content-between align-items-center mb-4">

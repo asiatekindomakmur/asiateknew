@@ -28,9 +28,15 @@ if (isset($_POST['update'])) {
   $stmt->bind_param("sssi", $name, $description, $image, $id);
   $stmt->execute();
 
-  header("Location: produk.php");
-  exit;
-}
+    if ($stmt->execute()) {
+        $_SESSION['message'] = ['type' => 'success', 'text' => 'Produk berhasil diperbarui!'];
+    } else {
+        $_SESSION['message'] = ['type' => 'danger', 'text' => 'Gagal memperbarui produk.'];
+    }
+    header("Location: produk.php");
+    exit;
+
+    }
 ?>
 
 <!DOCTYPE html>
