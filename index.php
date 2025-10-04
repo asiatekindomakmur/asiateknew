@@ -56,6 +56,7 @@
           <a href="service.html">Service</a>
           <a href="about.html">About Us</a>
           <a href="contact.html">Contact</a>
+          <a href="contact.html">Blog & Artikel</a>
         </nav>
       </div>
     </header>
