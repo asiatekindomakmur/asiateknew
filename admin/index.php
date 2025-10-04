@@ -12,13 +12,10 @@ if (!$conn) {
   die("Koneksi ke database gagal: " . mysqli_connect_error());
 }
 
-// ==== Ambil data dari database dengan pengecekan aman ====
+// ==== Ambil data dari database ====
 $total_products = 0;
 $total_articles = 0;
 $total_messages = 0;
-$recent_products = [];
-$recent_articles = [];
-$recent_messages = [];
 
 try {
   // Total produk
@@ -39,30 +36,6 @@ try {
     $total_messages = $row['total'];
   }
 
-  // Produk terbaru (tanpa stock)
-  $query = $conn->query("SELECT name, description, image, created_at FROM products ORDER BY created_at DESC LIMIT 5");
-  if ($query) {
-    while ($row = $query->fetch_assoc()) {
-      $recent_products[] = $row;
-    }
-  }
-
-  // Artikel terbaru
-  $query = $conn->query("SELECT title, created_at FROM articles ORDER BY created_at DESC LIMIT 5");
-  if ($query) {
-    while ($row = $query->fetch_assoc()) {
-      $recent_articles[] = $row;
-    }
-  }
-
-  // Pesan terbaru
-  $query = $conn->query("SELECT name, email, message, created_at FROM messages ORDER BY created_at DESC LIMIT 5");
-  if ($query) {
-    while ($row = $query->fetch_assoc()) {
-      $recent_messages[] = $row;
-    }
-  }
-
 } catch (Exception $e) {
   echo "⚠️ Terjadi kesalahan: " . $e->getMessage();
 }
@@ -77,7 +50,6 @@ try {
   <title>Dashboard Admin</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
     body {
@@ -86,6 +58,7 @@ try {
       margin: 0;
     }
 
+    /* Sidebar */
     .sidebar {
       position: fixed;
       left: 0;
@@ -121,38 +94,48 @@ try {
       color: white;
     }
 
+    /* Main Content */
     .main-content {
       margin-left: 260px;
-      padding: 30px;
+      padding: 40px;
     }
 
     .card-stat {
       background: white;
       border-radius: 12px;
-      padding: 20px;
+      padding: 25px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      transition: 0.3s;
+      text-align: center;
+      transition: all 0.3s;
     }
 
     .card-stat:hover {
       transform: translateY(-3px);
     }
 
-    .chart-container {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    .card-stat h6 {
+      color: #6c757d;
+      font-weight: 500;
     }
 
-    footer {
-      background: #0d6efd;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
+    .card-stat h3 {
+      color: #0d6efd;
+      font-weight: 700;
+      margin-top: 10px;
+    }
+
+    /* Logout Button */
+    .logout-link {
+      color: #dc3545;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       margin-top: 40px;
+    }
+
+    .logout-link:hover {
+      color: #b02a37;
     }
   </style>
 </head>
@@ -168,80 +151,36 @@ try {
     <a href="#"><i class="fa-solid fa-file-alt"></i> Artikel</a>
     <a href="#"><i class="fa-solid fa-envelope"></i> Pesan</a>
 
-    <div class="mt-auto pt-3">
-      <a href="logout.php" style="color:#dc3545;"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
-    </div>
+    <a href="logout.php" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
   </div>
 
   <!-- MAIN CONTENT -->
   <div class="main-content">
-    <h3 class="mb-4">Selamat Datang, <?php echo $_SESSION['admin']; ?> 👋</h3>
-
-    <div class="row g-4 mb-4">
-      <div class="col-md-4"><div class="card-stat"><h6>Total Produk</h6><h3><?php echo $total_products; ?></h3></div></div>
-      <div class="col-md-4"><div class="card-stat"><h6>Total Artikel</h6><h3><?php echo $total_articles; ?></h3></div></div>
-      <div class="col-md-4"><div class="card-stat"><h6>Pesan Customer</h6><h3><?php echo $total_messages; ?></h3></div></div>
-    </div>
+    <h3 class="mb-5">Selamat Datang, <?php echo $_SESSION['admin']; ?> 👋</h3>
 
     <div class="row g-4">
-      <div class="col-md-6">
-        <div class="chart-container">
-          <h6>Produk Terbaru</h6>
-          <table class="table table-sm">
-            <thead><tr><th>Nama</th><th>Deskripsi</th><th>Tanggal</th></tr></thead>
-            <tbody>
-              <?php foreach($recent_products as $p): ?>
-              <tr>
-                <td><?= htmlspecialchars($p['name']) ?></td>
-                <td><?= htmlspecialchars(substr($p['description'], 0, 40)) ?>...</td>
-                <td><?= date("d M Y", strtotime($p['created_at'])) ?></td>
-              </tr>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
+      <div class="col-md-4">
+        <div class="card-stat">
+          <h6>Total Produk</h6>
+          <h3><?php echo $total_products; ?></h3>
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class="chart-container">
-          <h6>Artikel Terbaru</h6>
-          <table class="table table-sm">
-            <thead><tr><th>Judul</th><th>Tanggal</th></tr></thead>
-            <tbody>
-              <?php foreach($recent_articles as $a): ?>
-              <tr>
-                <td><?= htmlspecialchars($a['title']) ?></td>
-                <td><?= date("d M Y", strtotime($a['created_at'])) ?></td>
-              </tr>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
+      <div class="col-md-4">
+        <div class="card-stat">
+          <h6>Total Artikel</h6>
+          <h3><?php echo $total_articles; ?></h3>
         </div>
       </div>
 
-      <div class="col-md-12">
-        <div class="chart-container">
-          <h6>Pesan Customer Terbaru</h6>
-          <table class="table table-striped">
-            <thead><tr><th>Nama</th><th>Email</th><th>Pesan</th><th>Tanggal</th></tr></thead>
-            <tbody>
-              <?php foreach($recent_messages as $m): ?>
-              <tr>
-                <td><?= htmlspecialchars($m['name']) ?></td>
-                <td><?= htmlspecialchars($m['email']) ?></td>
-                <td><?= htmlspecialchars(substr($m['message'], 0, 60)) ?>...</td>
-                <td><?= date("d M Y", strtotime($m['created_at'])) ?></td>
-              </tr>
-              <?php endforeach; ?>
-            </tbody>
-          </table>
+      <div class="col-md-4">
+        <div class="card-stat">
+          <h6>Pesan Customer</h6>
+          <h3><?php echo $total_messages; ?></h3>
         </div>
       </div>
     </div>
-
-    <footer>
-      © <?= date('Y'); ?> Panel Admin — Desain Modern & Elegan
-    </footer>
   </div>
+
 </body>
 </html>
