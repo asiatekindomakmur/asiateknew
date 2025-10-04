@@ -160,7 +160,7 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
       <div class="container">
         <h2>Spare Parts For Earthmoving And Construction Equipment</h2>
         <p>High quality products, fast delivery</p>
-        <a href="sparepart.html" class="btn btn-contact">Browse Catalog</a>
+        <a href="sparepart.php" class="btn btn-contact">Browse Catalog</a>
       </div>
     </section>
 
