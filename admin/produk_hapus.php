@@ -6,13 +6,15 @@ if (!isset($_SESSION['admin'])) {
 }
 include 'config.php';
 
-$id = $_GET['id'];
-$result = $conn->query("DELETE FROM products WHERE id=$id");
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']); // pastikan id aman
+    $result = $conn->query("DELETE FROM products WHERE id=$id");
 
-if ($result) {
-    $_SESSION['message'] = ['type' => 'success', 'text' => 'Produk berhasil dihapus!'];
-} else {
-    $_SESSION['message'] = ['type' => 'danger', 'text' => 'Gagal menghapus produk.'];
+    if ($result) {
+        $_SESSION['message'] = ['type' => 'success', 'text' => 'Produk berhasil dihapus!'];
+    } else {
+        $_SESSION['message'] = ['type' => 'danger', 'text' => 'Gagal menghapus produk.'];
+    }
 }
 
 header("Location: produk.php");

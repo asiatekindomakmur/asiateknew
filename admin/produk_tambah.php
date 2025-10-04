@@ -1,39 +1,44 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin'])) {
-  header("Location: login.php");
-  exit;
+    header("Location: login.php");
+    exit;
 }
 include 'config.php';
 
 if (isset($_POST['submit'])) {
-  $name = $_POST['name'];
-  $description = $_POST['description'];
-  $image = '';
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $image = '';
 
-  // Upload gambar
-  if ($_FILES['image']['name']) {
-    $targetDir = "uploads/";
-    $fileName = time() . '_' . basename($_FILES['image']['name']);
-    $targetFilePath = $targetDir . $fileName;
-    if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
-      $image = $fileName;
+    // Upload gambar
+    if (isset($_FILES['image']) && $_FILES['image']['name'] != '') {
+        $targetDir = "uploads/";
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0755, true);
+        }
+        $fileName = time() . '_' . basename($_FILES['image']['name']);
+        $targetFilePath = $targetDir . $fileName;
+
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
+            $image = $fileName;
+        }
     }
-  }
 
-  $stmt = $conn->prepare("INSERT INTO products (name, description, image, created_at) VALUES (?, ?, ?, NOW())");
-  $stmt->bind_param("sss", $name, $description, $image);
-  $stmt->execute();
+    $stmt = $conn->prepare("INSERT INTO products (name, description, image, created_at) VALUES (?, ?, ?, NOW())");
+    $stmt->bind_param("sss", $name, $description, $image);
 
     if ($stmt->execute()) {
         $_SESSION['message'] = ['type' => 'success', 'text' => 'Produk berhasil ditambahkan!'];
     } else {
         $_SESSION['message'] = ['type' => 'danger', 'text' => 'Gagal menambahkan produk.'];
     }
+
     header("Location: produk.php");
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
@@ -121,6 +126,15 @@ if (isset($_POST['submit'])) {
       <p class="text-muted">Isi form berikut untuk menambahkan produk baru.</p>
     </div>
 
+    <!-- NOTIFIKASI -->
+    <?php if (isset($_SESSION['message'])): ?>
+      <div class="alert alert-<?= $_SESSION['message']['type'] ?> alert-dismissible fade show" role="alert">
+        <?= $_SESSION['message']['text'] ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <?php unset($_SESSION['message']); ?>
+    <?php endif; ?>
+
     <div class="card-form">
       <form method="post" enctype="multipart/form-data">
         <div class="mb-3">
@@ -143,5 +157,6 @@ if (isset($_POST['submit'])) {
     </div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
