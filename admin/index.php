@@ -68,13 +68,14 @@ try {
     }
 
     .sidebar .logo {
-      font-weight: 700;
-      font-size: 22px;
-      color: var(--primary);
+      text-align: center;
       margin-bottom: 40px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    }
+
+    .sidebar .logo img {
+      width: 140px;
+      height: auto;
+      object-fit: contain;
     }
 
     .sidebar a {
@@ -194,7 +195,9 @@ try {
 
   <!-- SIDEBAR -->
   <div class="sidebar">
-    <div class="logo"><i class="fa-solid fa-gauge-high"></i> Admin Panel</div>
+    <div class="logo">
+      <img src="../img/logo.png" alt="Logo">
+    </div>
 
     <a href="#" class="active"><i class="fa-solid fa-house"></i> Dashboard</a>
     <a href="#"><i class="fa-solid fa-box"></i> Produk</a>
