@@ -26,118 +26,98 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       margin: 0;
       background: #ffffff;
       color: #333;
+      display: flex;
     }
 
     a {
       text-decoration: none;
+      color: inherit;
     }
 
-    /* === NAVBAR === */
-    .navbar-custom {
-      background: linear-gradient(135deg, #b8860b, #ffd700);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      padding: 12px 40px;
+    /* === SIDEBAR === */
+    .sidebar {
+      width: 250px;
+      background: linear-gradient(180deg, #b8860b, #ffd700);
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 2px solid rgba(255,255,255,0.2);
-    }
-
-    .navbar-left {
-      display: flex;
-      align-items: center;
-      gap: 25px;
-    }
-
-    .navbar-brand img {
-      height: 45px;
-    }
-
-    .navbar-menu {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      margin-left: 40px;
-    }
-
-    .navbar-menu a {
-      color: #fff;
-      font-weight: 600;
-      transition: 0.3s;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      position: relative;
-      text-transform: capitalize;
-    }
-
-    .navbar-menu a::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
+      padding: 30px 0;
+      box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
+      position: fixed;
       left: 0;
-      width: 0%;
-      height: 2px;
-      background: white;
-      transition: 0.3s;
+      top: 0;
     }
 
-    .navbar-menu a:hover::after {
+    .sidebar img {
+      height: 60px;
+      margin-bottom: 25px;
+    }
+
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
       width: 100%;
     }
 
-    .navbar-menu a:hover {
-      color: #fff;
-      transform: translateY(-2px);
-      text-shadow: 0 0 10px rgba(255,255,255,0.7);
-    }
-
-    .btn-logout {
-      background: #fff;
-      border: none;
-      color: #b8860b;
-      border-radius: 8px;
-      padding: 8px 16px;
-      font-weight: 600;
-      transition: 0.3s;
+    .sidebar a {
       display: flex;
       align-items: center;
-      gap: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      gap: 12px;
+      color: #fff;
+      font-weight: 600;
+      padding: 12px 30px;
+      transition: all 0.3s ease;
+      font-size: 15px;
     }
 
-    .btn-logout:hover {
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: rgba(255, 255, 255, 0.25);
+      color: #fff;
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    }
+
+    .sidebar .logout-btn {
+      margin-top: auto;
+      background: #fff;
+      color: #b8860b;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+
+    .sidebar .logout-btn:hover {
       background: #b8860b;
       color: white;
       transform: translateY(-2px);
     }
 
-    /* === DASHBOARD === */
-    .dashboard-wrapper {
+    /* === MAIN CONTENT === */
+    .main-content {
+      margin-left: 250px;
       padding: 50px 60px;
       background: #fff;
-      min-height: calc(100vh - 120px);
+      flex: 1;
+      min-height: 100vh;
     }
 
     .dashboard-header {
-      text-align: center;
       margin-bottom: 40px;
     }
 
     .dashboard-header h2 {
       font-weight: 700;
       color: #b8860b;
-      font-size: 28px;
     }
 
     .dashboard-header p {
       color: #666;
       margin-top: 6px;
-      font-size: 15px;
     }
 
     /* === INFO CARDS === */
@@ -182,7 +162,9 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
-    .bg-product, .bg-article, .bg-message {
+    .bg-product,
+    .bg-article,
+    .bg-message {
       background: linear-gradient(135deg, #000000, #434343);
     }
 
@@ -203,17 +185,22 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 
     /* === RESPONSIVE === */
     @media (max-width: 992px) {
-      .navbar-custom {
-        flex-direction: column;
-        align-items: flex-start;
+      .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-between;
         padding: 15px 20px;
       }
-      .navbar-menu {
-        flex-wrap: wrap;
-        gap: 15px;
-        margin-left: 0;
+
+      .sidebar nav {
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
       }
-      .dashboard-wrapper {
+
+      .main-content {
+        margin-left: 0;
         padding: 30px 20px;
       }
     }
@@ -222,32 +209,26 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar-custom">
-    <div class="navbar-left">
-      <a class="navbar-brand" href="index.php">
-        <img src="../img/logo.png" alt="Asiatek Logo">
-      </a>
-      <div class="navbar-menu">
-        <a href="index.php"><i class="fa fa-gauge"></i> Dashboard</a>
-        <a href="products.php"><i class="fa fa-box"></i> Produk</a>
-        <a href="articles.php"><i class="fa fa-newspaper"></i> Artikel</a>
-        <a href="messages.php"><i class="fa fa-envelope"></i> Pesan Customer</a>
-      </div>
-    </div>
-    <a href="logout.php" class="btn btn-logout">
-      <i class="fa fa-sign-out-alt"></i> Logout
-    </a>
-  </nav>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <img src="../img/logo.png" alt="Asiatek Logo">
+    <nav>
+      <a href="index.php" class="active"><i class="fa fa-gauge"></i> Dashboard</a>
+      <a href="products.php"><i class="fa fa-box"></i> Produk</a>
+      <a href="articles.php"><i class="fa fa-newspaper"></i> Artikel</a>
+      <a href="messages.php"><i class="fa fa-envelope"></i> Pesan Customer</a>
+    </nav>
+    <a href="logout.php" class="logout-btn"><i class="fa fa-sign-out-alt"></i> Logout</a>
+  </aside>
 
-  <!-- Dashboard Content -->
-  <div class="dashboard-wrapper">
+  <!-- Main Content -->
+  <div class="main-content">
     <div class="dashboard-header">
       <h2>Selamat Datang, <?php echo $_SESSION['admin']; ?> 👋</h2>
       <p>Berikut ringkasan aktivitas website Anda hari ini.</p>
     </div>
 
-    <div class="row g-4 text-center">
+    <div class="row g-4">
       <div class="col-md-4">
         <div class="info-card">
           <div class="icon-box bg-product"><i class="fa fa-box"></i></div>
@@ -282,12 +263,11 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     <div class="text-center mt-5">
       <h6 style="color:#666;">Panel Admin <strong style="color:#b8860b;">Asiatek</strong> — dirancang untuk efisiensi & kemudahan kerja</h6>
     </div>
-  </div>
 
-  <!-- Footer -->
-  <footer>
-    © <?php echo date("Y"); ?> <strong>Asiatek</strong>. Semua Hak Dilindungi.
-  </footer>
+    <footer>
+      © <?php echo date("Y"); ?> <strong>Asiatek</strong>. Semua Hak Dilindungi.
+    </footer>
+  </div>
 
 </body>
 </html>
