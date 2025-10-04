@@ -1,5 +1,5 @@
 <?php
-include 'config.php';
+include 'admin/config.php';
 
 // Ambil data produk (urut berdasarkan id / urutan admin)
 $products = fetchAll("SELECT * FROM products ORDER BY id ASC");
