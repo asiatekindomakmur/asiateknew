@@ -20,74 +20,47 @@ if (isset($_POST['login'])) {
 <head>
     <meta charset="UTF-8">
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <title>Login Admin</title>
+    <title>Login Admin - Asiatek</title>
 
     <style>
         body {
-            background: linear-gradient(135deg, #007bff, #6610f2);
+            background: linear-gradient(135deg, #b8860b, #ffd700, #daa520);
+            background-size: 400% 400%;
+            animation: gradientMove 10s ease infinite;
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .login-card {
-            background: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
             width: 100%;
             max-width: 400px;
             padding: 40px 30px;
+            backdrop-filter: blur(6px);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .login-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        .login-card h4 {
-            margin-bottom: 25px;
-            font-weight: 600;
-            color: #343a40;
-        }
-
-        .form-control {
-            height: 45px;
-            border-radius: 8px;
-            border: 1px solid #ced4da;
-            transition: all 0.3s ease;
-        }
-
-        .form-control:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #007bff, #6610f2);
-            border: none;
-            border-radius: 8px;
-            height: 45px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #0056d2, #520dc2);
-            transform: translateY(-1px);
-        }
-
-        .text-danger {
-            font-size: 0.9rem;
-            margin-top: 15px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
         }
 
         .brand-title {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: #007bff;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: #b8860b;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.15);
             margin-bottom: 10px;
         }
 
@@ -96,18 +69,82 @@ if (isset($_POST['login'])) {
             font-size: 0.9rem;
             margin-bottom: 30px;
         }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 45px 12px 15px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .input-group input:focus {
+            border-color: #b8860b;
+            background: #fff;
+            box-shadow: 0 0 8px rgba(184, 134, 11, 0.4);
+            outline: none;
+        }
+
+        .input-group i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b8860b;
+            font-size: 18px;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #b8860b, #ffd700);
+            border: none;
+            border-radius: 10px;
+            height: 45px;
+            font-weight: 600;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background: linear-gradient(135deg, #a67c00, #e5c100);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .text-danger {
+            font-size: 0.9rem;
+            margin-top: 15px;
+            color: #dc3545;
+        }
     </style>
+
+    <!-- Font Awesome untuk ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
     <div class="login-card text-center">
-        <div class="brand-title">Company Admin</div>
+        <div class="brand-title">Asiatek Admin</div>
         <div class="brand-subtitle">Silakan login untuk melanjutkan</div>
 
         <form method="post">
-            <input type="text" name="username" placeholder="Username" class="form-control mb-3" required>
-            <input type="password" name="password" placeholder="Password" class="form-control mb-3" required>
-            <button name="login" class="btn btn-primary w-100">Login</button>
+            <div class="input-group">
+                <input type="text" name="username" placeholder="Username" required>
+                <i class="fa fa-user"></i>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" placeholder="Password" required>
+                <i class="fa fa-lock"></i>
+            </div>
+            <button name="login" class="btn-login w-100">Login</button>
         </form>
 
         <?php if (isset($error)) echo "<div class='text-danger'>$error</div>"; ?>
