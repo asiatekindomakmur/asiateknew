@@ -24,18 +24,15 @@ if (isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin - Asiatek</title>
 
-    <!-- Bootstrap -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
     <style>
-        /* ===== BODY ===== */
+        /* === BODY === */
         body {
-            background: linear-gradient(135deg, #b8860b, #ffd700, #daa520);
-            background-size: 400% 400%;
-            animation: gradientMove 10s ease infinite;
+            background: linear-gradient(135deg, #0d6efd, #5a9bfd, #a2c8ff);
+            background-size: 300% 300%;
+            animation: gradientShift 10s ease infinite;
             height: 100vh;
             display: flex;
             align-items: center;
@@ -44,60 +41,65 @@ if (isset($_POST['login'])) {
             margin: 0;
         }
 
-        @keyframes gradientMove {
+        @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
 
-        /* ===== LOGIN CARD ===== */
+        /* === LOGIN CARD === */
         .login-card {
-            background: rgba(255, 255, 255, 0.92);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 18px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 12px 35px rgba(13, 110, 253, 0.3);
             width: 100%;
             max-width: 400px;
-            padding: 40px 35px;
-            backdrop-filter: blur(6px);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 45px 40px;
+            backdrop-filter: blur(8px);
+            text-align: center;
         }
 
         .login-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 18px 45px rgba(13, 110, 253, 0.4);
+            transform: translateY(-2px);
+            transition: 0.3s;
         }
 
-        /* ===== TITLE ===== */
+        /* === LOGO === */
+        .login-card img {
+            width: 130px;
+            margin-bottom: 20px;
+        }
+
+        /* === TITLE === */
         .brand-title {
-            font-weight: 800;
-            font-size: 1.8rem;
-            color: #b8860b;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.15);
-            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: #0d6efd;
+            margin-bottom: 8px;
         }
 
         .brand-subtitle {
             color: #6c757d;
             font-size: 0.9rem;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
-        /* ===== INPUT GROUP FIX ===== */
+        /* === INPUT === */
         .input-group {
             display: flex;
             align-items: center;
-            background: #f5f5f5;
+            background: #f8f9fb;
             border-radius: 12px;
-            box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1),
-                        inset -2px -2px 6px rgba(255,255,255,0.8);
+            border: 1px solid #dee2e6;
             overflow: hidden;
             margin-bottom: 20px;
+            transition: 0.3s;
         }
 
         .input-group i {
-            background: transparent;
-            color: #b8860b;
-            font-size: 18px;
+            color: #0d6efd;
+            font-size: 17px;
             padding: 0 14px;
         }
 
@@ -112,15 +114,13 @@ if (isset($_POST['login'])) {
         }
 
         .input-group:focus-within {
-            background: #fff8dc;
-            box-shadow: inset 1px 1px 4px rgba(0,0,0,0.15),
-                        inset -1px -1px 4px rgba(255,255,255,0.9),
-                        0 0 8px rgba(184, 134, 11, 0.4);
+            box-shadow: 0 0 8px rgba(13, 110, 253, 0.3);
+            border-color: #0d6efd;
         }
 
-        /* ===== BUTTON ===== */
+        /* === BUTTON === */
         .btn-login {
-            background: linear-gradient(135deg, #b8860b, #ffd700);
+            background: linear-gradient(135deg, #0d6efd, #5a9bfd);
             border: none;
             border-radius: 12px;
             height: 45px;
@@ -128,17 +128,16 @@ if (isset($_POST['login'])) {
             color: #fff;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            transition: all 0.3s ease;
             width: 100%;
+            transition: all 0.3s ease;
         }
 
         .btn-login:hover {
-            background: linear-gradient(135deg, #a67c00, #e5c100);
-            transform: translateY(-1px);
+            background: linear-gradient(135deg, #005ce6, #3b82f6);
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
 
-        /* ===== ERROR TEXT ===== */
+        /* === ERROR TEXT === */
         .text-danger {
             font-size: 0.9rem;
             margin-top: 15px;
@@ -148,9 +147,10 @@ if (isset($_POST['login'])) {
 </head>
 
 <body>
-    <div class="login-card text-center">
-        <div class="brand-title">Asiatek Admin</div>
-        <div class="brand-subtitle">Silakan login untuk melanjutkan</div>
+    <div class="login-card">
+        <img src="../img/logo.png" alt="Logo Asiatek">
+        <div class="brand-title">Login Admin</div>
+        <div class="brand-subtitle">Masuk ke panel administrasi</div>
 
         <form method="post">
             <div class="input-group">
@@ -163,7 +163,7 @@ if (isset($_POST['login'])) {
                 <input type="password" name="password" placeholder="Password" required>
             </div>
 
-            <button name="login" class="btn-login">Login</button>
+            <button name="login" class="btn-login">Masuk</button>
         </form>
 
         <?php if (isset($error)) echo "<div class='text-danger'>$error</div>"; ?>
