@@ -60,13 +60,3 @@
   text-decoration: underline;
 }
 
-.blog-card h3 a.blog-title {
-  text-decoration: none;
-  color: #333; /* default color */
-  transition: color 0.3s;
-}
-
-.blog-card h3 a.blog-title:hover,
-.blog-card h3 a.blog-title:active {
-  color: #007bff; /* biru saat diklik / hover */
-}
