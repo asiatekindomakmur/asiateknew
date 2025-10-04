@@ -46,6 +46,7 @@
           <a href="service.php">Service</a>
           <a href="about.php">About Us</a>
           <a href="contact.php">Contact</a>
+          <a href="artikel.php">Blog & Artikel</a>
         </nav>
       </div>
     </header>
