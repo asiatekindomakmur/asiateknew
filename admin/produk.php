@@ -79,7 +79,7 @@ body { background: #f8f9fb; font-family: 'Poppins', sans-serif; }
     </div>
     <a href="index.php"><i class="fa-solid fa-home"></i> Dashboard</a>
     <a href="produk.php" class="active"><i class="fa-solid fa-box"></i> Produk</a>
-    <a href="articles.php"><i class="fa-solid fa-file-alt"></i> Artikel</a>
+    <a href="artikel.php"><i class="fa-solid fa-file-alt"></i> Artikel</a>
     <a href="messages.php"><i class="fa-solid fa-envelope"></i> Pesan</a>
     <div class="mt-auto pt-3">
         <a href="logout.php" style="color:#dc3545;"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
