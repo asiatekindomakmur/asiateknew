@@ -43,7 +43,7 @@ if (isset($_POST['update'])) {
         $_SESSION['message'] = ['type' => 'danger', 'text' => 'Gagal memperbarui produk.'];
     }
 
-    header("Location: edit_produk.php?id=$id");
+    header("Location: produk.php?id=$id");
     exit;
 }
 ?>
