@@ -35,14 +35,20 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     /* === NAVBAR === */
     .navbar-custom {
       background: linear-gradient(135deg, #b8860b, #ffd700);
-      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
-      padding: 12px 40px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+      padding: 10px 40px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       position: sticky;
       top: 0;
       z-index: 1000;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 25px;
     }
 
     .navbar-custom .navbar-brand {
@@ -56,10 +62,35 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     }
 
     .navbar-custom .navbar-brand img {
-      height: 45px;
+      height: 40px;
     }
 
-    .navbar-custom .btn-logout {
+    /* === NAV LINKS === */
+    .navbar-nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    .navbar-nav a {
+      color: #fff;
+      font-weight: 500;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .navbar-nav a:hover {
+      color: #333;
+      transform: translateY(-2px);
+    }
+
+    .navbar-nav .active {
+      font-weight: 700;
+      color: #333;
+    }
+
+    .btn-logout {
       background: #fff;
       border: none;
       color: #b8860b;
@@ -73,7 +104,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
-    .navbar-custom .btn-logout:hover {
+    .btn-logout:hover {
       background: #b8860b;
       color: white;
       transform: translateY(-2px);
@@ -142,7 +173,6 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
-    /* === WARNA BARU (ELEGAN HITAM) === */
     .bg-product {
       background: linear-gradient(135deg, #000000, #434343);
     }
@@ -172,13 +202,26 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 
     /* === RESPONSIVE === */
     @media (max-width: 992px) {
+      .navbar-custom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar-nav {
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
       .dashboard-wrapper {
         padding: 30px 20px;
       }
+
       .info-card {
         flex-direction: column;
         text-align: center;
       }
+
       .icon-box {
         margin-bottom: 10px;
       }
@@ -189,10 +232,20 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 <body>
   <!-- Navbar -->
   <nav class="navbar-custom">
-    <a class="navbar-brand" href="index.php">
-      <img src="../img/logo.png" alt="Asiatek Logo">
-      <span>Admin Panel</span>
-    </a>
+    <div class="navbar-left">
+      <a class="navbar-brand" href="index.php">
+        <img src="../img/logo.png" alt="Asiatek Logo">
+        <span>Admin Panel</span>
+      </a>
+
+      <div class="navbar-nav">
+        <a href="index.php" class="active"><i class="fa fa-home"></i> Dashboard</a>
+        <a href="products.php"><i class="fa fa-box"></i> Produk</a>
+        <a href="articles.php"><i class="fa fa-newspaper"></i> Artikel</a>
+        <a href="messages.php"><i class="fa fa-envelope"></i> Pesan Customer</a>
+      </div>
+    </div>
+
     <a href="logout.php" class="btn btn-logout">
       <i class="fa fa-sign-out-alt"></i> Logout
     </a>
