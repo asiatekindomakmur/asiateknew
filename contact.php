@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="description" content="Kontak PT Asiatek Indo Makmur untuk pertanyaan dan layanan sparepart alat berat.">
 
     <!-- Font & CSS -->
+    <link rel="icon" type="image/png" href="img/logo.png" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/navbar.css" />
