@@ -23,6 +23,10 @@ $result = $conn->query("SELECT * FROM products ORDER BY created_at ASC"); // ASC
 body { background: #f8f9fb; font-family: 'Poppins', sans-serif; }
 
     /* === SIDEBAR === */
+    :root {
+  --primary: #0d6efd; /* biru bootstrap */
+}
+
     .sidebar {
       position: fixed;
       left: 0;

@@ -26,6 +26,10 @@ $result = $conn->query("SELECT * FROM artikel ORDER BY created_at DESC");
     }
 
     /* === SIDEBAR === */
+    :root {
+  --primary: #0d6efd; /* biru bootstrap */
+}
+
     .sidebar {
       position: fixed;
       left: 0;
