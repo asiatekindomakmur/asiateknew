@@ -142,17 +142,17 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
+    /* === WARNA BARU (ELEGAN HITAM) === */
     .bg-product {
-      background: linear-gradient(135deg, #b8860b, #ffd700);
+      background: linear-gradient(135deg, #000000, #434343);
     }
 
     .bg-article {
-      background: linear-gradient(135deg, #d4af37, #ffdd55);
+      background: linear-gradient(135deg, #1a1a1a, #4b4b4b);
     }
 
     .bg-message {
-      background: linear-gradient(135deg, #ffcc00, #fff3b0);
-      color: #333;
+      background: linear-gradient(135deg, #2a2a2a, #5c5c5c);
     }
 
     /* === FOOTER (BIRU ELEGAN) === */
