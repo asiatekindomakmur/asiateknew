@@ -22,20 +22,65 @@ $result = $conn->query("SELECT * FROM products ORDER BY created_at ASC"); // ASC
 <style>
 body { background: #f8f9fb; font-family: 'Poppins', sans-serif; }
 
-.sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 240px;
-    height: 100vh;
-    background: #fff;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.05);
-    padding: 30px 20px;
-}
+    /* === SIDEBAR === */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 250px;
+      height: 100vh;
+      background: #fff;
+      box-shadow: 3px 0 15px rgba(0, 0, 0, 0.05);
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      transition: 0.3s;
+    }
 
-.sidebar .logo img { width: 150px; margin-bottom: 20px; }
-.sidebar a { display: flex; align-items: center; gap: 10px; color: #555; padding: 10px 15px; border-radius: 8px; text-decoration: none; font-size: 15px; transition: 0.3s; }
-.sidebar a:hover, .sidebar a.active { background: #0d6efd; color: white; }
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .sidebar .logo img {
+      width: 140px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      color: #555;
+      border-radius: 10px;
+      font-size: 15px;
+      text-decoration: none;
+      margin-bottom: 8px;
+      transition: all 0.3s;
+    }
+
+    .sidebar a i {
+      font-size: 17px;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
+    }
+
+    .logout-link {
+      margin-top: auto;
+      color: #dc3545;
+      font-weight: 500;
+    }
+
+    .logout-link:hover {
+      color: #b02a37;
+    }
+
 
 .main-content { margin-left: 260px; padding: 30px; }
 .btn-primary { background-color: #0d6efd; border: none; border-radius: 10px; font-weight: 500; }
