@@ -55,6 +55,7 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="css/sparepart_css/header_sparepart.css" />
     <link rel="stylesheet" href="css/sparepart_css/product_sparepart.css" />
     <link rel="stylesheet" href="css/sparepart_css/search.css" />
+    <link rel="stylesheet" href="css/sparepart_css/pagination.css" />
 
     <script src="js/script.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
