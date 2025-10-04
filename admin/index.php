@@ -211,7 +211,7 @@ try {
   <div class="main-content">
     <div class="main-header">
       <h3>Selamat Datang, <?php echo $_SESSION['admin']; ?> 👋</h3>
-      <p class="text-muted">Berikut ringkasan aktivitas website Anda hari ini.</p>
+      <p class="text-muted">Panel Admin Asiatek Indo Makmur — Didesain untuk kemudahan & kecepatan kerja.</p>
     </div>
 
     <div class="row g-4">
