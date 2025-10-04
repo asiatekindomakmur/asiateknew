@@ -52,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <a href="service.php">Service</a>
           <a href="about.php">About Us</a>
           <a href="contact.php" class="active">Contact</a>
+          <a href="artikel.php" class="active">Blog & Artikel</a>
         </nav>
       </div>
     </header>
