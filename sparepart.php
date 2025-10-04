@@ -102,13 +102,18 @@ $result = $conn->query($sql);
       </div>
     </section>
 
-    <!-- Search -->
-    <div class="container" style="margin: 20px 0; text-align:center;">
-      <form method="GET" action="sparepart.php">
-        <input type="text" name="search" placeholder="Cari produk..." value="<?php echo htmlspecialchars($search); ?>" />
-        <button type="submit">Search</button>
-      </form>
+<!-- Search -->
+<div class="container search-container">
+  <form method="GET" action="sparepart.php">
+    <div class="search-wrapper">
+      <input type="text" name="search" placeholder="Cari produk..." value="<?php echo htmlspecialchars($search); ?>" />
+      <button type="submit">
+        <i data-feather="search"></i>
+      </button>
     </div>
+  </form>
+</div>
+
 
 <!-- Product Gallery -->
 <div class="gallery-wrapper">
