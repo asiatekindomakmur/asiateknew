@@ -59,13 +59,12 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 
     .sidebar img {
       height: 60px;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .sidebar.collapsed img {
       transform: scale(0.8);
-      margin-bottom: 15px;
     }
 
     .toggle-btn {
@@ -91,13 +90,32 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       color: #fff;
     }
 
+    /* Tombol Logout di atas menu */
+    .logout-btn {
+      background: #fff;
+      color: #b8860b;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background: #b8860b;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Menu */
     .sidebar nav {
       display: flex;
       flex-direction: column;
       width: 100%;
       gap: 5px;
-      flex-grow: 1;
-      margin-top: 20px;
+      margin-top: 10px;
     }
 
     .sidebar a {
@@ -120,28 +138,15 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       padding-left: 22px;
     }
 
-    .sidebar.collapsed a span {
+    .sidebar.collapsed a span,
+    .sidebar.collapsed .logout-btn span {
       display: none;
     }
 
-    .sidebar .logout-btn {
-      background: #fff;
-      color: #b8860b;
-      border: none;
-      border-radius: 10px;
-      padding: 10px 22px;
-      font-weight: 600;
-      margin: 20px auto 0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      transition: all 0.3s ease;
-      width: 80%;
+    .sidebar.collapsed .logout-btn {
+      width: 45px;
+      padding: 10px 0;
       text-align: center;
-    }
-
-    .sidebar .logout-btn:hover {
-      background: #b8860b;
-      color: white;
-      transform: translateY(-2px);
     }
 
     /* === MAIN CONTENT === */
@@ -229,20 +234,19 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     footer {
       margin-top: 60px;
       text-align: center;
-      padding: 35px 20px;
+      padding: 40px 20px;
       color: #f2f3f4;
       background: linear-gradient(135deg, #0d1b2a, #1b263b, #2a3f5f);
       border-top: 3px solid #b8860b;
       box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
-      font-size: 15px;
-      border-radius: 8px;
+      font-size: 16px;
+      border-radius: 10px;
     }
 
     footer strong {
       color: #ffd700;
     }
 
-    /* === RESPONSIVE === */
     @media (max-width: 992px) {
       .sidebar {
         position: fixed;
@@ -262,13 +266,16 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
   <aside class="sidebar" id="sidebar">
     <div class="toggle-btn" id="toggle-btn"><i class="fa fa-bars"></i></div>
     <img src="../img/logo.png" alt="Asiatek Logo">
+
+    <!-- Logout di atas -->
+    <a href="logout.php" class="logout-btn"><i class="fa fa-sign-out-alt"></i> <span>Logout</span></a>
+
     <nav>
       <a href="index.php" class="active"><i class="fa fa-gauge"></i> <span>Dashboard</span></a>
       <a href="products.php"><i class="fa fa-box"></i> <span>Produk</span></a>
       <a href="articles.php"><i class="fa fa-newspaper"></i> <span>Artikel</span></a>
       <a href="messages.php"><i class="fa fa-envelope"></i> <span>Pesan Customer</span></a>
     </nav>
-    <a href="logout.php" class="logout-btn"><i class="fa fa-sign-out-alt"></i> <span>Logout</span></a>
   </aside>
 
   <!-- Main Content -->
