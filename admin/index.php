@@ -7,14 +7,14 @@ if (!isset($_SESSION['admin'])) {
 
 include 'config.php';
 
-// --- Ambil data dari database ---
+// === Ambil data dari database ===
 $total_products = $conn->query("SELECT COUNT(*) AS total FROM products")->fetch_assoc()['total'] ?? 0;
-$total_users = $conn->query("SELECT COUNT(*) AS total FROM users")->fetch_assoc()['total'] ?? 0;
-$total_sales = $conn->query("SELECT SUM(total_price) AS total FROM orders")->fetch_assoc()['total'] ?? 0;
-$total_views = $conn->query("SELECT COUNT(*) AS total FROM visitors")->fetch_assoc()['total'] ?? 0;
+$total_articles = $conn->query("SELECT COUNT(*) AS total FROM articles")->fetch_assoc()['total'] ?? 0;
+$total_messages = $conn->query("SELECT COUNT(*) AS total FROM messages")->fetch_assoc()['total'] ?? 0;
 
-$recent_products = $conn->query("SELECT id, name, stock, status, created_at FROM products ORDER BY created_at DESC LIMIT 5");
-$recent_activities = $conn->query("SELECT user, activity, time FROM activities ORDER BY time DESC LIMIT 5");
+$recent_products = $conn->query("SELECT name, stock, status FROM products ORDER BY created_at DESC LIMIT 5");
+$recent_articles = $conn->query("SELECT title, created_at FROM articles ORDER BY created_at DESC LIMIT 5");
+$recent_messages = $conn->query("SELECT name, email, message, created_at FROM messages ORDER BY created_at DESC LIMIT 5");
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +32,6 @@ $recent_activities = $conn->query("SELECT user, activity, time FROM activities O
       background: #f8f9fb;
       font-family: 'Poppins', sans-serif;
       margin: 0;
-      overflow-x: hidden;
     }
 
     .sidebar {
@@ -41,7 +40,7 @@ $recent_activities = $conn->query("SELECT user, activity, time FROM activities O
       top: 0;
       width: 240px;
       height: 100vh;
-      background: #ffffff;
+      background: #fff;
       box-shadow: 2px 0 10px rgba(0,0,0,0.05);
       padding: 30px 20px;
     }
@@ -51,13 +50,6 @@ $recent_activities = $conn->query("SELECT user, activity, time FROM activities O
       font-size: 22px;
       color: #0d6efd;
       margin-bottom: 30px;
-    }
-
-    .sidebar h6 {
-      font-size: 12px;
-      color: #999;
-      margin: 25px 0 10px;
-      letter-spacing: 1px;
     }
 
     .sidebar a {
@@ -82,20 +74,6 @@ $recent_activities = $conn->query("SELECT user, activity, time FROM activities O
       padding: 30px;
     }
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-
-    .topbar .search-box input {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 8px 12px;
-      width: 250px;
-    }
-
     .card-stat {
       background: white;
       border-radius: 12px;
@@ -115,10 +93,6 @@ $recent_activities = $conn->query("SELECT user, activity, time FROM activities O
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
 
-    table {
-      font-size: 14px;
-    }
-
     footer {
       background: #0d6efd;
       color: white;
@@ -133,67 +107,62 @@ $recent_activities = $conn->query("SELECT user, activity, time FROM activities O
 
 <body>
 
-  <!-- ===== SIDEBAR ===== -->
+  <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="logo"><i class="fa-solid fa-chart-line"></i> Dashboard</div>
 
-    <h6>MENU</h6>
     <a href="#" class="active"><i class="fa-solid fa-home"></i> Dashboard</a>
     <a href="#"><i class="fa-solid fa-box"></i> Produk</a>
     <a href="#"><i class="fa-solid fa-file-alt"></i> Artikel</a>
-    <a href="#"><i class="fa-solid fa-envelope"></i> Pesan Customer</a>
-
-    <h6>PROFIL</h6>
-    <a href="#"><i class="fa-solid fa-gear"></i> Pengaturan</a>
-    <a href="#"><i class="fa-solid fa-user"></i> Akun</a>
+    <a href="#"><i class="fa-solid fa-envelope"></i> Pesan</a>
 
     <div class="mt-auto pt-3">
       <a href="logout.php" style="color:#dc3545;"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
     </div>
   </div>
 
-  <!-- ===== MAIN CONTENT ===== -->
+  <!-- MAIN CONTENT -->
   <div class="main-content">
-    <div class="topbar">
-      <h3>Selamat Datang, <?php echo $_SESSION['admin']; ?> 👋</h3>
-      <div class="search-box">
-        <input type="text" placeholder="Cari sesuatu...">
-      </div>
-    </div>
+    <h3 class="mb-4">Selamat Datang, <?php echo $_SESSION['admin']; ?> 👋</h3>
 
     <div class="row g-4 mb-4">
-      <div class="col-md-3"><div class="card-stat"><h6>Total Produk</h6><h3><?php echo $total_products; ?></h3></div></div>
-      <div class="col-md-3"><div class="card-stat"><h6>Total Pengguna</h6><h3><?php echo $total_users; ?></h3></div></div>
-      <div class="col-md-3"><div class="card-stat"><h6>Total Penjualan</h6><h3>$<?php echo number_format($total_sales,2); ?></h3></div></div>
-      <div class="col-md-3"><div class="card-stat"><h6>Total Tampilan</h6><h3><?php echo $total_views; ?></h3></div></div>
+      <div class="col-md-4"><div class="card-stat"><h6>Total Produk</h6><h3><?php echo $total_products; ?></h3></div></div>
+      <div class="col-md-4"><div class="card-stat"><h6>Total Artikel</h6><h3><?php echo $total_articles; ?></h3></div></div>
+      <div class="col-md-4"><div class="card-stat"><h6>Pesan Customer</h6><h3><?php echo $total_messages; ?></h3></div></div>
     </div>
 
     <div class="row g-4">
-      <div class="col-md-8">
+      <div class="col-md-6">
         <div class="chart-container">
-          <h6>Pengguna Aktif Bulanan</h6>
-          <canvas id="userChart" height="150"></canvas>
+          <h6>Produk Terbaru</h6>
+          <table class="table table-sm">
+            <thead><tr><th>Nama</th><th>Stok</th><th>Status</th></tr></thead>
+            <tbody>
+              <?php while($p = $recent_products->fetch_assoc()): ?>
+              <tr>
+                <td><?= htmlspecialchars($p['name']) ?></td>
+                <td><?= $p['stock'] ?></td>
+                <td class="<?= $p['status']=='ready'?'text-success':'text-danger' ?>">
+                  <?= ucfirst($p['status']) ?>
+                </td>
+              </tr>
+              <?php endwhile; ?>
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-6">
         <div class="chart-container">
-          <h6>Produk Terbaru</h6>
-          <table class="table table-sm table-borderless">
-            <thead>
-              <tr>
-                <th>No</th><th>Produk</th><th>Stok</th><th>Status</th>
-              </tr>
-            </thead>
+          <h6>Artikel Terbaru</h6>
+          <table class="table table-sm">
+            <thead><tr><th>Judul</th><th>Tanggal</th></tr></thead>
             <tbody>
-              <?php $no=1; while($p=$recent_products->fetch_assoc()): ?>
-                <tr>
-                  <td><?= $no++ ?></td>
-                  <td><?= htmlspecialchars($p['name']) ?></td>
-                  <td><?= $p['stock'] ?></td>
-                  <td><span class="<?= $p['status']=='ready'?'text-success':'text-danger' ?>">
-                    <?= ucfirst($p['status']) ?></span></td>
-                </tr>
+              <?php while($a = $recent_articles->fetch_assoc()): ?>
+              <tr>
+                <td><?= htmlspecialchars($a['title']) ?></td>
+                <td><?= date("d M Y", strtotime($a['created_at'])) ?></td>
+              </tr>
               <?php endwhile; ?>
             </tbody>
           </table>
@@ -202,15 +171,16 @@ $recent_activities = $conn->query("SELECT user, activity, time FROM activities O
 
       <div class="col-md-12">
         <div class="chart-container">
-          <h6>Aktivitas Terakhir</h6>
+          <h6>Pesan Customer</h6>
           <table class="table table-striped">
-            <thead><tr><th>Waktu</th><th>Pengguna</th><th>Aktivitas</th></tr></thead>
+            <thead><tr><th>Nama</th><th>Email</th><th>Pesan</th><th>Tanggal</th></tr></thead>
             <tbody>
-              <?php while($a=$recent_activities->fetch_assoc()): ?>
+              <?php while($m = $recent_messages->fetch_assoc()): ?>
               <tr>
-                <td><?= $a['time'] ?></td>
-                <td><?= htmlspecialchars($a['user']) ?></td>
-                <td><?= htmlspecialchars($a['activity']) ?></td>
+                <td><?= htmlspecialchars($m['name']) ?></td>
+                <td><?= htmlspecialchars($m['email']) ?></td>
+                <td><?= htmlspecialchars(substr($m['message'], 0, 60)) ?>...</td>
+                <td><?= date("d M Y", strtotime($m['created_at'])) ?></td>
               </tr>
               <?php endwhile; ?>
             </tbody>
@@ -220,28 +190,8 @@ $recent_activities = $conn->query("SELECT user, activity, time FROM activities O
     </div>
 
     <footer>
-      © <?php echo date('Y'); ?> Panel Admin — Desain Modern & Elegan
+      © <?= date('Y'); ?> Panel Admin — Desain Modern & Elegan
     </footer>
   </div>
-
-  <script>
-    const ctx = document.getElementById('userChart');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'],
-        datasets: [{
-          label: 'Pengguna Aktif',
-          data: [120, 90, 150, 180, 210, 170, 220, 240, 260, 300, 280, 320],
-          backgroundColor: '#0d6efd'
-        }]
-      },
-      options: {
-        responsive: true,
-        scales: { y: { beginAtZero: true } },
-        plugins: { legend: { display: false } }
-      }
-    });
-  </script>
 </body>
 </html>
