@@ -42,22 +42,29 @@ $result = $conn->query($sql);
 <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
-<header>
-  <div class="container header-content navbar">
-    <div class="header-title">
-      <img src="img/logo.png" alt="Logo AIM" style="height:60px">
-    </div>
-    <div class="hamburger-menu">&#9776;</div>
-    <nav class="nav links">
-      <a href="index.php">Home</a>
-      <a href="sparepart.php">Spare parts</a>
-      <a href="service.php">Service</a>
-      <a href="about.php">About Us</a>
-      <a href="contact.php">Contact</a>
-      <a href="artikel.php">Blog & Artikel</a>
-    </nav>
-  </div>
-</header>
+
+    <!-- Header -->
+    <header>
+      <div class="container header-content navbar">
+        <!-- Logo -->
+        <div class="header-title">
+          <img src="img/logo.png" alt="Logo AIM" style="height: 60px" />
+        </div>
+
+        <!-- Hamburger Menu (Mobile Only) -->
+        <div class="hamburger-menu">&#9776;</div>
+
+        <!-- Nav Links -->
+        <nav class="nav links">
+          <a href="index.php">Home</a>
+          <a href="sparepart.php">Spare parts</a>
+          <a href="service.php">Service</a>
+          <a href="about.php">About Us</a>
+          <a href="contact.php">Contact</a>
+          <a href="artikel.php">Blog & Artikel</a>
+        </nav>
+      </div>
+    </header>
 
 <!-- Hero -->
 <section class="about-hero" style="background-image:url('img/spb.jpg'); background-size:cover; background-position:center;">
