@@ -82,46 +82,40 @@ if (isset($_POST['login'])) {
             margin-bottom: 30px;
         }
 
-        /* ===== INPUT GROUP ===== */
+        /* ===== INPUT GROUP FIX ===== */
         .input-group {
-            position: relative;
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            border-radius: 12px;
+            box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1),
+                        inset -2px -2px 6px rgba(255,255,255,0.8);
+            overflow: hidden;
             margin-bottom: 20px;
         }
 
-        .input-group input {
-            width: 100%;
-            padding: 12px 45px 12px 15px;
-            border-radius: 12px;
-            border: none;
-            font-size: 15px;
-            background: #f5f5f5;
-            box-shadow: inset 2px 2px 6px rgba(0,0,0,0.1),
-                        inset -2px -2px 6px rgba(255,255,255,0.8);
-            transition: all 0.3s ease;
+        .input-group i {
+            background: transparent;
+            color: #b8860b;
+            font-size: 18px;
+            padding: 0 14px;
         }
 
-        .input-group input:focus {
+        .input-group input {
+            border: none;
+            background: transparent;
+            flex: 1;
+            padding: 12px;
+            font-size: 15px;
+            color: #333;
+            outline: none;
+        }
+
+        .input-group:focus-within {
             background: #fff8dc;
             box-shadow: inset 1px 1px 4px rgba(0,0,0,0.15),
                         inset -1px -1px 4px rgba(255,255,255,0.9),
                         0 0 8px rgba(184, 134, 11, 0.4);
-            outline: none;
-        }
-
-        .input-group i {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #b8860b;
-            font-size: 18px;
-            pointer-events: none;
-            transition: color 0.3s ease;
-        }
-
-        .input-group input:focus + i {
-            color: #ffd700;
-            text-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
         }
 
         /* ===== BUTTON ===== */
@@ -160,13 +154,13 @@ if (isset($_POST['login'])) {
 
         <form method="post">
             <div class="input-group">
-                <input type="text" name="username" placeholder="Username" required>
                 <i class="fa fa-user"></i>
+                <input type="text" name="username" placeholder="Username" required>
             </div>
 
             <div class="input-group">
-                <input type="password" name="password" placeholder="Password" required>
                 <i class="fa fa-lock"></i>
+                <input type="password" name="password" placeholder="Password" required>
             </div>
 
             <button name="login" class="btn-login">Login</button>
