@@ -200,7 +200,7 @@ try {
     </div>
 
     <a href="#" class="active"><i class="fa-solid fa-house"></i> Dashboard</a>
-    <a href="#"><i class="fa-solid fa-box"></i> Produk</a>
+    <a href="produk.php"><i class="fa-solid fa-box"></i> Produk</a>
     <a href="#"><i class="fa-solid fa-file-lines"></i> Artikel</a>
     <a href="#"><i class="fa-solid fa-envelope"></i> Pesan</a>
 
