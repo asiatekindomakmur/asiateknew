@@ -35,7 +35,9 @@
       <div class="container header-content navbar">
         <!-- Logo -->
         <div class="header-title">
-          <img src="img/logo.png" alt="Logo AIM" style="height: 60px" />
+          <a href="index.php">
+            <img src="img/logo.png" alt="Logo AIM" style="height: 60px" />
+          </a>
         </div>
 
         <!-- Hamburger Menu (Mobile Only) -->

@@ -53,8 +53,11 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
       <div class="container header-content navbar">
         <!-- Logo -->
         <div class="header-title">
-          <img src="img/logo.png" alt="Logo AIM" style="height: 60px" />
+          <a href="index.php">
+            <img src="img/logo.png" alt="Logo AIM" style="height: 60px" />
+          </a>
         </div>
+
 
         <!-- Hamburger Menu (Mobile Only) -->
         <div class="hamburger-menu">&#9776;</div>
