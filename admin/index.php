@@ -155,14 +155,19 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       color: #333;
     }
 
-    /* === FOOTER === */
+    /* === FOOTER (BIRU ELEGAN) === */
     footer {
       text-align: center;
       padding: 25px;
-      color: #777;
-      border-top: 1px solid #eee;
-      background: #fffdf5;
+      color: #e0e1dd;
+      background: linear-gradient(135deg, #0d1b2a, #1b263b, #2a3f5f);
+      border-top: 2px solid #b8860b;
       margin-top: 60px;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+    }
+
+    footer strong {
+      color: #ffd700;
     }
 
     /* === RESPONSIVE === */
@@ -236,13 +241,13 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     </div>
 
     <div class="text-center mt-5">
-      <h6 style="color:#888;">Panel Admin <strong style="color:#b8860b;">Asiatek</strong> — dirancang untuk efisiensi & kemudahan kerja</h6>
+      <h6 style="color:#666;">Panel Admin <strong style="color:#b8860b;">Asiatek</strong> — dirancang untuk efisiensi & kemudahan kerja</h6>
     </div>
   </div>
 
   <!-- Footer -->
   <footer>
-    © <?php echo date("Y"); ?> Asiatek. Semua Hak Dilindungi.
+    © <?php echo date("Y"); ?> <strong>Asiatek</strong>. Semua Hak Dilindungi.
   </footer>
 </body>
 </html>
