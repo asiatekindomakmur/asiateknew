@@ -1,3 +1,11 @@
+<?php
+include 'admin/config.php'; // koneksi database
+
+// Ambil semua produk dari database
+$sql = "SELECT * FROM products ORDER BY id ASC";
+$result = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -71,150 +79,24 @@
       </div>
     </section>
 
+
     <!-- Product Gallery -->
-<div class="header"></div>
-<div class="gallery-wrapper">
-  <div class="gallery">
-    <div class="gallery-item">
-      <a href="undercarriage.html">
-        <img src="img/product/uc.jpg" alt="UC" />
-        <p>Undercarriage</p>
-      </a>
+    <div class="gallery-wrapper">
+      <div class="gallery">
+        <?php if ($result->num_rows > 0): ?>
+            <?php while($row = $result->fetch_assoc()): ?>
+                <div class="gallery-item">
+                  <a href="<?php echo $row['link']; ?>">
+                    <img src="img/product/<?php echo $row['image']; ?>" alt="<?php echo htmlspecialchars($row['name']); ?>" />
+                    <p><?php echo htmlspecialchars($row['name']); ?></p>
+                  </a>
+                </div>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p>Tidak ada produk yang tersedia saat ini.</p>
+        <?php endif; ?>
+      </div>
     </div>
-    <div class="gallery-item">
-      <a href="hardware.html">
-        <img src="img/product/hw.jpg" alt="HW" />
-        <p>Hardware</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="chassis.html">
-        <img src="img/product/ch.jpg" alt="CH" />
-        <p>Chassis</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="bearings.html">
-        <img src="img/product/br.jpg" alt="BR" />
-        <p>Bearings</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="cooling.html">
-        <img src="img/product/cs.jpg" alt="CS" />
-        <p>Cooling System</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="light.html">
-        <img src="img/product/lg.jpg" alt="LG" />
-        <p>Lights</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="Electrical.html">
-        <img src="img/product/ep.jpg" alt="EP" />
-        <p>Electrical Parts</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="engine.html">
-        <img src="img/product/eg.jpg" alt="EG" />
-        <p>Engine</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="https://wa.me/+6281213838567?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk%Maintance%20Product">
-        <img src="img/product/mp.jpg" alt="MP" />
-        <p>Maintenance Product</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="gasket.html">
-        <img src="img/product/gs.jpg" alt="GS" />
-        <p>Gasket and Seals</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="hydraulic.html">
-        <img src="img/product/hc.jpg" alt="HC" />
-        <p>Hydraulics</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="filters.html">
-        <img src="img/product/ft.jpg" alt="FT" />
-        <p>Filters</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="hydraulic.html">
-        <img src="img/product/hb.jpg" alt="HB" />
-        <p>Hydraulic Breakers</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="rubber-track.html">
-        <img src="img/product/rt.jpg" alt="RT" />
-        <p>Rubber Tracks</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="highwear.html">
-        <img src="img/product/hwt.jpg" alt="HWT" />
-        <p>High Wear Items</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="cabcomponent.html">
-        <img src="img/product/cc.jpg" alt="CC" />
-        <p>Cabin Components</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="powertrain.html">
-        <img src="img/product/pt.jpg" alt="PT" />
-        <p>Power Train</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="brakes.html">
-        <img src="img/product/brk.jpg" alt="BRK" />
-        <p>Brakes</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="https://wa.me/+6281213838567?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk%For%20Catterpillar">
-        <img src="img/product/as.jpg" alt="AS" />
-        <p>Alternative Spare Parts For Caterpillar</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="https://wa.me/+6281213838567?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk%For%20Volvo">
-        <img src="img/product/ss.jpg" alt="SS" />
-        <p>Spare Parts Suitable For Volvo</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="https://wa.me/+6281213838567?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk%For%20Komatsu">
-        <img src="img/product/sk.jpg" alt="SK" />
-        <p>Spare Parts Suitable For Komatsu</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="https://wa.me/+6281213838567?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk%For%20Cummins">
-        <img src="img/product/sc.jpg" alt="SC" />
-        <p>Spare Parts Suitable For Cummins</p>
-      </a>
-    </div>
-    <div class="gallery-item">
-      <a href="https://wa.me/+6281213838567?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk%For%20Case">
-        <img src="img/product/sfc.jpg" alt="SFC" />
-        <p>Spare Parts Suitable For Case</p>
-      </a>
-    </div>
-  </div>
-</div>
 
 <!-- CTA Section -->
 <<div class="cta-full">
