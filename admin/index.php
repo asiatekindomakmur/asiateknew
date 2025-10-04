@@ -1,8 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-?>
-
 session_start();
 if (!isset($_SESSION['admin'])) {
   header("Location: login.php");
@@ -11,15 +7,60 @@ if (!isset($_SESSION['admin'])) {
 
 include 'config.php';
 
-// === Ambil data dari database ===
-$total_products = $conn->query("SELECT COUNT(*) AS total FROM products")->fetch_assoc()['total'] ?? 0;
-$total_articles = $conn->query("SELECT COUNT(*) AS total FROM articles")->fetch_assoc()['total'] ?? 0;
-$total_messages = $conn->query("SELECT COUNT(*) AS total FROM messages")->fetch_assoc()['total'] ?? 0;
+// ==== CEK KONEKSI ====
+if (!$conn) {
+  die("Koneksi ke database gagal: " . mysqli_connect_error());
+}
 
-$recent_products = $conn->query("SELECT name, stock, status FROM products ORDER BY created_at DESC LIMIT 5");
-$recent_articles = $conn->query("SELECT title, created_at FROM articles ORDER BY created_at DESC LIMIT 5");
-$recent_messages = $conn->query("SELECT name, email, message, created_at FROM messages ORDER BY created_at DESC LIMIT 5");
+// ==== Ambil data dari database dengan pengecekan aman ====
+$total_products = 0;
+$total_articles = 0;
+$total_messages = 0;
+$recent_products = [];
+$recent_articles = [];
+
+try {
+  // Total produk
+  $query = $conn->query("SELECT COUNT(*) AS total FROM products");
+  if ($query && $row = $query->fetch_assoc()) {
+    $total_products = $row['total'];
+  }
+
+  // Total artikel
+  $query = $conn->query("SELECT COUNT(*) AS total FROM articles");
+  if ($query && $row = $query->fetch_assoc()) {
+    $total_articles = $row['total'];
+  }
+
+  // Total pesan customer
+  $query = $conn->query("SELECT COUNT(*) AS total FROM messages");
+  if ($query && $row = $query->fetch_assoc()) {
+    $total_messages = $row['total'];
+  }
+
+  // Produk terbaru
+  $recent_products = [];
+  $query = $conn->query("SELECT name, stock, status FROM products ORDER BY created_at DESC LIMIT 5");
+  if ($query) {
+    while ($row = $query->fetch_assoc()) {
+      $recent_products[] = $row;
+    }
+  }
+
+  // Artikel terbaru
+  $recent_articles = [];
+  $query = $conn->query("SELECT title, created_at FROM articles ORDER BY created_at DESC LIMIT 5");
+  if ($query) {
+    while ($row = $query->fetch_assoc()) {
+      $recent_articles[] = $row;
+    }
+  }
+
+} catch (Exception $e) {
+  echo "⚠️ Terjadi kesalahan: " . $e->getMessage();
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="id">
