@@ -8,7 +8,7 @@ if (!isset($_SESSION['admin'])) {
 include 'config.php';
 
 // Ambil semua artikel
-$result = $conn->query("SELECT * FROM artikel ORDER BY created_at DESC");
+$result = $conn->query("SELECT * FROM artikel ORDER BY created_at ASC");
 ?>
 
 <!DOCTYPE html>
