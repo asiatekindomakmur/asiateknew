@@ -24,8 +24,8 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
-      background: #121212;
-      color: #f8f9fa;
+      background: #ffffff;
+      color: #333;
     }
 
     a {
@@ -35,7 +35,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     /* === NAVBAR === */
     .navbar-custom {
       background: linear-gradient(135deg, #b8860b, #ffd700);
-      box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
       padding: 12px 40px;
       display: flex;
       align-items: center;
@@ -70,7 +70,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
     }
 
     .navbar-custom .btn-logout:hover {
@@ -82,6 +82,8 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     /* === DASHBOARD WRAPPER === */
     .dashboard-wrapper {
       padding: 50px 60px;
+      background: #fff;
+      min-height: calc(100vh - 120px);
     }
 
     .dashboard-header {
@@ -90,41 +92,41 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 
     .dashboard-header h2 {
       font-weight: 700;
-      color: #ffd700;
+      color: #b8860b;
     }
 
     .dashboard-header p {
-      color: #ccc;
+      color: #666;
       margin-top: 6px;
     }
 
     /* === INFO CARDS === */
     .info-card {
-      background: #1c1c1c;
+      background: #ffffff;
       border-radius: 15px;
       padding: 25px 30px;
       display: flex;
       align-items: center;
       gap: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
       transition: 0.3s;
-      border: 1px solid rgba(255, 215, 0, 0.2);
+      border: 1px solid #f0e6c8;
     }
 
     .info-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 18px rgba(255, 215, 0, 0.25);
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
     }
 
     .info-card h5 {
-      color: #f0f0f0;
+      color: #555;
       font-weight: 600;
       margin-bottom: 5px;
     }
 
     .info-card h2 {
       font-weight: 800;
-      color: #ffd700;
+      color: #b8860b;
       margin: 0;
     }
 
@@ -137,6 +139,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       justify-content: center;
       color: white;
       font-size: 28px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
 
     .bg-product {
@@ -144,21 +147,21 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     }
 
     .bg-article {
-      background: linear-gradient(135deg, #d4af37, #ffe680);
+      background: linear-gradient(135deg, #d4af37, #ffdd55);
     }
 
     .bg-message {
-      background: linear-gradient(135deg, #f1c40f, #ffecb3);
-      color: #222;
+      background: linear-gradient(135deg, #ffcc00, #fff3b0);
+      color: #333;
     }
 
     /* === FOOTER === */
     footer {
       text-align: center;
       padding: 25px;
-      color: #ccc;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      background: #0e0e0e;
+      color: #777;
+      border-top: 1px solid #eee;
+      background: #fffdf5;
       margin-top: 60px;
     }
 
@@ -233,7 +236,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     </div>
 
     <div class="text-center mt-5">
-      <h6 style="color:#ccc;">Panel Admin <strong style="color:#ffd700;">Asiatek</strong> — dirancang untuk efisiensi & kemudahan kerja</h6>
+      <h6 style="color:#888;">Panel Admin <strong style="color:#b8860b;">Asiatek</strong> — dirancang untuk efisiensi & kemudahan kerja</h6>
     </div>
   </div>
 
