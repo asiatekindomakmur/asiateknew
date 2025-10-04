@@ -8,7 +8,7 @@ if (!isset($_SESSION['admin'])) {
 include 'config.php';
 
 // Ambil semua artikel
-$result = $conn->query("SELECT * FROM articles ORDER BY created_at DESC");
+$result = $conn->query("SELECT * FROM artikel ORDER BY created_at DESC");
 ?>
 
 <!DOCTYPE html>
@@ -77,7 +77,7 @@ $result = $conn->query("SELECT * FROM articles ORDER BY created_at DESC");
     </div>
     <a href="index.php"><i class="fa-solid fa-home"></i> Dashboard</a>
     <a href="produk.php"><i class="fa-solid fa-box"></i> Produk</a>
-    <a href="articles.php" class="active"><i class="fa-solid fa-file-alt"></i> Artikel</a>
+    <a href="artikel.php" class="active"><i class="fa-solid fa-file-alt"></i> Artikel</a>
     <a href="messages.php"><i class="fa-solid fa-envelope"></i> Pesan</a>
     <div class="mt-auto pt-3">
       <a href="logout.php" style="color:#dc3545;"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
