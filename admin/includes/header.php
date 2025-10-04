@@ -17,15 +17,16 @@ if (!isset($_SESSION['admin'])) {
     /* === FONT & GLOBAL === */
     body {
       font-family: 'Poppins', sans-serif;
-      background: #fdfcf9;
+      background: #0d1b2a;
       margin: 0;
       padding: 0;
+      color: #e0e1dd;
     }
 
-    /* === NAVBAR ELEGAN === */
+    /* === NAVBAR ELEGAN BIRU === */
     .navbar-custom {
-      background: linear-gradient(135deg, #b8860b, #e6c200);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      background: linear-gradient(135deg, #0d1b2a, #1b263b);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
       padding: 12px 40px;
       display: flex;
       align-items: center;
@@ -41,18 +42,18 @@ if (!isset($_SESSION['admin'])) {
       gap: 12px;
       font-weight: 700;
       font-size: 20px;
-      color: #fff;
-      letter-spacing: 0.5px;
+      color: #e0e1dd;
       text-decoration: none;
+      letter-spacing: 0.5px;
     }
 
     .navbar-custom .navbar-brand img {
       height: 45px;
       width: auto;
-      border-radius: 10px;
-      background: white;
-      padding: 5px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+      border-radius: 6px;
+      background: transparent;
+      padding: 0;
+      box-shadow: none;
     }
 
     .navbar-custom .navbar-brand span {
@@ -60,9 +61,9 @@ if (!isset($_SESSION['admin'])) {
     }
 
     .navbar-custom .btn-logout {
-      background: #fff;
-      color: #b8860b;
-      border: none;
+      background: transparent;
+      color: #e0e1dd;
+      border: 1px solid #415a77;
       font-weight: 600;
       border-radius: 10px;
       padding: 8px 16px;
@@ -73,27 +74,27 @@ if (!isset($_SESSION['admin'])) {
     }
 
     .navbar-custom .btn-logout:hover {
-      background: #b8860b;
+      background: #415a77;
       color: #fff;
       transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     /* === SIDEBAR === */
     .sidebar {
-      background: #fffdfa;
-      border-right: 1px solid #f0e0a0;
+      background: #1b263b;
+      border-right: 1px solid #415a77;
       min-height: 100vh;
       padding-top: 25px;
       position: fixed;
       width: 220px;
-      top: 70px; /* tinggi navbar */
+      top: 70px;
       left: 0;
     }
 
     .sidebar h6 {
       font-weight: 700;
-      color: #b8860b;
+      color: #778da9;
       margin-bottom: 15px;
       padding-left: 15px;
       text-transform: uppercase;
@@ -101,7 +102,7 @@ if (!isset($_SESSION['admin'])) {
     }
 
     .sidebar a {
-      color: #333;
+      color: #e0e1dd;
       text-decoration: none;
       display: flex;
       align-items: center;
@@ -113,9 +114,10 @@ if (!isset($_SESSION['admin'])) {
       font-weight: 500;
     }
 
-    .sidebar a:hover, .sidebar a.active {
-      background: linear-gradient(135deg, #fff4cc, #ffe680);
-      color: #b8860b;
+    .sidebar a:hover,
+    .sidebar a.active {
+      background: #415a77;
+      color: #fff;
       font-weight: 600;
     }
 
@@ -128,18 +130,18 @@ if (!isset($_SESSION['admin'])) {
     .content {
       margin-left: 220px;
       padding: 40px;
-      background: #faf9f5;
+      background: #0d1b2a;
       min-height: calc(100vh - 70px);
     }
 
     .content h3 {
       font-weight: 700;
-      color: #b8860b;
+      color: #e0e1dd;
       margin-bottom: 10px;
     }
 
     .content p {
-      color: #555;
+      color: #adb5bd;
       font-size: 15px;
     }
 
