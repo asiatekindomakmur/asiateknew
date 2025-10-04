@@ -27,6 +27,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       background: #ffffff;
       color: #333;
       display: flex;
+      min-height: 100vh;
     }
 
     a {
@@ -36,13 +37,13 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 
     /* === SIDEBAR === */
     .sidebar {
-      width: 250px;
+      width: 260px;
       background: linear-gradient(180deg, #b8860b, #ffd700);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 30px 0;
+      padding: 40px 0 30px;
       box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
       position: fixed;
       left: 0;
@@ -50,14 +51,16 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     }
 
     .sidebar img {
-      height: 60px;
-      margin-bottom: 25px;
+      height: 70px;
+      margin-bottom: 35px;
     }
 
     .sidebar nav {
       display: flex;
       flex-direction: column;
       width: 100%;
+      gap: 5px;
+      flex-grow: 1;
     }
 
     .sidebar a {
@@ -66,7 +69,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       gap: 12px;
       color: #fff;
       font-weight: 600;
-      padding: 12px 30px;
+      padding: 14px 30px;
       transition: all 0.3s ease;
       font-size: 15px;
     }
@@ -76,17 +79,18 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       background: rgba(255, 255, 255, 0.25);
       color: #fff;
       text-shadow: 0 0 8px rgba(255,255,255,0.8);
+      border-left: 4px solid #fff;
+      padding-left: 26px;
     }
 
     .sidebar .logout-btn {
-      margin-top: auto;
       background: #fff;
       color: #b8860b;
       border: none;
-      border-radius: 8px;
-      padding: 10px 20px;
+      border-radius: 10px;
+      padding: 10px 24px;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-top: 15px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.15);
       transition: all 0.3s ease;
     }
@@ -99,10 +103,13 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 
     /* === MAIN CONTENT === */
     .main-content {
-      margin-left: 250px;
+      margin-left: 260px;
       padding: 50px 60px;
       background: #fff;
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       min-height: 100vh;
     }
 
@@ -113,11 +120,13 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     .dashboard-header h2 {
       font-weight: 700;
       color: #b8860b;
+      font-size: 26px;
     }
 
     .dashboard-header p {
       color: #666;
       margin-top: 6px;
+      font-size: 15px;
     }
 
     /* === INFO CARDS === */
@@ -170,13 +179,15 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 
     /* === FOOTER === */
     footer {
-      text-align: center;
-      padding: 25px;
-      color: #e0e1dd;
-      background: linear-gradient(135deg, #0d1b2a, #1b263b, #2a3f5f);
-      border-top: 2px solid #b8860b;
       margin-top: 60px;
-      box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
+      text-align: center;
+      padding: 35px 20px;
+      color: #f2f3f4;
+      background: linear-gradient(135deg, #0d1b2a, #1b263b, #2a3f5f);
+      border-top: 3px solid #b8860b;
+      box-shadow: 0 -4px 10px rgba(0,0,0,0.3);
+      font-size: 15px;
+      border-radius: 8px;
     }
 
     footer strong {
@@ -189,19 +200,23 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
         width: 100%;
         height: auto;
         flex-direction: row;
-        justify-content: space-between;
-        padding: 15px 20px;
+        justify-content: space-around;
+        padding: 10px;
       }
 
       .sidebar nav {
         flex-direction: row;
-        justify-content: space-around;
-        width: 100%;
+        justify-content: center;
+        gap: 10px;
       }
 
       .main-content {
         margin-left: 0;
         padding: 30px 20px;
+      }
+
+      .sidebar .logout-btn {
+        margin-top: 0;
       }
     }
   </style>
@@ -223,45 +238,47 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 
   <!-- Main Content -->
   <div class="main-content">
-    <div class="dashboard-header">
-      <h2>Selamat Datang, <?php echo $_SESSION['admin']; ?> 👋</h2>
-      <p>Berikut ringkasan aktivitas website Anda hari ini.</p>
-    </div>
+    <div>
+      <div class="dashboard-header">
+        <h2>Selamat Datang, <?php echo $_SESSION['admin']; ?> 👋</h2>
+        <p>Berikut ringkasan aktivitas website Anda hari ini.</p>
+      </div>
 
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="info-card">
-          <div class="icon-box bg-product"><i class="fa fa-box"></i></div>
-          <div>
-            <h5>Total Produk</h5>
-            <h2><?php echo $total_products; ?></h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="info-card">
+            <div class="icon-box bg-product"><i class="fa fa-box"></i></div>
+            <div>
+              <h5>Total Produk</h5>
+              <h2><?php echo $total_products; ?></h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="info-card">
+            <div class="icon-box bg-article"><i class="fa fa-newspaper"></i></div>
+            <div>
+              <h5>Total Artikel</h5>
+              <h2><?php echo $total_articles; ?></h2>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="info-card">
+            <div class="icon-box bg-message"><i class="fa fa-envelope"></i></div>
+            <div>
+              <h5>Pesan Masuk</h5>
+              <h2><?php echo $total_messages; ?></h2>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-4">
-        <div class="info-card">
-          <div class="icon-box bg-article"><i class="fa fa-newspaper"></i></div>
-          <div>
-            <h5>Total Artikel</h5>
-            <h2><?php echo $total_articles; ?></h2>
-          </div>
-        </div>
+      <div class="text-center mt-5">
+        <h6 style="color:#666;">Panel Admin <strong style="color:#b8860b;">Asiatek</strong> — dirancang untuk efisiensi & kemudahan kerja</h6>
       </div>
-
-      <div class="col-md-4">
-        <div class="info-card">
-          <div class="icon-box bg-message"><i class="fa fa-envelope"></i></div>
-          <div>
-            <h5>Pesan Masuk</h5>
-            <h2><?php echo $total_messages; ?></h2>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="text-center mt-5">
-      <h6 style="color:#666;">Panel Admin <strong style="color:#b8860b;">Asiatek</strong> — dirancang untuk efisiensi & kemudahan kerja</h6>
     </div>
 
     <footer>
