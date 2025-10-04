@@ -43,15 +43,6 @@ $result = $conn->query($sql);
 </head>
 <body>
 
-<script>
-const hamburger = document.querySelector('.hamburger-menu');
-const navLinks = document.querySelector('.nav.links');
-
-hamburger.addEventListener('click', () => {
-  navLinks.classList.toggle('active');
-});
-</script>
-
     <!-- Header -->
     <header>
       <div class="container header-content navbar">
@@ -151,6 +142,15 @@ hamburger.addEventListener('click', () => {
 
 <script>
 feather.replace();
+</script>
+
+<script>
+const hamburger = document.querySelector('.hamburger-menu');
+const navLinks = document.querySelector('.nav.links');
+
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
 </script>
 </body>
 </html>
