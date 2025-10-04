@@ -5,7 +5,7 @@ if (!isset($_SESSION['admin'])) {
   exit;
 }
 
-include 'config.php';
+include '../config.php';
 
 // === Ambil data dari database ===
 $total_products = $conn->query("SELECT COUNT(*) AS total FROM products")->fetch_assoc()['total'] ?? 0;
