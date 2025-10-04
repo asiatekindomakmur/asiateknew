@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+session_start();
 
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
@@ -9,6 +10,7 @@ if (isset($_POST['login'])) {
     if ($result->num_rows > 0) {
         $_SESSION['admin'] = $username;
         header("Location: index.php");
+        exit;
     } else {
         $error = "Username atau password salah!";
     }
@@ -16,13 +18,20 @@ if (isset($_POST['login'])) {
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin - Asiatek</title>
 
+    <!-- Bootstrap -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        /* ===== BODY ===== */
         body {
             background: linear-gradient(135deg, #b8860b, #ffd700, #daa520);
             background-size: 400% 400%;
@@ -32,6 +41,7 @@ if (isset($_POST['login'])) {
             align-items: center;
             justify-content: center;
             font-family: 'Poppins', sans-serif;
+            margin: 0;
         }
 
         @keyframes gradientMove {
@@ -40,6 +50,7 @@ if (isset($_POST['login'])) {
             100% { background-position: 0% 50%; }
         }
 
+        /* ===== LOGIN CARD ===== */
         .login-card {
             background: rgba(255, 255, 255, 0.92);
             border-radius: 18px;
@@ -56,6 +67,7 @@ if (isset($_POST['login'])) {
             box-shadow: 0 15px 45px rgba(0, 0, 0, 0.3);
         }
 
+        /* ===== TITLE ===== */
         .brand-title {
             font-weight: 800;
             font-size: 1.8rem;
@@ -70,6 +82,7 @@ if (isset($_POST['login'])) {
             margin-bottom: 30px;
         }
 
+        /* ===== INPUT GROUP ===== */
         .input-group {
             position: relative;
             margin-bottom: 20px;
@@ -103,8 +116,15 @@ if (isset($_POST['login'])) {
             color: #b8860b;
             font-size: 18px;
             pointer-events: none;
+            transition: color 0.3s ease;
         }
 
+        .input-group input:focus + i {
+            color: #ffd700;
+            text-shadow: 0 0 6px rgba(255, 215, 0, 0.6);
+        }
+
+        /* ===== BUTTON ===== */
         .btn-login {
             background: linear-gradient(135deg, #b8860b, #ffd700);
             border: none;
@@ -115,6 +135,7 @@ if (isset($_POST['login'])) {
             text-transform: uppercase;
             letter-spacing: 0.5px;
             transition: all 0.3s ease;
+            width: 100%;
         }
 
         .btn-login:hover {
@@ -123,15 +144,13 @@ if (isset($_POST['login'])) {
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
 
+        /* ===== ERROR TEXT ===== */
         .text-danger {
             font-size: 0.9rem;
             margin-top: 15px;
             color: #dc3545;
         }
     </style>
-
-    <!-- Font Awesome untuk ikon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -144,11 +163,13 @@ if (isset($_POST['login'])) {
                 <input type="text" name="username" placeholder="Username" required>
                 <i class="fa fa-user"></i>
             </div>
+
             <div class="input-group">
                 <input type="password" name="password" placeholder="Password" required>
                 <i class="fa fa-lock"></i>
             </div>
-            <button name="login" class="btn-login w-100">Login</button>
+
+            <button name="login" class="btn-login">Login</button>
         </form>
 
         <?php if (isset($error)) echo "<div class='text-danger'>$error</div>"; ?>
