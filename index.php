@@ -1,3 +1,13 @@
+<?php
+include 'config.php';
+
+// Ambil data produk (urut berdasarkan id / urutan admin)
+$products = fetchAll("SELECT * FROM products ORDER BY id ASC");
+
+// Ambil artikel terbaru (limit 3)
+$articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -151,176 +161,42 @@
       </div>
     </section>
 
-  <!-- Product Section -->
+  <!-- Product Section Dinamis -->
   <section class="product-carousel">
-    <h2>Spare parts for heavy machinery</h2>
-    <p>Accessories, parts and spare parts for your machinery</p>
-    <div class="carousel-wrapper">
-      <!-- Left button -->
-      <button class="carousel-btn left">&#10094;</button>
+      <h2>Spare parts for heavy machinery</h2>
+      <p>Accessories, parts and spare parts for your machinery</p>
 
-      <!-- Carousel with product items -->
-      <div class="carousel">
-        <div class="product-item">
-          <a href="undercarriage.html">
-            <img src="img/product/uc.jpg" alt="Undercarriage" />
-            <p>Undercarriage</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="hardware.html">
-            <img src="img/product/hw.jpg" alt="Hardware" />
-            <p>Hardware</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="chassis.html">
-            <img src="img/product/ch.jpg" alt="Chassis" />
-            <p>Chassis</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="bearings.html">
-            <img src="img/product/br.jpg" alt="Bearings" />
-            <p>Bearings</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="cooling.html">
-            <img src="img/product/cs.jpg" alt="Cooling System" />
-            <p>Cooling System</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="light.html">
-            <img src="img/product/lg.jpg" alt="Lights" />
-            <p>Lights</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="Electrical.html">
-            <img src="img/product/ep.jpg" alt="Electrical Parts" />
-            <p>Electrical Parts</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="engine.html">
-            <img src="img/product/eg.jpg" alt="Engine" />
-            <p>Engine</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="https://wa.me/+6281213838567?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk%Maintance%20Product">
-            <img src="img/product/mp.jpg" alt="Maintenance Product" />
-            <p>Maintenance Product</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="gasket.html">
-            <img src="img/product/gs.jpg" alt="Gasket And Seal" />
-            <p>Gasket And Seals</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="hydraulic.html">
-            <img src="img/product/hc.jpg" alt="Hydraulics" />
-            <p>Hydraulics</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="filters.html">
-            <img src="img/product/ft.jpg" alt="Filters" />
-            <p>Filters</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="hydraulic.html">
-            <img src="img/product/hb.jpg" alt="Hydraulic Breakers" />
-            <p>Hydraulic Breakers</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="rubber-track.html">
-            <img src="img/product/rt.jpg" alt="Rubber Tracks" />
-            <p>Rubber Tracks</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="highwear.html">
-            <img src="img/product/hwt.jpg" alt="High Wear Items" />
-            <p>High Wear Items</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="cabcomponent.html">
-            <img src="img/product/cc.jpg" alt="Cabin Components" />
-            <p>Cabin Components</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="powertrain.html">
-            <img src="img/product/pt.jpg" alt="Power Train" />
-            <p>Power Train</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="brakes.html">
-            <img src="img/product/brk.jpg" alt="Brakes" />
-            <p>Brakes</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="https://wa.me/+6281213838567?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk%For%20Catterpillar">
-            <img src="img/product/as.jpg" alt="Alternative Spare Parts For Caterpillar" />
-            <p>Alternative Spare Parts For Caterpillar</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="https://wa.me/+6281213838567?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk%For%20Volvo">
-            <img src="img/product/ss.jpg" alt="Spare Parts Suitable For Volvo" />
-            <p>Spare Parts Suitable For Volvo</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="https://wa.me/+6281213838567?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk%20For%20Komatsu">
-            <img src="img/product/sk.jpg" alt="Spare Parts Suitable For Komatsu" />
-            <p>Spare Parts Suitable For Komatsu</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="https://wa.me/+6281213838567?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk%20For%20Cummins">
-            <img src="img/product/sc.jpg" alt="Spare Parts Suitable For Cummins" />
-            <p>Spare Parts Suitable For Cummins</p>
-          </a>
-        </div>
-        <div class="product-item">
-          <a href="https://wa.me/+6281213838567?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk%20For%20Case">
-            <img src="img/product/sfc.jpg" alt="Spare Parts Suitable For Case" />
-            <p>Spare Parts Suitable For Case</p>
-          </a>
-        </div>
+      <div class="carousel-wrapper">
+          <!-- Left button -->
+          <button class="carousel-btn left">&#10094;</button>
+
+          <!-- Carousel dengan produk dinamis -->
+          <div class="carousel">
+              <?php foreach ($products as $p): ?>
+              <div class="product-item">
+                  <a href="<?= htmlspecialchars($p['link']) ?>">
+                      <img src="uploads/produk/<?= htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['name']) ?>" />
+                      <p><?= htmlspecialchars($p['name']) ?></p>
+                  </a>
+              </div>
+              <?php endforeach; ?>
+          </div>
+
+          <!-- Right button -->
+          <button class="carousel-btn right">&#10095;</button>
       </div>
 
-      <!-- Right button -->
-      <button class="carousel-btn right">&#10095;</button>
-    </div>
-
-    <!-- Tambahkan teks di bawah carousel -->
-    <div class="product-description">
-      <p class="highlight-text">
-        Asiatek delivers replacement parts and maintenance products for Construction and Mining Equipment
-      </p>
-      <p>
-        With more than 100,000 part numbers in stock, Asiatek offers its customers the best possible service in the replacement parts industry.
-      </p>
-    </div>
+      <!-- Teks di bawah carousel -->
+      <div class="product-description">
+          <p class="highlight-text">
+              Asiatek delivers replacement parts and maintenance products for Construction and Mining Equipment
+          </p>
+          <p>
+              With more than 100,000 part numbers in stock, Asiatek offers its customers the best possible service in the replacement parts industry.
+          </p>
+      </div>
   </section>
 
-  
-  
-  
-  
-  
   <!-- Keunggulan Kami -->
   <section class="advantages">
     <div class="advantages-container">
