@@ -175,7 +175,7 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
               <?php foreach ($products as $p): ?>
               <div class="product-item">
                   <a href="<?= htmlspecialchars($p['link']) ?>">
-                      <img src="uploads/produk/<?= htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['name']) ?>" />
+                      <img src="admin/uploads/produk/<?= htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['name']) ?>" />
                       <p><?= htmlspecialchars($p['name']) ?></p>
                   </a>
               </div>
@@ -455,7 +455,7 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
         <div class="blog-grid">
             <?php foreach ($articles as $a): ?>
             <div class="blog-card">
-                <img src="uploads/artikel/<?= htmlspecialchars($a['image']) ?>" alt="<?= htmlspecialchars($a['title']) ?>" />
+                <img src="admin/uploads/artikel/<?= htmlspecialchars($a['image']) ?>" alt="<?= htmlspecialchars($a['title']) ?>" />
                 <h3><?= htmlspecialchars($a['title']) ?></h3>
                 <p>
                     <?= nl2br(htmlspecialchars(substr($a['description'], 0, 150))) ?>...
