@@ -24,8 +24,8 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
-      background: #0d1b2a;
-      color: #e0e1dd;
+      background: #121212;
+      color: #f8f9fa;
     }
 
     a {
@@ -34,8 +34,8 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 
     /* === NAVBAR === */
     .navbar-custom {
-      background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 60%, #2b6777 100%);
-      box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+      background: linear-gradient(135deg, #b8860b, #ffd700);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.4);
       padding: 12px 40px;
       display: flex;
       align-items: center;
@@ -49,7 +49,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       display: flex;
       align-items: center;
       gap: 10px;
-      color: #f8f9fa;
+      color: #fff;
       font-weight: 700;
       font-size: 20px;
       letter-spacing: 0.5px;
@@ -57,14 +57,12 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 
     .navbar-custom .navbar-brand img {
       height: 45px;
-      border-radius: 6px;
-      background: none;
     }
 
     .navbar-custom .btn-logout {
-      background: transparent;
-      border: 1px solid #468faf;
-      color: #e0e1dd;
+      background: #fff;
+      border: none;
+      color: #b8860b;
       border-radius: 8px;
       padding: 8px 16px;
       font-weight: 600;
@@ -72,10 +70,11 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       display: flex;
       align-items: center;
       gap: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
     .navbar-custom .btn-logout:hover {
-      background: #468faf;
+      background: #b8860b;
       color: white;
       transform: translateY(-2px);
     }
@@ -91,17 +90,17 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
 
     .dashboard-header h2 {
       font-weight: 700;
-      color: #f8f9fa;
+      color: #ffd700;
     }
 
     .dashboard-header p {
-      color: #adb5bd;
+      color: #ccc;
       margin-top: 6px;
     }
 
     /* === INFO CARDS === */
     .info-card {
-      background: #1b263b;
+      background: #1c1c1c;
       border-radius: 15px;
       padding: 25px 30px;
       display: flex;
@@ -109,22 +108,23 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
       gap: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
       transition: 0.3s;
+      border: 1px solid rgba(255, 215, 0, 0.2);
     }
 
     .info-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 18px rgba(255, 215, 0, 0.25);
     }
 
     .info-card h5 {
-      color: #e0e1dd;
+      color: #f0f0f0;
       font-weight: 600;
       margin-bottom: 5px;
     }
 
     .info-card h2 {
       font-weight: 800;
-      color: #f0c808;
+      color: #ffd700;
       margin: 0;
     }
 
@@ -140,24 +140,25 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     }
 
     .bg-product {
-      background: linear-gradient(135deg, #0077b6, #00b4d8);
+      background: linear-gradient(135deg, #b8860b, #ffd700);
     }
 
     .bg-article {
-      background: linear-gradient(135deg, #3a86ff, #90e0ef);
+      background: linear-gradient(135deg, #d4af37, #ffe680);
     }
 
     .bg-message {
-      background: linear-gradient(135deg, #2a9d8f, #52b788);
+      background: linear-gradient(135deg, #f1c40f, #ffecb3);
+      color: #222;
     }
 
     /* === FOOTER === */
     footer {
       text-align: center;
       padding: 25px;
-      color: #adb5bd;
-      border-top: 1px solid #1e3d59;
-      background: #0d1b2a;
+      color: #ccc;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      background: #0e0e0e;
       margin-top: 60px;
     }
 
@@ -232,7 +233,7 @@ $total_messages = $conn->query("SELECT COUNT(*) as total FROM messages")->fetch_
     </div>
 
     <div class="text-center mt-5">
-      <h6 style="color:#adb5bd;">Panel Admin <strong style="color:#f0c808;">Asiatek</strong> — dirancang untuk efisiensi & kemudahan kerja</h6>
+      <h6 style="color:#ccc;">Panel Admin <strong style="color:#ffd700;">Asiatek</strong> — dirancang untuk efisiensi & kemudahan kerja</h6>
     </div>
   </div>
 
