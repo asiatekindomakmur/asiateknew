@@ -1,8 +1,31 @@
 <?php
 include 'admin/config.php'; // koneksi database
 
-// Ambil semua produk dari database
-$sql = "SELECT * FROM products ORDER BY id ASC";
+// Pagination
+$limit = 15; // maksimal produk per halaman
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$start = ($page - 1) * $limit;
+
+// Search
+$search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+
+// Query total produk (untuk pagination)
+$total_sql = "SELECT COUNT(*) as total FROM products";
+if($search) {
+    $total_sql .= " WHERE name LIKE '%$search%'";
+}
+$total_result = $conn->query($total_sql);
+$total_row = $total_result->fetch_assoc();
+$total_products = $total_row['total'];
+$total_pages = ceil($total_products / $limit);
+
+// Ambil produk sesuai search dan pagination
+$sql = "SELECT * FROM products";
+if($search) {
+    $sql .= " WHERE name LIKE '%$search%'";
+}
+$sql .= " ORDER BY id ASC LIMIT $start, $limit";
+
 $result = $conn->query($sql);
 ?>
 
@@ -79,24 +102,41 @@ $result = $conn->query($sql);
       </div>
     </section>
 
-
-    <!-- Product Gallery -->
-    <div class="gallery-wrapper">
-      <div class="gallery">
-        <?php if ($result->num_rows > 0): ?>
-            <?php while($row = $result->fetch_assoc()): ?>
-                <div class="gallery-item">
-                  <a href="<?php echo $row['link']; ?>">
-                    <img src="admin/uploads/produk/<?php echo $row['image']; ?>" alt="<?php echo htmlspecialchars($row['name']); ?>" />
-                    <p><?php echo htmlspecialchars($row['name']); ?></p>
-                  </a>
-                </div>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <p>Tidak ada produk yang tersedia saat ini.</p>
-        <?php endif; ?>
-      </div>
+    <!-- Search -->
+    <div class="container" style="margin: 20px 0; text-align:center;">
+      <form method="GET" action="sparepart.php">
+        <input type="text" name="search" placeholder="Cari produk..." value="<?php echo htmlspecialchars($search); ?>" />
+        <button type="submit">Search</button>
+      </form>
     </div>
+
+<!-- Product Gallery -->
+<div class="gallery-wrapper">
+  <div class="gallery">
+    <?php if ($result->num_rows > 0): ?>
+        <?php while($row = $result->fetch_assoc()): ?>
+            <div class="gallery-item">
+              <a href="<?php echo $row['link']; ?>">
+                <img src="admin/uploads/produk/<?php echo $row['image']; ?>" alt="<?php echo htmlspecialchars($row['name']); ?>" />
+                <p><?php echo htmlspecialchars($row['name']); ?></p>
+              </a>
+            </div>
+        <?php endwhile; ?>
+    <?php else: ?>
+        <p>Tidak ada produk yang tersedia saat ini.</p>
+    <?php endif; ?>
+  </div>
+</div>
+
+<!-- Pagination -->
+<div class="pagination" style="text-align:center; margin:30px 0;">
+  <?php if($total_pages > 1): ?>
+    <?php for($i=1; $i<=$total_pages; $i++): ?>
+      <a href="sparepart.php?page=<?php echo $i; ?><?php if($search) echo '&search='.$search; ?>" 
+         class="<?php if($i==$page) echo 'active'; ?>"><?php echo $i; ?></a>
+    <?php endfor; ?>
+  <?php endif; ?>
+</div>
 
 <!-- CTA Section -->
 <<div class="cta-full">
