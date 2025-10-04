@@ -456,7 +456,11 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
             <?php foreach ($articles as $a): ?>
             <div class="blog-card">
                 <img src="admin/uploads/artikel/<?= htmlspecialchars($a['image']) ?>" alt="<?= htmlspecialchars($a['title']) ?>" />
-                <h3><?= htmlspecialchars($a['title']) ?></h3>
+                <h3>
+                    <a href="artikel-detail.php?id=<?= $a['id'] ?>" class="blog-title">
+                        <?= htmlspecialchars($a['title']) ?>
+                    </a>
+                </h3>
                 <p>
                     <?= nl2br(htmlspecialchars(substr($a['description'], 0, 150))) ?>...
                 </p>
