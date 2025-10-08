@@ -44,7 +44,7 @@
     </header>
 
     <!-- Artikel Hero -->
-    <section class="about-hero" style="background-image: url('img/contact.jpeg'); background-size: cover; background-position: center;">
+    <section class="about-hero" style="background-image: url('img/bpg.jpg'); background-size: cover; background-position: center;">
       <div class="about-hero-overlay">
         <div class="about-hero-content container">
           <h1>Blog & Artikel</h1>
