@@ -53,5 +53,16 @@
       </div>
     </section>
 
+    <!-- Search -->
+    <div class="container search-container">
+      <form method="GET" action="sparepart.php">
+        <div class="search-wrapper">
+          <input type="text" name="search" placeholder="Cari produk..." value="<?php echo htmlspecialchars($search); ?>">
+          <button type="submit"><i data-feather="search"></i></button>
+        </div>
+      </form>
+    </div>
+
+  <?php include 'footer.php'; ?>
 </body>
 </html>
