@@ -121,26 +121,6 @@ $result = $conn->query($sql);
   <a href="https://wa.me/+6281213838567?text=Halo%20Saya%20Ingin%20Menanyakan%20Tentang%20Produk" class="cta-full-button">Hubungi Kami</a>
 </div>
 
-<!-- Footer -->
-<footer class="site-footer">
-  <div class="footer-container">
-    <div class="footer-section">
-      <img src="img/logo.png" alt="Logo" class="footer-logo">
-      <p>PT Asiatek Indo Makmur Menyediakan berbagai Suku Cadang dan Sparepart Alat Berat dengan Harga yang kompetetif dan berkualitas.</p>
-    </div>
-    <div class="footer-section">
-      <h4>HUBUNGI KAMI</h4>
-      <p>📞 0812-1383-8567</p>
-      <p>📧 sales@asiatek.co.id</p>
-      <p>📍 Jl. Asia Baru Blok F. No 148 RW.04 RT. 005, Kota Jakarta Barat</p>
-      <div class="footer-social" style="margin-top:20px">
-        <a href="https://www.instagram.com/asiatek.indomakmur" target="_blank"><i data-feather="instagram"></i></a>
-        <a href="https://wa.me/+6281213838567" target="_blank"><i data-feather="phone"></i></a>
-        <a href="https://tokopedia.com/asiatekindo" target="_blank"><i data-feather="shopping-cart"></i></a>
-      </div>
-    </div>
-  </div>
-</footer>
 
 <script>
 feather.replace();
@@ -154,5 +134,7 @@ hamburger.addEventListener('click', () => {
   navLinks.classList.toggle('active');
 });
 </script>
+
+  <?php include 'footer.php'; ?>
 </body>
 </html>
