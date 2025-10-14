@@ -11,18 +11,24 @@ $start = ($page - 1) * $limit;
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
 
 // Total Artikel (untuk pagination)
-$total_sql = "SELECT COUNT(*) as total FROM artikel";
-if($search) $total_sql .= " WHERE name LIKE '%$search%'";
+$whereSQL = $search ? "WHERE judul LIKE '%$search%'" : '';
+$total_sql = "SELECT COUNT(*) as total FROM artikel $whereSQL";
 $total_result = $conn->query($total_sql);
 $total_row = $total_result->fetch_assoc();
 $total_artikel = $total_row['total'];
 $total_pages = ceil($total_artikel / $limit);
 
 // Ambil Artikel sesuai page & search
-$sql = "SELECT * FROM artikel";
-if($search) $sql .= " WHERE name LIKE '%$search%'";
-$sql .= " ORDER BY id ASC LIMIT $start, $limit";
+$sql = "SELECT * FROM artikel $whereSQL ORDER BY id DESC LIMIT $start, $limit";
 $result = $conn->query($sql);
+
+// Simpan hasil ke dalam array
+$artikel = [];
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $artikel[] = $row;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +48,7 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="css/artikel_css/header_artikel.css" />
     <link rel="stylesheet" href="css/artikel_css/search.css" />
     <link rel="stylesheet" href="css/artikel_css/pagination.css" />
+    <link rel="stylesheet" href="css/artikel_css/artikel.css" />
 
     <script src="js/script.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
@@ -84,13 +91,41 @@ $result = $conn->query($sql);
 
     <!-- Search -->
     <div class="container search-container">
-      <form method="GET" action="sparepart.php">
+      <form method="GET" action="artikel.php">
         <div class="search-wrapper">
           <input type="text" name="search" placeholder="Cari Artikel..." value="<?php echo htmlspecialchars($search); ?>">
           <button type="submit"><i data-feather="search"></i></button>
         </div>
       </form>
     </div>
+
+    <!-- Blog & Artikel -->
+<section class="content-section" id="artikel">
+    <div class="container">
+
+        <!-- Artikel Grid -->
+        <div class="blog-grid">
+            <?php if (is_array($artikel) && count($artikel) > 0): ?>
+                <?php foreach ($artikel as $row): ?>
+                    <div class="blog-post">
+                        <img src="<?= htmlspecialchars($row['gambar']) ?>" 
+                             alt="Artikel - <?= htmlspecialchars($row['judul']) ?>" 
+                             loading="lazy">
+                        <h2>
+                            <a href="detail_artikel.php?slug=<?= urlencode($row['slug']) ?>">
+                                <?= htmlspecialchars($row['judul']) ?>
+                            </a>
+                        </h2>
+                        <p><?= substr(strip_tags($row['isi']), 0, 120) ?>...</p>
+                        <div class="card-footer">
+                            <a href="detail_artikel.php?slug=<?= urlencode($row['slug']) ?>">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Tidak ada artikel yang ditemukan.</p>
+            <?php endif; ?>
+        </div>
 
     <!-- Pagination -->
     <?php if($total_pages > 1): ?>
