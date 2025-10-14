@@ -119,24 +119,33 @@ if ($result) {
                         </h2>
                         <p><?= substr(strip_tags($row['description']), 0, 120) ?>...</p>
                         <div class="card-footer">
-                            <a href="detail_artikel.php?slug=<?= urlencode($row['slug']) ?>">Baca Selengkapnya</a>
+                            <a href="detail_artikel.php?id=<?= $row['id'] ?>">Baca Selengkapnya</a>
                         </div>
                     </div>
                 <?php endforeach; ?>
             <?php else: ?>
                 <p>Tidak ada artikel yang ditemukan.</p>
             <?php endif; ?>
+        </div> <!-- blog-grid -->
+
+        <!-- Pagination -->
+        <?php if($total_pages > 1): ?>
+        <div class="pagination">
+          <?php for($i=1; $i<=$total_pages; $i++): ?>
+            <a href="artikel.php?page=<?= $i ?><?= $search ? '&search=' . urlencode($search) : '' ?>" class="<?= $i == $page ? 'active' : '' ?>">
+              <?= $i ?>
+            </a>
+          <?php endfor; ?>
         </div>
+        <?php endif; ?>
 
-    <!-- Pagination -->
-    <?php if($total_pages > 1): ?>
-    <div class="pagination">
-      <?php for($i=1; $i<=$total_pages; $i++): ?>
-        <a href="artikel.php?page=<?php echo $i; ?><?php if($search) echo '&search='.$search; ?>" class="<?php if($i==$page) echo 'active'; ?>"><?php echo $i; ?></a>
-      <?php endfor; ?>
-    </div>
-    <?php endif; ?>
+    </div> <!-- container -->
+</section>
 
-  <?php include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
+
+<script>
+  feather.replace(); // Aktifkan feather icons
+</script>
 </body>
 </html>
