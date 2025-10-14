@@ -99,7 +99,7 @@ if ($result) {
       </form>
     </div>
 
-    <!-- Blog & Artikel -->
+<!-- Blog & Artikel -->
 <section class="content-section" id="artikel">
     <div class="container">
 
@@ -108,9 +108,9 @@ if ($result) {
             <?php if (is_array($artikel) && count($artikel) > 0): ?>
                 <?php foreach ($artikel as $row): ?>
                     <div class="blog-post">
-                        <img src="<?= htmlspecialchars($row['gambar']) ?>" 
-                             alt="Artikel - <?= htmlspecialchars($row['judul']) ?>" 
-                             loading="lazy">
+                        <img src="admin/uploads/artikel/<?= htmlspecialchars($row['gambar']) ?>" 
+                            alt="Artikel - <?= htmlspecialchars($row['judul']) ?>" 
+                            loading="lazy">
                         <h2>
                             <a href="detail_artikel.php?slug=<?= urlencode($row['slug']) ?>">
                                 <?= htmlspecialchars($row['judul']) ?>
