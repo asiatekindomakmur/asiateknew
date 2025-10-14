@@ -4,25 +4,25 @@ include 'admin/config.php'; // koneksi database
 // Pagination
 $limit = 15;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-if($page < 1) $page = 1;
+if ($page < 1) $page = 1;
 $start = ($page - 1) * $limit;
 
 // Search
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
 
 // Total Artikel (untuk pagination)
-$whereSQL = $search ? "WHERE judul LIKE '%$search%'" : '';
+$whereSQL = $search ? "WHERE title LIKE '%$search%'" : '';
 $total_sql = "SELECT COUNT(*) as total FROM artikel $whereSQL";
 $total_result = $conn->query($total_sql);
 $total_row = $total_result->fetch_assoc();
 $total_artikel = $total_row['total'];
 $total_pages = ceil($total_artikel / $limit);
 
-// Ambil Artikel sesuai page & search
+// Ambil Artikel
 $sql = "SELECT * FROM artikel $whereSQL ORDER BY id DESC LIMIT $start, $limit";
 $result = $conn->query($sql);
 
-// Simpan hasil ke dalam array
+// Simpan hasil ke array
 $artikel = [];
 if ($result) {
     while ($row = $result->fetch_assoc()) {
@@ -30,6 +30,7 @@ if ($result) {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -108,15 +109,15 @@ if ($result) {
             <?php if (is_array($artikel) && count($artikel) > 0): ?>
                 <?php foreach ($artikel as $row): ?>
                     <div class="blog-post">
-                        <img src="admin/uploads/artikel/<?= htmlspecialchars($row['gambar']) ?>" 
-                            alt="Artikel - <?= htmlspecialchars($row['judul']) ?>" 
+                        <img src="admin/uploads/artikel/<?= htmlspecialchars($row['image']) ?>" 
+                            alt="Artikel - <?= htmlspecialchars($row['title']) ?>" 
                             loading="lazy">
                         <h2>
-                            <a href="detail_artikel.php?slug=<?= urlencode($row['slug']) ?>">
-                                <?= htmlspecialchars($row['judul']) ?>
+                            <a href="detail_artikel.php?id=<?= $row['id'] ?>">
+                                <?= htmlspecialchars($row['title']) ?>
                             </a>
                         </h2>
-                        <p><?= substr(strip_tags($row['isi']), 0, 120) ?>...</p>
+                        <p><?= substr(strip_tags($row['description']), 0, 120) ?>...</p>
                         <div class="card-footer">
                             <a href="detail_artikel.php?slug=<?= urlencode($row['slug']) ?>">Baca Selengkapnya</a>
                         </div>
@@ -131,7 +132,7 @@ if ($result) {
     <?php if($total_pages > 1): ?>
     <div class="pagination">
       <?php for($i=1; $i<=$total_pages; $i++): ?>
-        <a href="sparepart.php?page=<?php echo $i; ?><?php if($search) echo '&search='.$search; ?>" class="<?php if($i==$page) echo 'active'; ?>"><?php echo $i; ?></a>
+        <a href="artikel.php?page=<?php echo $i; ?><?php if($search) echo '&search='.$search; ?>" class="<?php if($i==$page) echo 'active'; ?>"><?php echo $i; ?></a>
       <?php endfor; ?>
     </div>
     <?php endif; ?>
