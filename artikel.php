@@ -1,3 +1,30 @@
+<?php
+include 'admin/config.php'; // koneksi database
+
+// Pagination
+$limit = 15;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if($page < 1) $page = 1;
+$start = ($page - 1) * $limit;
+
+// Search
+$search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+
+// Total Artikel (untuk pagination)
+$total_sql = "SELECT COUNT(*) as total FROM artikel";
+if($search) $total_sql .= " WHERE name LIKE '%$search%'";
+$total_result = $conn->query($total_sql);
+$total_row = $total_result->fetch_assoc();
+$total_artikel = $total_row['total'];
+$total_pages = ceil($total_artikel / $limit);
+
+// Ambil Artikel sesuai page & search
+$sql = "SELECT * FROM artikel";
+if($search) $sql .= " WHERE name LIKE '%$search%'";
+$sql .= " ORDER BY id ASC LIMIT $start, $limit";
+$result = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +40,8 @@
     <link rel="stylesheet" href="css/navbar.css" />
     <link rel="stylesheet" href="css/footer.css" />
     <link rel="stylesheet" href="css/artikel_css/header_artikel.css" />
+    <link rel="stylesheet" href="css/artikel_css/search.css" />
+    <link rel="stylesheet" href="css/artikel_css/pagination.css" />
 
     <script src="js/script.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
@@ -57,11 +86,20 @@
     <div class="container search-container">
       <form method="GET" action="sparepart.php">
         <div class="search-wrapper">
-          <input type="text" name="search" placeholder="Cari produk..." value="<?php echo htmlspecialchars($search); ?>">
+          <input type="text" name="search" placeholder="Cari Artikel..." value="<?php echo htmlspecialchars($search); ?>">
           <button type="submit"><i data-feather="search"></i></button>
         </div>
       </form>
     </div>
+
+    <!-- Pagination -->
+    <?php if($total_pages > 1): ?>
+    <div class="pagination">
+      <?php for($i=1; $i<=$total_pages; $i++): ?>
+        <a href="sparepart.php?page=<?php echo $i; ?><?php if($search) echo '&search='.$search; ?>" class="<?php if($i==$page) echo 'active'; ?>"><?php echo $i; ?></a>
+      <?php endfor; ?>
+    </div>
+    <?php endif; ?>
 
   <?php include 'footer.php'; ?>
 </body>
