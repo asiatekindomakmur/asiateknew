@@ -19,22 +19,27 @@ if ($id && is_array($data)) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="keywords" content="<?= htmlspecialchars($artikel['title'] ?? '') ?>, Asiatek, Sparepart, Alat Berat" />
+    <meta name="keywords" content="<?= htmlspecialchars($artikel['title'] ?? '') ?>, Hino, Truk, Dealer Hino, Jabodetabek, Hino Indonesia" />
     <meta property="og:title" content="<?= htmlspecialchars($artikel['title'] ?? '') ?>" />
     <meta property="og:description" content="<?= substr(strip_tags($artikel['description'] ?? ''), 0, 150) ?>..." />
     <meta property="og:image" content="<?= htmlspecialchars($artikel['image'] ?? '') ?>" />
-    <meta property="og:url" content="https://asiatek.co.id/detail_artikel.php?id=<?= htmlspecialchars($artikel['id'] ?? '') ?>" />
-    <title><?= htmlspecialchars($artikel['title'] ?? 'Artikel Tidak Ditemukan') ?> | PT Asiatek Indo Makmur</title>
-    <meta name="description" content="PT Asiatek Indo Makmur menyediakan berbagai sparepart alat berat dengan harga kompetitif dan kualitas terbaik. Hubungi kami untuk informasi produk terbaru.">
+    <meta property="og:url" content="https://asiatek.co.id/detail_artikel.php?id=<?= $artikel['id'] ?? '' ?>" />
+    <title>PT Asiatek Indo Makmur | The best spare parts for heavy equipment</title>
+    <meta name="description" content="PT Asiatek Indo Makmur Menyediakan berbagai Suku Cadang dan Sparepart Alat Berat dengan Harga yang kompetetif dan berkualitas. Hubungi: +62 812-1383-8567 untuk mendapatkan informasi produk. Layanan Terbaik dan Jaminan Mutu." />
     <link rel="icon" type="image/png" href="/img/logo.png">
 
-    <!-- Fonts & CSS -->
+    <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap" rel="stylesheet" />
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/home_css/header.css" />
     <link rel="stylesheet" href="css/footer.css" />
     <link rel="stylesheet" href="css/artikel_css/artikel.css">
     <link rel="stylesheet" href="css/artikel_css/blog.css">
+
+    <script src="js/script.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
   </head>
   <body>
@@ -49,6 +54,7 @@ if ($id && is_array($data)) {
         </div>
 
         <div class="hamburger-menu">&#9776;</div>
+
         <nav class="nav links">
           <a href="index.php">Home</a>
           <a href="sparepart.php">Spare parts</a>
@@ -68,13 +74,13 @@ if ($id && is_array($data)) {
             <?php if($artikel): ?>
               <h1><?= htmlspecialchars($artikel['title']) ?></h1>
               <p style="color: #888; font-size: 14px; margin-bottom: 15px;">
-                Diposting oleh <strong>Admin Asiatek</strong> pada <?= date('d M Y', strtotime($artikel['created_at'])) ?>
+                Diposting oleh <strong><?= htmlspecialchars($artikel['author'] ?? 'Admin Asiatek') ?></strong> pada <?= date('d M Y', strtotime($artikel['created_at'] ?? 'now')) ?>
               </p>
               <img src="<?= htmlspecialchars($artikel['image']) ?>" alt="<?= htmlspecialchars($artikel['title']) ?>" class="featured-image" style="width: 100%; height: auto; margin-bottom: 20px;">
               <div class="isi-artikel">
                 <?= nl2br($artikel['description']) ?>
               </div>
-              <a href="artikel.php" class="btn-kembali" style="display:inline-block; margin-top:20px;">← Kembali ke Daftar Artikel</a>
+              <a href="artikel.php" class="btn-kembali" style="display:inline-block; margin-top:20px;">Kembali ke Daftar Artikel</a>
             <?php else: ?>
               <p>Artikel tidak ditemukan.</p>
             <?php endif; ?>
@@ -86,18 +92,16 @@ if ($id && is_array($data)) {
               <h3>Recent Posts</h3>
               <div class="recent-posts-list">
                 <?php
-                if (is_array($data)) {
-                  foreach (array_slice($data, 0, 5) as $recent) {
-                    if ($recent['id'] != $id) {
-                      echo '<div class="recent-post-item" style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">';
-                      echo '<a href="detail_artikel.php?id=' . $recent['id'] . '" style="flex-shrink: 0;">';
-                      echo '<img src="' . htmlspecialchars($recent['image']) . '" alt="' . htmlspecialchars($recent['title']) . '" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;">';
-                      echo '</a>';
-                      echo '<div style="flex: 1;">';
-                      echo '<a href="detail_artikel.php?id=' . $recent['id'] . '" style="font-weight: 600; text-decoration: none; color: #333; line-height: 1.3; display: block;">' . htmlspecialchars($recent['title']) . '</a>';
-                      echo '</div>';
-                      echo '</div>';
-                    }
+                foreach (array_slice($data, 0, 5) as $recent) {
+                  if ($recent['id'] != $id) {
+                    echo '<div class="recent-post-item" style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">';
+                    echo '<a href="detail_artikel.php?id=' . $recent['id'] . '" style="flex-shrink: 0;">';
+                    echo '<img src="' . htmlspecialchars($recent['image']) . '" alt="' . htmlspecialchars($recent['title']) . '" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;">';
+                    echo '</a>';
+                    echo '<div style="flex: 1;">';
+                    echo '<a href="detail_artikel.php?id=' . $recent['id'] . '" style="font-weight: 600; text-decoration: none; color: #333; line-height: 1.3; display: block;">' . htmlspecialchars($recent['title']) . '</a>';
+                    echo '</div>';
+                    echo '</div>';
                   }
                 }
                 ?>
@@ -111,10 +115,11 @@ if ($id && is_array($data)) {
     <!-- Footer -->
     <?php include 'footer.php'; ?>
 
-    <!-- WhatsApp Chat -->
     <script src="https://elfsightcdn.com/platform.js" async></script>
     <div class="elfsight-app-b334841b-ad07-411c-889b-4364272215a1" data-elfsight-app-lazy></div>
 
-    <script>feather.replace();</script>
+    <script>
+      feather.replace();
+    </script>
   </body>
 </html>
