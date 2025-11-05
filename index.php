@@ -456,16 +456,27 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
         </p>
 
         <div class="blog-grid">
-            <?php foreach ($articles as $a): ?>
+            <?php
+            // Ambil data artikel dari API
+            $articles = json_decode(file_get_contents("https://asiatek.co.id/admin/api/get_artikel.php"), true);
+
+            if (!empty($articles) && is_array($articles)):
+                foreach ($articles as $a):
+            ?>
             <div class="blog-card">
-                <img src="admin/uploads/artikel/<?= htmlspecialchars($a['image']) ?>" alt="<?= htmlspecialchars($a['title']) ?>" />
-                <h3><?= htmlspecialchars($a['title']) ?></h3>
-                <p>
-                    <?= nl2br(htmlspecialchars(substr($a['description'], 0, 150))) ?>...
-                </p>
-                <a href="artikel-detail.php?id=<?= $a['id'] ?>">Read More</a>
+                <a href="detail_artikel.php?id=<?= $a['id'] ?>" style="text-decoration:none; color:inherit;">
+                    <img src="admin/uploads/artikel/<?= htmlspecialchars($a['image']) ?>" alt="<?= htmlspecialchars($a['title']) ?>" />
+                    <h3><?= htmlspecialchars($a['title']) ?></h3>
+                    <p><?= nl2br(htmlspecialchars(substr($a['description'], 0, 150))) ?>...</p>
+                    <span class="read-more" style="color:#007bff; font-weight:600;">Read More →</span>
+                </a>
             </div>
-            <?php endforeach; ?>
+            <?php
+                endforeach;
+            else:
+                echo "<p>Tidak ada artikel yang tersedia saat ini.</p>";
+            endif;
+            ?>
         </div>
     </div>
 </section>
