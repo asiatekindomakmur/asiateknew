@@ -53,20 +53,25 @@ if ($id && is_array($data)) {
     <!-- Header -->
     <header>
       <div class="container header-content navbar">
-    <!-- Logo -->
-    <div class="header-title">
-      <a href="https://asiatek.co.id">
-        <img src="img/logo3.png" alt="Logo Hino" style="height: 60px" />
-      </a>
-    </div>
+        <!-- Logo -->
+        <div class="header-title">
+          <a href="index.php">
+            <img src="img/logo.png" alt="Logo AIM" style="height: 60px" />
+          </a>
+        </div>
+
+
+        <!-- Hamburger Menu (Mobile Only) -->
         <div class="hamburger-menu">&#9776;</div>
+
+        <!-- Nav Links -->
         <nav class="nav links">
           <a href="index.php">Home</a>
-          <a href="hino300.php">Hino 300 Series</a>
-          <a href="hino500.php">Hino 500 Series</a>
-          <a href="hinobus.php">Hino Bus Series</a>
-          <a href="artikel.php">Blog & Artikel</a>
+          <a href="sparepart.php">Spare parts</a>
+          <a href="service.php">Service</a>
+          <a href="about.php">About Us</a>
           <a href="contact.php">Contact</a>
+          <a href="artikel.php">Blog & Artikel</a>
         </nav>
       </div>
     </header>
