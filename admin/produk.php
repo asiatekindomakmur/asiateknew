@@ -19,7 +19,7 @@ $result = $conn->query("SELECT * FROM products ORDER BY created_at ASC"); // ASC
 <title>Manajemen Produk</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-<link rel="icon" type="image/png" href="img/logo.png" />
+<link rel="icon" type="image/png" href="/img/logo.png" />
 <style>
 body { background: #f8f9fb; font-family: 'Poppins', sans-serif; }
 
