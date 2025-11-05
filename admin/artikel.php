@@ -19,6 +19,7 @@ $result = $conn->query("SELECT * FROM artikel ORDER BY created_at ASC");
   <title>Manajemen Artikel</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css?v=2">
   <link rel="icon" type="image/png" href="/img/logo.png" />
   <style>
     body {
@@ -181,6 +182,8 @@ $result = $conn->query("SELECT * FROM artikel ORDER BY created_at ASC");
     </div>
   </div>
 
+  <!-- JS -->
+  <script src="js/admin.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
