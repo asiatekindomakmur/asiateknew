@@ -58,16 +58,6 @@ if (isset($_POST['update'])) {
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="css/admin.css?v=2">
 <link rel="icon" type="image/png" href="/img/logo.png" />
-<style>
-.main-content { margin-left:270px; padding:40px 50px; }
-.main-header { margin-bottom:40px; }
-.main-header h3 { font-weight:700; color: var(--primary);}
-.card-form { background: var(--card-bg); border-radius:16px; padding:30px; box-shadow:0 4px 14px rgba(0,0,0,0.06); }
-.card-form h4 { margin-bottom:25px; color:var(--primary); font-weight:700; }
-.btn-primary { background-color: var(--primary); border-radius:10px; border:none; }
-.btn-secondary { border-radius:10px; }
-img.current-image { width: 120px; border-radius: 8px; margin-bottom: 10px; }
-</style>
 </head>
 <body>
 

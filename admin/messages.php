@@ -21,19 +21,6 @@ $result = $conn->query("SELECT * FROM messages ORDER BY created_at DESC");
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="css/admin.css?v=2">
 <link rel="icon" type="image/png" href="/img/logo.png" />
-<style>
-.main-content { margin-left: 260px; padding: 30px; }
-
-.card { border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-.table th { background-color: #0d6efd; color: white; }
-.btn-primary, .btn-info, .btn-danger { border-radius: 8px; font-weight: 500; }
-.btn-primary { background-color: #0d6efd; border: none; }
-.btn-primary:hover { background-color: #005ce6; }
-.btn-info { background-color: #17a2b8; border: none; color:white; }
-.btn-info:hover { background-color: #138496; }
-.btn-danger { background-color: #dc3545; border: none; color:white; }
-.btn-danger:hover { background-color: #b02a37; }
-</style>
 </head>
 <body>
 

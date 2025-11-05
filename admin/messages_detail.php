@@ -28,13 +28,6 @@ if (!$message) {
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="css/admin.css?v=2">
 <link rel="icon" type="image/png" href="/img/logo.png" />
-<style>
-.main-content { margin-left: 260px; padding: 30px; }
-
-.card { border-radius: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-.btn-primary { background-color: #0d6efd; border: none; border-radius: 10px; font-weight: 500; }
-.btn-primary:hover { background-color: #005ce6; }
-</style>
 </head>
 <body>
 
