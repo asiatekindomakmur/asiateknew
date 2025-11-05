@@ -22,75 +22,6 @@ $result = $conn->query("SELECT * FROM artikel ORDER BY created_at ASC");
   <link rel="stylesheet" href="css/admin.css?v=2">
   <link rel="icon" type="image/png" href="/img/logo.png" />
   <style>
-    body {
-      background: #f8f9fb;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    /* === SIDEBAR === */
-    :root {
-  --primary: #0d6efd; /* biru bootstrap */
-}
-
-    .sidebar {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 250px;
-      height: 100vh;
-      background: #fff;
-      box-shadow: 3px 0 15px rgba(0, 0, 0, 0.05);
-      padding: 30px 20px;
-      display: flex;
-      flex-direction: column;
-      transition: 0.3s;
-    }
-
-    .sidebar .logo {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .sidebar .logo img {
-      width: 140px;
-      height: auto;
-      object-fit: contain;
-    }
-
-    .sidebar a {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 18px;
-      color: #555;
-      border-radius: 10px;
-      font-size: 15px;
-      text-decoration: none;
-      margin-bottom: 8px;
-      transition: all 0.3s;
-    }
-
-    .sidebar a i {
-      font-size: 17px;
-    }
-
-    .sidebar a:hover, .sidebar a.active {
-      background: var(--primary);
-      color: white;
-      box-shadow: 0 4px 10px rgba(13, 110, 253, 0.2);
-    }
-
-    .logout-link {
-      margin-top: auto;
-      color: #dc3545;
-      font-weight: 500;
-    }
-
-    .logout-link:hover {
-      color: #b02a37;
-    }
-
-
     .main-content { margin-left: 260px; padding: 30px; }
 
     .btn-primary {
@@ -121,9 +52,9 @@ $result = $conn->query("SELECT * FROM artikel ORDER BY created_at ASC");
       <img src="../img/logo.png" alt="Logo">
     </div>
 
-    <a href="index.php" class="active"><i class="fa-solid fa-house"></i> Dashboard</a>
-    <a href="produk.php" class="active"><i class="fa-solid fa-house"></i> Produk</a>
-    <a href="artikel.php"><i class="fa-solid fa-file-lines"></i> Artikel</a>
+    <a href="index.php"><i class="fa-solid fa-house"></i> Dashboard</a>
+    <a href="produk.php"><i class="fa-solid fa-house"></i> Produk</a>
+    <a href="artikel.php" class="active"><i class="fa-solid fa-file-lines"></i> Artikel</a>
     <a href="messages.php"><i class="fa-solid fa-envelope"></i> Pesan</a>
 
     <a href="logout.php" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
