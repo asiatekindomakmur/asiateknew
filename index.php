@@ -43,6 +43,8 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
     <link rel="stylesheet" href="css/home_css/keunggulankami.css" />
     <link rel="stylesheet" href="css/home_css/contact.css" />
     <link rel="stylesheet" href="css/home_css/ourclient.css" />
+    <link rel="stylesheet" href="css/artikel_css/artikel.css" />
+    <link rel="stylesheet" href="css/artikel_css/blog.css" />
 
     <script src="js/script.js"></script>
     <script src="https://unpkg.com/feather-icons"></script>
