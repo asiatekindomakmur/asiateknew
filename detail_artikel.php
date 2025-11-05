@@ -19,14 +19,15 @@ if ($id && is_array($data)) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="keywords" content="<?= htmlspecialchars($artikel['title'] ?? '') ?>, Hino, Truk, Dealer Hino, Jabodetabek, Hino Indonesia" />
+    <meta name="keywords" content="<?= htmlspecialchars($artikel['title'] ?? '') ?>, Asiatek, Sparepart, Alat Berat" />
     <meta property="og:title" content="<?= htmlspecialchars($artikel['title'] ?? '') ?>" />
     <meta property="og:description" content="<?= substr(strip_tags($artikel['description'] ?? ''), 0, 150) ?>..." />
     <meta property="og:image" content="<?= htmlspecialchars($artikel['image'] ?? '') ?>" />
-    <meta property="og:url" content="https://asiatek.co.id/detail_artikel.php?id=<?= $artikel['id'] ?? '' ?>" />
-    <title>PT Asiatek Indo Makmur | The best spare parts for heavy equipment</title>
-    <meta name="description" content="PT Asiatek Indo Makmur Menyediakan berbagai Suku Cadang dan Sparepart Alat Berat dengan Harga yang kompetetif dan berkualitas. Hubungi: +62 812-1383-8567 untuk mendapatkan informasi produk. Layanan Terbaik dan Jaminan Mutu." />
+    <meta property="og:url" content="https://asiatek.co.id/detail_artikel.php?id=<?= htmlspecialchars($artikel['id'] ?? '') ?>" />
+    <title><?= htmlspecialchars($artikel['title'] ?? 'Artikel Tidak Ditemukan') ?> | PT Asiatek Indo Makmur</title>
+    <meta name="description" content="PT Asiatek Indo Makmur menyediakan berbagai sparepart alat berat dengan harga kompetitif dan kualitas terbaik. Hubungi kami untuk informasi produk terbaru.">
     <link rel="icon" type="image/png" href="/img/logo.png">
+
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap" rel="stylesheet" />
