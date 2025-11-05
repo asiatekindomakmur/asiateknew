@@ -69,7 +69,7 @@ try {
     <div class="row g-4">
       <div class="col-md-4">
         <div class="stat-card">
-          <div class="stat-icon icon-products"><i class="fa-solid fa-box"></i></div>
+          <div class="stat-icon icon-products"><i class="fa-solid fa-cube"></i></div>
           <div class="stat-info">
             <h6>Total Produk</h6>
             <h3><?php echo $total_products; ?></h3>
