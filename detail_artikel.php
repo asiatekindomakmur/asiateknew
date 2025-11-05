@@ -1,7 +1,7 @@
 <?php
 // Ambil ID artikel dari URL
 $id = $_GET['id'] ?? null;
-$data = json_decode(file_get_contents("https://official-hino.com/admin/api/get_artikel.php"), true);
+$data = json_decode(file_get_contents("https://asiatek.co.id/admin/api/get_artikel.php"), true);
 $artikel = null;
 
 // Cari artikel berdasarkan ID
