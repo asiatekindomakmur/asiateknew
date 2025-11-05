@@ -81,14 +81,23 @@ img.current-image { width: 120px; border-radius: 8px; margin-bottom: 10px; }
 </head>
 <body>
 
-<div class="sidebar">
-  <div class="logo"><img src="../img/logo.png" alt="Logo"></div>
-  <a href="index.php"><i class="fa-solid fa-house"></i> Dashboard</a>
-  <a href="produk.php"><i class="fa-solid fa-box"></i> Produk</a>
-  <a href="artikel.php" class="active"><i class="fa-solid fa-file-alt"></i> Artikel</a>
-  <a href="messages.php"><i class="fa-solid fa-envelope"></i> Pesan</a>
-  <a href="logout.php" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
-</div>
+  <!-- HAMBURGER TOGGLE & OVERLAY -->
+  <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+  <div class="overlay"></div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="logo">
+      <img src="../img/logo.png" alt="Logo">
+    </div>
+
+    <a href="index.php" class="active"><i class="fa-solid fa-house"></i> Dashboard</a>
+    <a href="produk.php" class="active"><i class="fa-solid fa-house"></i> Produk</a>
+    <a href="artikel.php"><i class="fa-solid fa-file-lines"></i> Artikel</a>
+    <a href="messages.php"><i class="fa-solid fa-envelope"></i> Pesan</a>
+
+    <a href="logout.php" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
+  </div>
 
 <div class="main-content">
   <div class="main-header">

@@ -194,6 +194,10 @@ try {
 
 <body>
 
+  <!-- HAMBURGER TOGGLE & OVERLAY -->
+  <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+  <div class="overlay"></div>
+
   <!-- SIDEBAR -->
   <div class="sidebar">
     <div class="logo">
@@ -201,7 +205,7 @@ try {
     </div>
 
     <a href="index.php" class="active"><i class="fa-solid fa-house"></i> Dashboard</a>
-    <a href="produk.php"><i class="fa-solid fa-box"></i> Produk</a>
+    <a href="produk.php" class="active"><i class="fa-solid fa-house"></i> Produk</a>
     <a href="artikel.php"><i class="fa-solid fa-file-lines"></i> Artikel</a>
     <a href="messages.php"><i class="fa-solid fa-envelope"></i> Pesan</a>
 

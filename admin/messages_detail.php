@@ -63,19 +63,23 @@ body { background: #f8f9fb; font-family: 'Poppins', sans-serif; }
 </head>
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-    <div class="logo text-center">
-        <img src="../img/logo.png" alt="Logo">
+  <!-- HAMBURGER TOGGLE & OVERLAY -->
+  <button class="menu-toggle"><i class="fa-solid fa-bars"></i></button>
+  <div class="overlay"></div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="logo">
+      <img src="../img/logo.png" alt="Logo">
     </div>
-    <a href="index.php"><i class="fa-solid fa-home"></i> Dashboard</a>
-    <a href="produk.php"><i class="fa-solid fa-box"></i> Produk</a>
-    <a href="artikel.php"><i class="fa-solid fa-file-alt"></i> Artikel</a>
-    <a href="messages.php" class="active"><i class="fa-solid fa-envelope"></i> Pesan</a>
-    <div class="mt-auto pt-3">
-        <a href="logout.php" style="color:#dc3545;"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-    </div>
-</div>
+
+    <a href="index.php" class="active"><i class="fa-solid fa-house"></i> Dashboard</a>
+    <a href="produk.php" class="active"><i class="fa-solid fa-house"></i> Produk</a>
+    <a href="artikel.php"><i class="fa-solid fa-file-lines"></i> Artikel</a>
+    <a href="messages.php"><i class="fa-solid fa-envelope"></i> Pesan</a>
+
+    <a href="logout.php" class="logout-link"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
+  </div>
 
 <!-- MAIN CONTENT -->
 <div class="main-content">
@@ -105,6 +109,6 @@ body { background: #f8f9fb; font-family: 'Poppins', sans-serif; }
   <!-- JS -->
   <script src="js/admin.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  
+
 </body>
 </html>
