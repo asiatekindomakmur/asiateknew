@@ -449,39 +449,41 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
     </div>
   </section>
     
-<!-- Blog Section Dinamis -->
-<section class="blog-section">
-    <div class="container">
-        <h2>Blog & Artikel</h2>
-        <p>
-            Dapatkan informasi terbaru seputar alat berat, perawatan, dan tips terbaik.
-        </p>
+  <!-- Blog & Artikel -->
+  <section class="content-section" id="artikel">
+      <div class="container">
 
-        <div class="blog-grid">
-            <?php
-            // Ambil data artikel dari API
-            $articles = json_decode(file_get_contents("https://asiatek.co.id/admin/api/get_artikel.php"), true);
+          <?php
+          // Ambil data artikel dari API
+          $artikel = json_decode(file_get_contents("https://asiatek.co.id/admin/api/get_artikel.php"), true);
+          ?>
 
-            if (!empty($articles) && is_array($articles)):
-                foreach ($articles as $a):
-            ?>
-            <div class="blog-card">
-                <a href="detail_artikel.php?id=<?= $a['id'] ?>" style="text-decoration:none; color:inherit;">
-                    <img src="admin/uploads/artikel/<?= htmlspecialchars($a['image']) ?>" alt="<?= htmlspecialchars($a['title']) ?>" />
-                    <h3><?= htmlspecialchars($a['title']) ?></h3>
-                    <p><?= nl2br(htmlspecialchars(substr($a['description'], 0, 150))) ?>...</p>
-                    <span class="read-more" style="color:#007bff; font-weight:600;">Read More →</span>
-                </a>
-            </div>
-            <?php
-                endforeach;
-            else:
-                echo "<p>Tidak ada artikel yang tersedia saat ini.</p>";
-            endif;
-            ?>
-        </div>
-    </div>
-</section>
+          <!-- Artikel Grid -->
+          <div class="blog-grid">
+              <?php if (is_array($artikel) && count($artikel) > 0): ?>
+                  <?php foreach ($artikel as $row): ?>
+                      <div class="blog-post">
+                          <img src="<?= htmlspecialchars($row['image']) ?>" 
+                              alt="Artikel - <?= htmlspecialchars($row['title']) ?>" 
+                              loading="lazy">
+                          <h2>
+                              <a href="detail_artikel.php?id=<?= $row['id'] ?>">
+                                  <?= htmlspecialchars($row['title']) ?>
+                              </a>
+                          </h2>
+                          <p><?= substr(strip_tags($row['description']), 0, 120) ?>...</p>
+                          <div class="card-footer">
+                              <a href="detail_artikel.php?id=<?= $row['id'] ?>">Baca Selengkapnya</a>
+                          </div>
+                      </div>
+                  <?php endforeach; ?>
+              <?php else: ?>
+                  <p>Tidak ada artikel yang ditemukan.</p>
+              <?php endif; ?>
+          </div> <!-- blog-grid -->
+      </div>
+  </section>
+
 
     <?php include 'footer.php'; ?>
   </body>
