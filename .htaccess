@@ -1,61 +1,58 @@
 # ===========================
-# 🔐 SECURITY & URL CLEANING
+# 🔐 SECURITY BASIC
 # ===========================
 
 Options -Indexes
 ServerSignature Off
 
-# Blok Akses ke File Sensitif
+# Blok file sensitif
 <FilesMatch "(^\.|composer\.json|composer\.lock|config\.php|php.ini|php\.ini|\.env|\.htpasswd|\.htaccess)">
     Order allow,deny
     Deny from all
 </FilesMatch>
 
-# ===========================
-# 🔐 SECURITY: BLOCK MALWARE & BACKDOOR
-# ===========================
-
 RewriteEngine On
 
-# Blok akses folder berbahaya
+# ===========================
+# 🔥 BLOCK MALWARE / BACKDOOR
+# ===========================
+
 RedirectMatch 404 /(backup|backdoor|shell|uploads\/tmp|temp)/
 
-# SQL Injection basic block
 RewriteCond %{QUERY_STRING} (\.\./|\.\.\\) [NC,OR]
 RewriteCond %{QUERY_STRING} (UNION|SELECT|DROP|INSERT|CAST|CONCAT|DECLARE) [NC]
-RewriteRule ^(.*)$ - [F,L]
+RewriteRule ^ - [F]
 
-# Blok eval, base64, system, shell_exec di URL
 RewriteCond %{QUERY_STRING} (base64_encode|eval\(|system\(|shell_exec|passthru|exec) [NC]
-RewriteRule ^(.*)$ - [F,L]
+RewriteRule ^ - [F]
 
 # ===========================
-# 🔄 CLEAN URL (TANPA .php)
+# 🔄 CLEAN URL / NO .PHP
 # ===========================
 
 # Abaikan folder admin
 RewriteRule ^admin(/.*)?$ - [L]
 
-# Hapus index.php dari home
+# HOME tanpa /index.php
 RewriteRule ^index\.php$ / [L,R=301]
 
-# Hapus .php dari URL
+# Hapus .php di semua file front-end
+RewriteCond %{THE_REQUEST} \s/+([^?]*)\.php[\s?] [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# Rewrite ke file .php sebenarnya
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
-RewriteRule ^(.+)$ $1.php [L]
+RewriteRule ^(.+)$ $1.php [L,QSA]
 
 # ===========================
-# 📁 SECURITY UNTUK FOLDER UPLOADS
+# 📁 SECURITY UPLOADS
 # ===========================
-
-# Blok eksekusi PHP di semua file uploads
 RewriteRule ^uploads/.*\.(php|php5|phtml|html)$ - [F,L]
-
-# Blok script dalam file gambar
 AddType text/plain .php .phtml .php5 .html
 
 # ===========================
-# 🛡 PROTECTION AGAINST HOTLINK
+# 🛡 HOTLINK PROTECTION
 # ===========================
 RewriteCond %{HTTP_REFERER} !^$
 RewriteCond %{HTTP_REFERER} !yourdomain.com [NC]
