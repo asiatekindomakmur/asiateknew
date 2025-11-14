@@ -166,26 +166,43 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
       </div>
     </section>
 
-  <!-- Product Section Dinamis -->
-  <section class="product-carousel">
-      <h2>Spare parts for heavy machinery</h2>
-      <p>Accessories, parts and spare parts for your machinery</p>
+    <!-- Product Section Dinamis -->
+    <section class="product-carousel">
+        <h2>Spare parts for heavy machinery</h2>
+        <p>Accessories, parts and spare parts for your machinery</p>
 
-      <div class="carousel-wrapper">
-          <!-- Left button -->
-          <button class="carousel-btn left">&#10094;</button>
+        <div class="carousel-wrapper">
+            <!-- Left button -->
+            <button class="carousel-btn left">&#10094;</button>
 
-          <!-- Carousel dengan produk dinamis -->
-          <div class="carousel">
-              <?php foreach ($products as $p): ?>
-              <div class="product-item">
-                  <a href="<?= htmlspecialchars($p['link']) ?>">
-                      <img src="admin/uploads/produk/<?= htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['name']) ?>" />
-                      <p><?= htmlspecialchars($p['name']) ?></p>
-                  </a>
-              </div>
-              <?php endforeach; ?>
-          </div>
+            <!-- Carousel dengan produk dinamis -->
+            <div class="carousel">
+
+                <?php 
+                    // Nomor WhatsApp tujuan
+                    $wa_number = "6281213838567";
+                ?>
+
+                <?php foreach ($products as $p): ?>
+
+                <?php
+                    // Pesan WhatsApp otomatis
+                    $message = "Halo saya dapat nomor anda dari google, Saya ingin menanyakan tentang produk (" . $p['name'] . ")";
+                    $wa_link = "https://wa.me/" . $wa_number . "?text=" . urlencode($message);
+                ?>
+
+                <div class="product-item">
+                    <a href="<?= $wa_link ?>" target="_blank">
+                        <img src="admin/uploads/produk/<?= htmlspecialchars($p['image']) ?>" 
+                            alt="<?= htmlspecialchars($p['name']) ?>" />
+                        <p><?= htmlspecialchars($p['name']) ?></p>
+                    </a>
+                </div>
+
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
 
           <!-- Right button -->
           <button class="carousel-btn right">&#10095;</button>

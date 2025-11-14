@@ -93,12 +93,24 @@ $result = $conn->query($sql);
   <div class="gallery">
     <?php if($result->num_rows > 0): ?>
       <?php while($row = $result->fetch_assoc()): ?>
+
+        <?php 
+          // Nomor WhatsApp tujuan
+          $wa_number = "6281213838567";
+
+          // Pesan WA otomatis
+          $message = "Halo saya dapat nomor anda dari google, Saya ingin menanyakan tentang produk (" . $row['name'] . ")";
+          $wa_link = "https://wa.me/" . $wa_number . "?text=" . urlencode($message);
+        ?>
+
         <div class="gallery-item">
-          <a href="<?php echo $row['link']; ?>">
-            <img src="admin/uploads/produk/<?php echo $row['image']; ?>" alt="<?php echo htmlspecialchars($row['name']); ?>">
+          <a href="<?php echo $wa_link; ?>" target="_blank">
+            <img src="admin/uploads/produk/<?php echo $row['image']; ?>" 
+                 alt="<?php echo htmlspecialchars($row['name']); ?>">
             <p><?php echo htmlspecialchars($row['name']); ?></p>
           </a>
         </div>
+
       <?php endwhile; ?>
     <?php else: ?>
       <p>Tidak ada produk yang tersedia saat ini.</p>
