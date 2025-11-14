@@ -93,7 +93,7 @@ if ($result) {
 <link rel="stylesheet" href="css/navbar.css">
 <link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/artikel_css/header_artikel.css">
-link rel="stylesheet" href="css/artikel_css/search.css">
+<link rel="stylesheet" href="css/artikel_css/search.css">
 <link rel="stylesheet" href="css/artikel_css/pagination.css">
 <link rel="stylesheet" href="css/artikel_css/artikel.css">
 
