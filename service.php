@@ -1,17 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer' ? '&l=' + l : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-53JF8MG7');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YDPM3D26HV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-YDPM3D26HV');
+    </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      PT Asiatek Indo Makmur | The best spare parts for heavy equipment
-    </title>
+    <title>PT Asiatek Indo Makmur | The best spare parts for heavy equipment</title>
+
     <meta
       name="description"
       content="PT Asiatek Indo Makmur Menyediakan berbagai Suku Cadang dan Sparepart Alat Berat dengan Harga yang kompetetif dan berkualitas. Hubungi: +62 812-1383-8567 untuk mendapatkan informasi produk. Layanan Terbaik dan Jaminan Mutu."
     />
 
-    <!-- Font -->
+    <!-- Google Font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap"
       rel="stylesheet"
@@ -28,20 +53,28 @@
     <script src="https://unpkg.com/feather-icons"></script>
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-53JF8MG7"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <!-- Header -->
     <header>
       <div class="container header-content navbar">
-        <!-- Logo -->
         <div class="header-title">
           <a href="index.php">
             <img src="img/logo.png" alt="Logo AIM" style="height: 60px" />
           </a>
         </div>
 
-        <!-- Hamburger Menu (Mobile Only) -->
         <div class="hamburger-menu">&#9776;</div>
 
-        <!-- Nav Links -->
         <nav class="nav links">
           <a href="index.php">Home</a>
           <a href="sparepart.php">Spare parts</a>
@@ -56,11 +89,7 @@
     <!-- Service Header Section -->
     <section
       class="about-hero"
-      style="
-        background-image: url('img/service.png');
-        background-size: cover;
-        background-position: center;
-      "
+      style="background-image: url('img/service.png'); background-size: cover; background-position: center;"
     >
       <div class="about-hero-overlay">
         <div class="about-hero-content container">
@@ -73,9 +102,8 @@
       </div>
     </section>
 
-    <!-- Service -->
+    <!-- Service Section -->
     <section class="service-section">
-      <!-- Baris 1: Gambar di kanan -->
       <div class="service-row">
         <div class="service-text">
           <h2>Payment Guarantee</h2>
@@ -91,17 +119,15 @@
         </div>
       </div>
 
-      <!-- Baris 2: Gambar di kiri (pakai reverse) -->
       <div class="service-row reverse">
         <div class="service-text">
           <h2>Technical assistance</h2>
           <p>
             Staf Layanan Teknis kami siap memberikan bantuan dalam pencarian
             suku cadang serta menjawab berbagai pertanyaan terkait pemasangan.
-            Tim Ahli Pengendalian Kualitas kami secara rutin melakukan pengujian
-            dan pemantauan untuk memastikan setiap suku cadang yang dipasang
-            memiliki kualitas terbaik dan memenuhi standar tertinggi di industri
-            suku cadang pengganti.
+            Tim Ahli Pengendalian Kualitas kami melakukan pengujian dan
+            pemantauan rutin untuk memastikan setiap suku cadang memenuhi
+            standar terbaik di industri.
           </p>
         </div>
         <div class="service-image">
@@ -109,18 +135,13 @@
         </div>
       </div>
 
-      <!-- Baris 3: Gambar di kanan -->
       <div class="service-row">
         <div class="service-text">
           <h2>Emergency On-Site Support</h2>
           <p>
-            Tim layanan mobile kami selalu siap sedia memberikan dukungan
-            darurat langsung di lokasi, guna meminimalkan waktu henti
-            operasional dan memastikan pemulihan berlangsung dengan cepat dan
-            efisien. Baik di sektor pertambangan, konstruksi, maupun lingkungan
-            industri lainnya, kami hadir dengan respons cepat, didukung
-            peralatan lengkap dan tenaga ahli berpengalaman untuk menjamin
-            kelancaran operasional Anda.
+            Tim layanan mobile kami siap memberikan dukungan darurat di lokasi
+            untuk meminimalkan downtime dan memastikan pemulihan cepat dan
+            efisien—baik untuk pertambangan, konstruksi, maupun industri lainnya.
           </p>
         </div>
         <div class="service-image">
@@ -128,17 +149,13 @@
         </div>
       </div>
 
-      <!-- Baris 4: Gambar di kiri (pakai reverse) -->
       <div class="service-row reverse">
         <div class="service-text">
           <h2>Customer Support</h2>
           <p>
-            Di perusahaan kami, kepuasan pelanggan adalah prioritas utama. Tim
-            Customer Support kami siap membantu Anda dalam setiap kebutuhan —
-            mulai dari konsultasi suku cadang, pengecekan ketersediaan, hingga
-            panduan teknis pemasangan. Dengan pengetahuan mendalam tentang alat
-            berat dan jaringan distribusi yang solid, kami memastikan Anda
-            mendapatkan solusi cepat, tepat, dan efisien. .
+            Kepuasan pelanggan adalah prioritas kami. Tim Customer Support siap
+            membantu Anda mulai dari konsultasi, pengecekan ketersediaan, hingga
+            panduan teknis pemasangan.
           </p>
         </div>
         <div class="service-image">
@@ -150,7 +167,7 @@
     <?php include 'footer.php'; ?>
 
     <script>
-      feather.replace(); // Inisialisasi feather icon
+      feather.replace();
     </script>
   </body>
 </html>
