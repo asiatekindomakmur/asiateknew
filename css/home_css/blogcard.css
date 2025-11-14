@@ -60,3 +60,18 @@
   text-decoration: underline;
 }
 
+.content-section .section-title {
+  font-size: 32px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: #0a1950;
+}
+
+.content-section .section-subtitle {
+  font-size: 15px;
+  color: #777;
+  text-align: center;
+  margin-bottom: 30px;
+}
