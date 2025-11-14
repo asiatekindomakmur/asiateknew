@@ -40,7 +40,7 @@ gtag('config', 'G-YDPM3D26HV');
 <!-- CSS -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/navbar.css">
-link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="css/footer.css">
 <link rel="stylesheet" href="css/about_css/header_about.css">
 <link rel="stylesheet" href="css/about_css/visimisi.css">
 <link rel="stylesheet" href="css/home_css/companyprofilehome.css">
