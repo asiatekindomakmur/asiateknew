@@ -14,14 +14,15 @@ while($row = $result->fetch_assoc()) {
 
 // Mulai XML
 echo '<?xml version="1.0" encoding="UTF-8"?>';
-?>
-<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
-<?php foreach($produk as $p): ?>
-    <url>
-        <loc>https://asiatek.co.id/produk/<?php echo htmlspecialchars($p['slug'], ENT_QUOTES, 'UTF-8'); ?></loc>
-        <lastmod><?php echo !empty($p['updated_at']) ? date('Y-m-d', strtotime($p['updated_at'])) : date('Y-m-d'); ?></lastmod>
+echo '<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">';
+foreach($produk as $p) {
+    $slug = htmlspecialchars($p['slug'], ENT_QUOTES, 'UTF-8');
+    $lastmod = !empty($p['updated_at']) ? date('Y-m-d', strtotime($p['updated_at'])) : date('Y-m-d');
+    echo "<url>
+        <loc>https://asiatek.co.id/produk/$slug</loc>
+        <lastmod>$lastmod</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.80</priority>
-    </url>
-<?php endforeach; ?>
-</urlset>
+    </url>";
+}
+echo '</urlset>';
