@@ -26,6 +26,7 @@ $result = $conn->query($sql);
 $artikel = [];
 if ($result) {
     while ($row = $result->fetch_assoc()) {
+        $row['slug'] = buatSlug($row['title']);
         $artikel[] = $row;
     }
 }
@@ -100,47 +101,53 @@ if ($result) {
       </form>
     </div>
 
-<!-- Blog & Artikel -->
-<section class="content-section" id="artikel">
-    <div class="container">
+    <!-- Blog & Artikel -->
+    <section class="content-section" id="artikel">
+        <div class="container">
 
-        <!-- Artikel Grid -->
-        <div class="blog-grid">
-            <?php if (is_array($artikel) && count($artikel) > 0): ?>
-                <?php foreach ($artikel as $row): ?>
-                    <div class="blog-post">
-                        <img src="admin/uploads/artikel/<?= htmlspecialchars($row['image']) ?>" 
-                            alt="Artikel - <?= htmlspecialchars($row['title']) ?>" 
-                            loading="lazy">
-                        <h2>
-                            <a href="detail_artikel.php?id=<?= $row['id'] ?>">
-                                <?= htmlspecialchars($row['title']) ?>
-                            </a>
-                        </h2>
-                        <p><?= substr(strip_tags($row['description']), 0, 120) ?>...</p>
-                        <div class="card-footer">
-                            <a href="detail_artikel.php?id=<?= $row['id'] ?>">Baca Selengkapnya</a>
+            <!-- Artikel Grid -->
+            <div class="blog-grid">
+                <?php if (is_array($artikel) && count($artikel) > 0): ?>
+                    <?php foreach ($artikel as $row): ?>
+                        <div class="blog-post">
+                            <img src="admin/uploads/artikel/<?= htmlspecialchars($row['image']) ?>" 
+                                alt="Artikel - <?= htmlspecialchars($row['title']) ?>" 
+                                loading="lazy">
+
+                            <h2>
+                                <a href="detail_artikel.php?slug=<?= htmlspecialchars($row['slug']) ?>">
+                                    <?= htmlspecialchars($row['title']) ?>
+                                </a>
+                            </h2>
+                            
+                            <p><?= substr(strip_tags($row['description']), 0, 120) ?>...</p>
+
+                            <div class="card-footer">
+                                <a href="detail_artikel.php?slug=<?= htmlspecialchars($row['slug']) ?>">
+                                    Baca Selengkapnya
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>Tidak ada artikel yang ditemukan.</p>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Tidak ada artikel yang ditemukan.</p>
+                <?php endif; ?>
+            </div> <!-- blog-grid -->
+
+            <!-- Pagination -->
+            <?php if($total_pages > 1): ?>
+            <div class="pagination">
+              <?php for($i=1; $i<=$total_pages; $i++): ?>
+                <a href="artikel.php?page=<?= $i ?><?= $search ? '&search=' . urlencode($search) : '' ?>"
+                  class="<?= $i == $page ? 'active' : '' ?>">
+                  <?= $i ?>
+                </a>
+              <?php endfor; ?>
+            </div>
             <?php endif; ?>
-        </div> <!-- blog-grid -->
 
-        <!-- Pagination -->
-        <?php if($total_pages > 1): ?>
-        <div class="pagination">
-          <?php for($i=1; $i<=$total_pages; $i++): ?>
-            <a href="artikel.php?page=<?= $i ?><?= $search ? '&search=' . urlencode($search) : '' ?>" class="<?= $i == $page ? 'active' : '' ?>">
-              <?= $i ?>
-            </a>
-          <?php endfor; ?>
         </div>
-        <?php endif; ?>
-
-    </div> <!-- container -->
-</section>
+    </section>
 
 <?php include 'footer.php'; ?>
 

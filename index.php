@@ -466,47 +466,47 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
     </div>
   </section>
     
-  <!-- Blog & Artikel -->
-  <section class="content-section" id="artikel">
-      <div class="container">
+<!-- Blog & Artikel -->
+<section class="content-section" id="artikel">
+    <div class="container">
 
-          <!-- JUDUL SECTION -->
-          <h2 class="section-title">Blog & Artikel</h2>
-          <p class="section-subtitle">Informasi terbaru dan update penting untuk Anda</p>
+        <!-- JUDUL SECTION -->
+        <h2 class="section-title">Blog & Artikel</h2>
+        <p class="section-subtitle">Informasi terbaru dan update penting untuk Anda</p>
 
-          <?php
-          // Ambil data artikel dari API
-          $artikel = json_decode(file_get_contents("https://asiatek.co.id/admin/api/get_artikel.php"), true);
-          ?>
+        <?php
+        // Ambil data artikel dari API
+        $artikel = json_decode(file_get_contents("https://asiatek.co.id/admin/api/get_artikel.php"), true);
+        ?>
 
-          <!-- Artikel Grid -->
-          <div class="blog-grid">
-              <?php if (is_array($artikel) && count($artikel) > 0): ?>
-                  <?php foreach ($artikel as $row): ?>
-                      <div class="blog-post">
-                          <img src="<?= htmlspecialchars($row['image']) ?>" 
-                              alt="Artikel - <?= htmlspecialchars($row['title']) ?>" 
-                              loading="lazy">
+        <!-- Artikel Grid -->
+        <div class="blog-grid">
+            <?php if (is_array($artikel) && count($artikel) > 0): ?>
+                <?php foreach ($artikel as $row): ?>
+                    <div class="blog-post">
+                        <img src="<?= htmlspecialchars($row['image']) ?>" 
+                            alt="Artikel - <?= htmlspecialchars($row['title']) ?>" 
+                            loading="lazy">
 
-                          <h2>
-                              <a href="detail_artikel.php?id=<?= $row['id'] ?>">
-                                  <?= htmlspecialchars($row['title']) ?>
-                              </a>
-                          </h2>
+                        <h2>
+                            <a href="detail_artikel.php?slug=<?= htmlspecialchars($row['slug']) ?>">
+                                <?= htmlspecialchars($row['title']) ?>
+                            </a>
+                        </h2>
 
-                          <p><?= substr(strip_tags($row['description']), 0, 120) ?>...</p>
+                        <p><?= substr(strip_tags($row['description']), 0, 120) ?>...</p>
 
-                          <div class="card-footer">
-                              <a href="detail_artikel.php?id=<?= $row['id'] ?>">Baca Selengkapnya</a>
-                          </div>
-                      </div>
-                  <?php endforeach; ?>
-              <?php else: ?>
-                  <p>Tidak ada artikel yang ditemukan.</p>
-              <?php endif; ?>
-          </div> <!-- blog-grid -->
-      </div>
-  </section>
+                        <div class="card-footer">
+                            <a href="detail_artikel.php?slug=<?= htmlspecialchars($row['slug']) ?>">Baca Selengkapnya</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Tidak ada artikel yang ditemukan.</p>
+            <?php endif; ?>
+        </div> <!-- blog-grid -->
+    </div>
+</section>
 
     <?php include 'footer.php'; ?>
   </body>

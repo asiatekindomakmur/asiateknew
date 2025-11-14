@@ -1,11 +1,24 @@
 <?php
-// Ambil ID artikel dari URL
-$id = $_GET['id'] ?? null;
+// Ambil slug dari URL
+$slug = $_GET['slug'] ?? null;
+
+// Ambil data artikel dari API
 $data = json_decode(file_get_contents("https://asiatek.co.id/admin/api/get_artikel.php"), true);
 $artikel = null;
 
-// Cari artikel berdasarkan ID
-if ($id && is_array($data)) {
+// Cari artikel berdasarkan slug
+if ($slug && is_array($data)) {
+  foreach ($data as $item) {
+    if (isset($item['slug']) && $item['slug'] === $slug) {
+      $artikel = $item;
+      break;
+    }
+  }
+}
+
+// Jika tidak ketemu slug, fallback ke ID (kompatibel dengan URL lama)
+if (!$artikel && isset($_GET['id'])) {
+  $id = $_GET['id'];
   foreach ($data as $item) {
     if ($item['id'] == $id) {
       $artikel = $item;
@@ -13,21 +26,31 @@ if ($id && is_array($data)) {
     }
   }
 }
+
+// Buat ID aman untuk sidebar Recent Post
+if ($artikel) {
+  $id = $artikel['id'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- SEO META -->
     <meta name="keywords" content="<?= htmlspecialchars($artikel['title'] ?? '') ?>, Asiatek, Sparepart, Alat Berat" />
+
     <meta property="og:title" content="<?= htmlspecialchars($artikel['title'] ?? '') ?>" />
     <meta property="og:description" content="<?= substr(strip_tags($artikel['description'] ?? ''), 0, 150) ?>..." />
     <meta property="og:image" content="<?= htmlspecialchars($artikel['image'] ?? '') ?>" />
-    <meta property="og:url" content="https://asiatek.co.id/detail_artikel.php?id=<?= htmlspecialchars($artikel['id'] ?? '') ?>" />
-    <title><?= htmlspecialchars($artikel['title'] ?? 'Artikel Tidak Ditemukan') ?> | PT Asiatek Indo Makmur</title>
-    <meta name="description" content="PT Asiatek Indo Makmur menyediakan berbagai sparepart alat berat dengan harga kompetitif dan kualitas terbaik. Hubungi kami untuk informasi produk terbaru.">
-    <link rel="icon" type="image/png" href="/img/logo.png">
+    <meta property="og:url" content="https://asiatek.co.id/detail_artikel.php?slug=<?= htmlspecialchars($artikel['slug'] ?? '') ?>" />
 
+    <title><?= htmlspecialchars($artikel['title'] ?? 'Artikel Tidak Ditemukan') ?> | PT Asiatek Indo Makmur</title>
+
+    <meta name="description" content="<?= substr(strip_tags($artikel['description'] ?? ''), 0, 150) ?>...">
+
+    <link rel="icon" type="image/png" href="/img/logo.png">
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;700&display=swap" rel="stylesheet" />
@@ -72,19 +95,31 @@ if ($id && is_array($data)) {
       <div class="container">
         <div class="artikel-wrapper" style="display: flex; flex-wrap: wrap; gap: 30px;">
           <div class="artikel-main" style="flex: 1 1 65%;">
+
             <?php if($artikel): ?>
               <h1><?= htmlspecialchars($artikel['title']) ?></h1>
               <p style="color: #888; font-size: 14px; margin-bottom: 15px;">
-                Diposting oleh <strong><?= htmlspecialchars($artikel['author'] ?? 'Admin Asiatek') ?></strong> pada <?= date('d M Y', strtotime($artikel['created_at'] ?? 'now')) ?>
+                Diposting oleh <strong><?= htmlspecialchars($artikel['author'] ?? 'Admin Asiatek') ?></strong>
+                pada <?= date('d M Y', strtotime($artikel['created_at'] ?? 'now')) ?>
               </p>
-              <img src="<?= htmlspecialchars($artikel['image']) ?>" alt="<?= htmlspecialchars($artikel['title']) ?>" class="featured-image" style="width: 100%; height: auto; margin-bottom: 20px;">
+
+              <img src="<?= htmlspecialchars($artikel['image']) ?>" 
+                   alt="<?= htmlspecialchars($artikel['title']) ?>" 
+                   class="featured-image" 
+                   style="width: 100%; height: auto; margin-bottom: 20px;">
+
               <div class="isi-artikel">
                 <?= nl2br($artikel['description']) ?>
               </div>
-              <a href="artikel.php" class="btn-kembali" style="display:inline-block; margin-top:20px;">Kembali ke Daftar Artikel</a>
+
+              <a href="artikel.php" class="btn-kembali" style="display:inline-block; margin-top:20px;">
+                Kembali ke Daftar Artikel
+              </a>
+
             <?php else: ?>
               <p>Artikel tidak ditemukan.</p>
             <?php endif; ?>
+
           </div>
 
           <!-- Sidebar -->
@@ -95,12 +130,18 @@ if ($id && is_array($data)) {
                 <?php
                 foreach (array_slice($data, 0, 5) as $recent) {
                   if ($recent['id'] != $id) {
-                    echo '<div class="recent-post-item" style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">';
-                    echo '<a href="detail_artikel.php?id=' . $recent['id'] . '" style="flex-shrink: 0;">';
-                    echo '<img src="' . htmlspecialchars($recent['image']) . '" alt="' . htmlspecialchars($recent['title']) . '" style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;">';
+
+                    // Pakai slug jika ada
+                    $link = isset($recent['slug']) 
+                            ? 'detail_artikel.php?slug=' . $recent['slug']
+                            : 'detail_artikel.php?id=' . $recent['id'];
+
+                    echo '<div class="recent-post-item" style="display:flex; align-items:center; gap:12px; margin-bottom:15px;">';
+                    echo '<a href="'. $link .'" style="flex-shrink:0;">';
+                    echo '<img src="' . htmlspecialchars($recent['image']) . '" alt="' . htmlspecialchars($recent['title']) . '" style="width:80px; height:60px; object-fit:cover; border-radius:6px;">';
                     echo '</a>';
-                    echo '<div style="flex: 1;">';
-                    echo '<a href="detail_artikel.php?id=' . $recent['id'] . '" style="font-weight: 600; text-decoration: none; color: #333; line-height: 1.3; display: block;">' . htmlspecialchars($recent['title']) . '</a>';
+                    echo '<div style="flex:1;">';
+                    echo '<a href="'. $link .'" style="font-weight:600; text-decoration:none; color:#333; line-height:1.3; display:block;">' . htmlspecialchars($recent['title']) . '</a>';
                     echo '</div>';
                     echo '</div>';
                   }
@@ -109,6 +150,7 @@ if ($id && is_array($data)) {
               </div>
             </div>
           </aside>
+
         </div>
       </div>
     </section>
