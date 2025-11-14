@@ -26,3 +26,4 @@ foreach($produk as $p) {
     </url>";
 }
 echo '</urlset>';
+// TIDAK ADA ?> di akhir file
