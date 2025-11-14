@@ -1,60 +1,85 @@
-# ===========================
-# 🔐 SECURITY BASIC
-# ===========================
-
+# =========================================
+# 🔐 BASIC SECURITY
+# =========================================
 Options -Indexes
 ServerSignature Off
 
 # Blok file sensitif
-<FilesMatch "(^\.|composer\.json|composer\.lock|config\.php|php.ini|php\.ini|\.env|\.htpasswd|\.htaccess)">
-    Order allow,deny
-    Deny from all
+<FilesMatch "(^\.|composer\.json|composer\.lock|config\.php|php.ini|\.env|\.htpasswd)">
+    Require all denied
 </FilesMatch>
 
+
+# =========================================
+# 🔥 BLOCK MALWARE & BACKDOOR
+# =========================================
 RewriteEngine On
 
-# ===========================
-# 🔥 BLOCK MALWARE / BACKDOOR
-# ===========================
+# Blok akses folder berbahaya
+RedirectMatch 404 /(backup|backdoor|shell|tmp|temp|cache)/
 
-RedirectMatch 404 /(backup|backdoor|shell|uploads\/tmp|temp)/
+# Blok nama file umum malware
+<FilesMatch "(wshell|b374k|r57|c99|cmd|sh3ll|uploader)\.php$">
+    Require all denied
+</FilesMatch>
 
+# Blok query injection
 RewriteCond %{QUERY_STRING} (\.\./|\.\.\\) [NC,OR]
 RewriteCond %{QUERY_STRING} (UNION|SELECT|DROP|INSERT|CAST|CONCAT|DECLARE) [NC]
-RewriteRule ^ - [F]
+RewriteRule ^ - [F,L]
 
+# Blok fungsi berbahaya
 RewriteCond %{QUERY_STRING} (base64_encode|eval\(|system\(|shell_exec|passthru|exec) [NC]
-RewriteRule ^ - [F]
+RewriteRule ^ - [F,L]
 
-# ===========================
-# 🔄 CLEAN URL / NO .PHP
-# ===========================
+# Blok upload PHP ke folder upload
+RewriteRule ^uploads/.*\.(php|php5|phtml|phar|html|js|svg)$ - [F,L]
+
+# Blok .user.ini di mana pun
+<FilesMatch "\.user\.ini$">
+    Require all denied
+</FilesMatch>
+
+# =========================================
+# 🔄 CLEAN URL (Hilangkan .php)
+# =========================================
 
 # Abaikan folder admin
 RewriteRule ^admin(/.*)?$ - [L]
 
-# HOME tanpa /index.php
+# Redirect index.php
 RewriteRule ^index\.php$ / [L,R=301]
 
-# Hapus .php di semua file front-end
+# Redirect .php → tanpa ekstensi
 RewriteCond %{THE_REQUEST} \s/+([^?]*)\.php[\s?] [NC]
 RewriteRule ^ %1 [R=301,L]
 
-# Rewrite ke file .php sebenarnya
+# Jalankan file .php yang tersembunyi
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.+)$ $1.php [L,QSA]
 
-# ===========================
-# 📁 SECURITY UPLOADS
-# ===========================
-RewriteRule ^uploads/.*\.(php|php5|phtml|html)$ - [F,L]
-AddType text/plain .php .phtml .php5 .html
 
-# ===========================
+# =========================================
 # 🛡 HOTLINK PROTECTION
-# ===========================
+# =========================================
 RewriteCond %{HTTP_REFERER} !^$
-RewriteCond %{HTTP_REFERER} !yourdomain.com [NC]
+RewriteCond %{HTTP_REFERER} !asiatek.co.id [NC]
 RewriteCond %{HTTP_REFERER} !localhost [NC]
 RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [L]
+
+# =========================================
+# 🚀 GZIP & CACHE (SEO SANGAT WAJIB)
+# =========================================
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain text/html application/json text/xml text/css application/javascript
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/html "access plus 1h"
+</IfModule>

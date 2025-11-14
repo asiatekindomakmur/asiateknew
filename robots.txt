@@ -1,0 +1,47 @@
+User-agent: *
+# Izinkan Google mengindeks seluruh halaman utama
+Allow: /
+
+# ===========================
+# 🚫 BLOKIR HALAMAN SENSITIF
+# ===========================
+Disallow: /admin/
+Disallow: /config/
+Disallow: /backup/
+Disallow: /temp/
+Disallow: /tmp/
+Disallow: /private/
+Disallow: /includes/
+Disallow: /vendor/
+Disallow: /errors/
+Disallow: /api/secret/
+
+# Blokir akses file penting
+Disallow: /*.php$
+Disallow: /*.sql$
+Disallow: /*.ini$
+Disallow: /*.env
+
+# Tetapi izinkan file PHP utama untuk routing
+Allow: /index.php
+
+# ===========================
+# 📁 IZINKAN FOLDER PUBLIC
+# ===========================
+Allow: /uploads/
+Allow: /img/
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+
+# ===========================
+# 🔍 SPECIAL GOOGLE RULES
+# ===========================
+# Izinkan Googlebot merender JS & CSS
+Allow: /*.js$
+Allow: /*.css$
+
+# ===========================
+# 🗺️ SITEMAP UNTUK SEO
+# ===========================
+Sitemap: https://asiatek.co.id/sitemap.xml
