@@ -1,37 +1,57 @@
 <?php
 include 'admin/config.php'; // koneksi database
 
+// ===============================
+// Fungsi SLUG — WAJIB ADA
+// ===============================
+function buatSlug($text) {
+    $text = strtolower(trim($text));
+    $text = preg_replace('/[^a-z0-9]+/i', '-', $text);
+    return trim($text, '-');
+}
+
+// ===============================
 // Pagination
+// ===============================
 $limit = 15;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($page < 1) $page = 1;
 $start = ($page - 1) * $limit;
 
+// ===============================
 // Search
+// ===============================
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
 
-// Total Artikel (untuk pagination)
 $whereSQL = $search ? "WHERE title LIKE '%$search%'" : '';
+
+// ===============================
+// Hitung Total Artikel
+// ===============================
 $total_sql = "SELECT COUNT(*) as total FROM artikel $whereSQL";
 $total_result = $conn->query($total_sql);
-$total_row = $total_result->fetch_assoc();
+$total_row = $total_result ? $total_result->fetch_assoc() : ['total' => 0];
 $total_artikel = $total_row['total'];
 $total_pages = ceil($total_artikel / $limit);
 
+// ===============================
 // Ambil Artikel
+// ===============================
 $sql = "SELECT * FROM artikel $whereSQL ORDER BY id DESC LIMIT $start, $limit";
 $result = $conn->query($sql);
 
-// Simpan hasil ke array
+// Simpan data artikel
 $artikel = [];
 if ($result) {
     while ($row = $result->fetch_assoc()) {
+
+        // Tambahkan slug
         $row['slug'] = buatSlug($row['title']);
+
         $artikel[] = $row;
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
