@@ -204,6 +204,7 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
         </div>
     </section>
 
+
           <!-- Right button -->
           <button class="carousel-btn right">&#10095;</button>
       </div>
