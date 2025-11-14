@@ -60,18 +60,19 @@
   text-decoration: underline;
 }
 
-.content-section .section-title {
-  font-size: 32px;
+/* === BLOG & ARTIKEL — SAMA PERSIS DENGAN PRODUCT SECTION === */
+
+#artikel .section-title {
+  font-size: 32px; /* ukuran sama */
+  margin: 16px 0 8px; /* spacing sama */
   font-weight: 700;
   text-align: center;
-  margin-top: 0;
-  margin-bottom: 5px;
-  color: #0a1950;
+  color: #000; /* product section pakai default black */
 }
 
-.content-section .section-subtitle {
-  font-size: 15px;
-  color: #777;
+#artikel .section-subtitle {
+  font-size: 16px; /* sama */
+  margin-bottom: 16px; /* sama */
+  color: #555; /* sama */
   text-align: center;
-  margin-bottom: 30px;
 }
