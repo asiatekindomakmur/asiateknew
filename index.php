@@ -172,10 +172,11 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
         <p>Accessories, parts and spare parts for your machinery</p>
 
         <div class="carousel-wrapper">
+
             <!-- Left button -->
             <button class="carousel-btn left">&#10094;</button>
 
-            <!-- Carousel dengan produk dinamis -->
+            <!-- Carousel -->
             <div class="carousel">
 
                 <?php 
@@ -184,41 +185,39 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
                 ?>
 
                 <?php foreach ($products as $p): ?>
+                    <?php
+                        // Pesan WhatsApp otomatis
+                        $message = "Halo saya dapat nomor anda dari google, Saya ingin menanyakan tentang produk (" . $p['name'] . ")";
+                        $wa_link = "https://wa.me/" . $wa_number . "?text=" . urlencode($message);
+                    ?>
 
-                <?php
-                    // Pesan WhatsApp otomatis
-                    $message = "Halo saya dapat nomor anda dari google, Saya ingin menanyakan tentang produk (" . $p['name'] . ")";
-                    $wa_link = "https://wa.me/" . $wa_number . "?text=" . urlencode($message);
-                ?>
-
-                <div class="product-item">
-                    <a href="<?= $wa_link ?>" target="_blank">
-                        <img src="admin/uploads/produk/<?= htmlspecialchars($p['image']) ?>" 
-                            alt="<?= htmlspecialchars($p['name']) ?>" />
-                        <p><?= htmlspecialchars($p['name']) ?></p>
-                    </a>
-                </div>
-
+                    <div class="product-item">
+                        <a href="<?= $wa_link ?>" target="_blank">
+                            <img src="admin/uploads/produk/<?= htmlspecialchars($p['image']) ?>" 
+                                alt="<?= htmlspecialchars($p['name']) ?>" />
+                            <p><?= htmlspecialchars($p['name']) ?></p>
+                        </a>
+                    </div>
                 <?php endforeach; ?>
+
             </div>
+
+            <!-- Right button -->
+            <button class="carousel-btn right">&#10095;</button>
+
         </div>
     </section>
 
+    <!-- Product Description -->
+    <section class="product-description">
+        <p class="highlight-text">
+            Asiatek delivers replacement parts and maintenance products for Construction and Mining Equipment
+        </p>
+        <p>
+            With more than 100,000 part numbers in stock, Asiatek offers its customers the best possible service in the replacement parts industry.
+        </p>
+    </section>
 
-          <!-- Right button -->
-          <button class="carousel-btn right">&#10095;</button>
-      </div>
-
-      <!-- Teks di bawah carousel -->
-      <div class="product-description">
-          <p class="highlight-text">
-              Asiatek delivers replacement parts and maintenance products for Construction and Mining Equipment
-          </p>
-          <p>
-              With more than 100,000 part numbers in stock, Asiatek offers its customers the best possible service in the replacement parts industry.
-          </p>
-      </div>
-  </section>
 
   <!-- Keunggulan Kami -->
   <section class="advantages">
