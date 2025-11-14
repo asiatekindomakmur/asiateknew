@@ -470,6 +470,10 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
   <section class="content-section" id="artikel">
       <div class="container">
 
+          <!-- JUDUL SECTION -->
+          <h2 class="section-title">Blog & Artikel</h2>
+          <p class="section-subtitle">Informasi terbaru dan update penting untuk Anda</p>
+
           <?php
           // Ambil data artikel dari API
           $artikel = json_decode(file_get_contents("https://asiatek.co.id/admin/api/get_artikel.php"), true);
@@ -483,12 +487,15 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
                           <img src="<?= htmlspecialchars($row['image']) ?>" 
                               alt="Artikel - <?= htmlspecialchars($row['title']) ?>" 
                               loading="lazy">
+
                           <h2>
                               <a href="detail_artikel.php?id=<?= $row['id'] ?>">
                                   <?= htmlspecialchars($row['title']) ?>
                               </a>
                           </h2>
+
                           <p><?= substr(strip_tags($row['description']), 0, 120) ?>...</p>
+
                           <div class="card-footer">
                               <a href="detail_artikel.php?id=<?= $row['id'] ?>">Baca Selengkapnya</a>
                           </div>
@@ -500,7 +507,6 @@ $articles = fetchAll("SELECT * FROM artikel ORDER BY created_at DESC LIMIT 3");
           </div> <!-- blog-grid -->
       </div>
   </section>
-
 
     <?php include 'footer.php'; ?>
   </body>
