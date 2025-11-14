@@ -44,4 +44,4 @@ Allow: /*.css$
 # ===========================
 # 🗺️ SITEMAP UNTUK SEO
 # ===========================
-Sitemap: https://asiatek.co.id/sitemap.xml
+Sitemap: https://asiatek.co.id/sitemap-index.php

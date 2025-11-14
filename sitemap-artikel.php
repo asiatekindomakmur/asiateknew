@@ -1,6 +1,7 @@
 <?php
+// sitemap-artikel.php
 header("Content-Type: application/xml; charset=UTF-8");
-error_reporting(0); // hentikan error supaya tidak merusak XML
+error_reporting(0); // hentikan error agar XML tetap valid
 
 include "admin/config.php";
 
@@ -15,6 +16,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
     <url>
         <loc>https://asiatek.co.id/artikel/<?= htmlspecialchars($a['slug'], ENT_QUOTES, 'UTF-8') ?></loc>
         <lastmod><?= !empty($a['updated_at']) ? date('Y-m-d', strtotime($a['updated_at'])) : date('Y-m-d') ?></lastmod>
+        <changefreq>weekly</changefreq>
         <priority>0.80</priority>
     </url>
 <?php endforeach; ?>
