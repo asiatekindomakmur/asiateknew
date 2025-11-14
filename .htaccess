@@ -1,0 +1,74 @@
+# ===========================
+# 🔐 SECURITY & URL CLEANING
+# ===========================
+
+Options -Indexes
+ServerSignature Off
+
+# Blok Akses ke File Sensitif
+<FilesMatch "(^\.|composer\.json|composer\.lock|config\.php|php.ini|php\.ini|\.env|\.htpasswd|\.htaccess)">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Cegah Upload File Berbahaya (PHP dalam gambar)
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+<FilesMatch "\.(php|php5|phtml)$">
+    Deny from all
+</FilesMatch>
+
+# ===========================
+# 🔐 SECURITY: BLOCK MALWARE & BACKDOOR
+# ===========================
+
+# Blok akses ke folder tertentu
+RedirectMatch 404 /(backup|backdoor|shell|uploads/tmp|temp)/
+
+# Blok serangan umum
+RewriteEngine On
+
+# SQL Injection basic block
+RewriteCond %{QUERY_STRING} (\.\./|\.\.\\) [NC,OR]
+RewriteCond %{QUERY_STRING} (UNION|SELECT|DROP|INSERT|CAST|CONCAT|DECLARE) [NC]
+RewriteRule ^(.*)$ - [F,L]
+
+# Blok eval, base64, system, shell_exec di URL (banyak backdoor pakai ini)
+RewriteCond %{QUERY_STRING} (base64_encode|eval\(|system\(|shell_exec|passthru|exec) [NC]
+RewriteRule ^(.*)$ - [F,L]
+
+# ===========================
+# 🔄 CLEAN URL (TANPA .php)
+# ===========================
+
+# Abaikan folder admin → jangan di rewrite!
+RewriteRule ^admin(/.*)?$ - [L]
+
+# HOME = hilangkan /index.php
+RewriteRule ^index\.php$ / [L,R=301]
+
+# Hapus .php dari URL (public file)
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+)$ $1.php [L]
+
+# ===========================
+# 📁 SECURITY UNTUK UPLOADS
+# ===========================
+# Semua file di uploads hanya boleh diakses sebagai file statis (gambar)
+<Directory "uploads">
+    <FilesMatch "\.(php|php5|phtml|html)$">
+        Deny from all
+    </FilesMatch>
+</Directory>
+
+# Blok script di dalam gambar
+AddType text/plain .php .phtml .php5 .html
+
+# ===========================
+# 🛡 PROTECTION AGAINST HOTLINK
+# ===========================
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !yourdomain.com [NC]
+RewriteCond %{HTTP_REFERER} !localhost [NC]
+RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [L]
